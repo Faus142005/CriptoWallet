@@ -342,6 +342,9 @@
         <mxCell id="RXBJ0WqxxfnvdXyqFnlm-35" value="respuesta : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="RXBJ0WqxxfnvdXyqFnlm-25">
           <mxGeometry y="52" width="120" height="26" as="geometry" />
         </mxCell>
+        <mxCell id="RXBJ0WqxxfnvdXyqFnlm-45" value="el codigo se genera en el &#xa;constructor del activo??" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1275" y="-193" width="150" height="50" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
