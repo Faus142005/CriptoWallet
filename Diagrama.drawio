@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.10">
   <diagram name="Página-1" id="NR62WoQhjPWwxRr1Rxn-">
-    <mxGraphModel dx="819" dy="451" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="2868" dy="1580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -841,7 +841,7 @@
         <mxCell id="sRIo8l0j95c4rmNbtkQX-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endArrow=block;endFill=0;" parent="1" source="sRIo8l0j95c4rmNbtkQX-13" target="bWVJ9A6BMGptJfY1byJl-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F3OHgbdhdCOY9Myi1UhH-1" value="-Tendrian que tener la billetera las transacciones?&#xa;-Tiene que tenerlos metodos que tienen las transacciones&#xa;que tienen a parte del toString&#xa;-Gestor de movientos?&#xa;-Para que hacer bitcoin, eth, etc...&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="F3OHgbdhdCOY9Myi1UhH-1" value="-Tendrian que tener la billetera las transacciones?&#xa;-Tiene que tenerlos metodos que tienen las transacciones&#xa;que tienen a parte del toString&#xa;-Gestor de movientos?&#xa;-Para que hacer bitcoin, eth, etc...&#xa;-Rombitos&#xa;&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1220" y="1280" width="320" height="140" as="geometry" />
         </mxCell>
         <mxCell id="F3OHgbdhdCOY9Myi1UhH-2" value="GestorDeMovimientos" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontSize=12;" vertex="1" parent="1">
