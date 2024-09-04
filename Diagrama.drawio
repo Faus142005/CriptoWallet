@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.10">
   <diagram name="Página-1" id="NR62WoQhjPWwxRr1Rxn-">
-    <mxGraphModel dx="1509" dy="832" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="869" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -13,11 +13,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cGzMn2-btZof8PWtjlkr-197" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="cGzMn2-btZof8PWtjlkr-1" target="cGzMn2-btZof8PWtjlkr-55" edge="1">
+        <mxCell id="uPdgmqQ6__cbQZYuAYbr-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="cGzMn2-btZof8PWtjlkr-1" target="cGzMn2-btZof8PWtjlkr-55">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1655" y="430" />
-              <mxPoint x="1520" y="430" />
+              <mxPoint x="1600" y="420" />
+              <mxPoint x="1520" y="420" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -68,7 +68,7 @@
         <mxCell id="cGzMn2-btZof8PWtjlkr-225" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="cGzMn2-btZof8PWtjlkr-13" target="cGzMn2-btZof8PWtjlkr-55" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1460" y="423" />
+              <mxPoint x="1460" y="420" />
             </Array>
           </mxGeometry>
         </mxCell>
