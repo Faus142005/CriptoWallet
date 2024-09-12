@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.13">
   <diagram name="Página-1" id="WDjQ5PUS1ypViv3o5lz9">
-    <mxGraphModel dx="1415" dy="1640" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="145" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -746,7 +746,7 @@
         </mxCell>
         <mxCell id="rlaJw5aa2Yewg--EE3p0-251" value="monedaSwap" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rlaJw5aa2Yewg--EE3p0-250" vertex="1" connectable="0">
           <mxGeometry x="0.752" y="-2" relative="1" as="geometry">
-            <mxPoint y="-14" as="offset" />
+            <mxPoint x="-32" y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="rlaJw5aa2Yewg--EE3p0-270" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rlaJw5aa2Yewg--EE3p0-250" vertex="1" connectable="0">
