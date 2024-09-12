@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.13">
   <diagram name="Página-1" id="WDjQ5PUS1ypViv3o5lz9">
-    <mxGraphModel dx="-750" dy="463" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="-1210" dy="212" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -853,24 +853,24 @@
         <mxCell id="TIMCcToxUaOOQiMx-8cA-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="TIMCcToxUaOOQiMx-8cA-17" target="rlaJw5aa2Yewg--EE3p0-63">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="2827" y="850" />
+              <mxPoint x="2825" y="850" />
               <mxPoint x="2770" y="850" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="TIMCcToxUaOOQiMx-8cA-17" value="ActivoFreezado" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;spacing=2;" vertex="1" parent="1">
-          <mxGeometry x="2750" y="855" width="153.5" height="86" as="geometry">
+          <mxGeometry x="2750" y="855" width="150" height="86" as="geometry">
             <mxRectangle x="320" y="12" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="TIMCcToxUaOOQiMx-8cA-19" value="- nombreProtocolo : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="TIMCcToxUaOOQiMx-8cA-17">
-          <mxGeometry y="26" width="153.5" height="26" as="geometry" />
+          <mxGeometry y="26" width="150" height="26" as="geometry" />
         </mxCell>
         <mxCell id="TIMCcToxUaOOQiMx-8cA-28" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=12;" vertex="1" parent="TIMCcToxUaOOQiMx-8cA-17">
-          <mxGeometry y="52" width="153.5" height="8" as="geometry" />
+          <mxGeometry y="52" width="150" height="8" as="geometry" />
         </mxCell>
         <mxCell id="TIMCcToxUaOOQiMx-8cA-29" value="+getProtocolo() : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="TIMCcToxUaOOQiMx-8cA-17">
-          <mxGeometry y="60" width="153.5" height="26" as="geometry" />
+          <mxGeometry y="60" width="150" height="26" as="geometry" />
         </mxCell>
         <mxCell id="TIMCcToxUaOOQiMx-8cA-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="TIMCcToxUaOOQiMx-8cA-23" target="rlaJw5aa2Yewg--EE3p0-63">
           <mxGeometry relative="1" as="geometry">
