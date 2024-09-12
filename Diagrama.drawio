@@ -680,7 +680,7 @@
         </mxCell>
         <mxCell id="rlaJw5aa2Yewg--EE3p0-168" value="monedaFiduciaria" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rlaJw5aa2Yewg--EE3p0-166" vertex="1" connectable="0">
           <mxGeometry x="0.7314" y="1" relative="1" as="geometry">
-            <mxPoint y="-9" as="offset" />
+            <mxPoint x="-9" y="-9" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="rlaJw5aa2Yewg--EE3p0-171" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;" parent="1" source="rlaJw5aa2Yewg--EE3p0-58" target="rlaJw5aa2Yewg--EE3p0-69" edge="1">
