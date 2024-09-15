@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.14">
   <diagram name="Página-1" id="-2VtjGOH2qZDODduAIqy">
-    <mxGraphModel dx="1658" dy="902" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="1442" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -80,7 +80,7 @@
         <mxCell id="fC_xdWrlekhXA9CfphBG-258" value="+ enviarCripto(Billetera, Moneda, double, String) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
           <mxGeometry y="412" width="348" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="fC_xdWrlekhXA9CfphBG-259" value="+ retirarDeDeFi(Billetera,String, Moneda, double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
+        <mxCell id="fC_xdWrlekhXA9CfphBG-259" value="+ retirarDeDeFi(Billetera, String, Moneda, double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
           <mxGeometry y="438" width="348" height="26" as="geometry" />
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-260" value="+ colocarEnDeFi(Billetera, String, Moneda, double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
@@ -89,10 +89,10 @@
         <mxCell id="fC_xdWrlekhXA9CfphBG-261" value="+venderCripto(Billetera, Moneda, double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
           <mxGeometry y="490" width="348" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="fC_xdWrlekhXA9CfphBG-262" value="+comprarCripto(BilleteraMoneda, double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
+        <mxCell id="fC_xdWrlekhXA9CfphBG-262" value="+comprarCripto(Billetera, Moneda, double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
           <mxGeometry y="516" width="348" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="fC_xdWrlekhXA9CfphBG-263" value="+swap(Billetera, Moneda,Moneda,double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
+        <mxCell id="fC_xdWrlekhXA9CfphBG-263" value="+swap(Billetera, Moneda, Moneda,double) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
           <mxGeometry y="542" width="348" height="26" as="geometry" />
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-667" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="fC_xdWrlekhXA9CfphBG-458" target="fC_xdWrlekhXA9CfphBG-651" edge="1">
