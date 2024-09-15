@@ -74,7 +74,7 @@
         <mxCell id="fC_xdWrlekhXA9CfphBG-256" value="+ getStock() : List &lt;Stock&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
           <mxGeometry y="364" width="348" height="24" as="geometry" />
         </mxCell>
-        <mxCell id="fC_xdWrlekhXA9CfphBG-257" value="+ getProtocolo() : List &lt;Protocolo&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
+        <mxCell id="fC_xdWrlekhXA9CfphBG-257" value="+ getProtocolos() : List &lt;Protocolo&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
           <mxGeometry y="388" width="348" height="24" as="geometry" />
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-258" value="+ enviarCripto(Billetera, Moneda, double, String) : boolean" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-241" vertex="1">
