@@ -35,7 +35,7 @@ public class Persona {
 	private Fecha fechaDeNacimiento;
 	
 	/**
-	 * @return: Los nombres
+	 * @return Los nombres
 	 */
 	public String getNombres() {
 		return nombres;
@@ -49,7 +49,7 @@ public class Persona {
 	}
 	
 	/**
-	 * @return: Los apellidos
+	 * @return Los apellidos
 	 */
 	public String getApellidos() {
 		return apellidos;
@@ -62,7 +62,7 @@ public class Persona {
 		this.apellidos = apellidos;
 	}
 	/**
-	 * @return: El paisDeNacimiento
+	 * @return El paisDeNacimiento
 	 */
 	public String getPaisDeNacimiento() {
 		return paisDeNacimiento;
@@ -74,7 +74,7 @@ public class Persona {
 		this.paisDeNacimiento = paisDeNacimiento;
 	}
 	/**
-	 * @return: El paisAOperar
+	 * @return El paisAOperar
 	 */
 	public String getPaisAOperar() {
 		return paisAOperar;
@@ -86,7 +86,7 @@ public class Persona {
 		this.paisAOperar = paisAOperar;
 	}
 	/**
-	 * @return: El telefono
+	 * @return El telefono
 	 */
 	public String getTelefono() {
 		return telefono;
@@ -98,7 +98,7 @@ public class Persona {
 		this.telefono = telefono;
 	}
 	/**
-	 * @return: El email
+	 * @return El email
 	 */
 	public String getEmail() {
 		return email;
@@ -110,7 +110,7 @@ public class Persona {
 		this.email = email;
 	}
 	/**
-	 * @return: La fotoDePerfil
+	 * @return La fotoDePerfil
 	 */
 	public Image getFotoDePerfil() {
 		return fotoDePerfil;
@@ -122,7 +122,7 @@ public class Persona {
 		this.fotoDePerfil = fotoDePerfil;
 	}
 	/**
-	 * @return: La billeteraCriptos
+	 * @return La billeteraCriptos
 	 */
 	public Billetera getBilleteraCriptos() {
 		return billeteraCriptos;
@@ -134,7 +134,7 @@ public class Persona {
 		this.billeteraCriptos = billeteraCriptos;
 	}
 	/**
-	 * @return: El usuario
+	 * @return El usuario
 	 */
 	public Usuario getUsuario() {
 		return usuario;
@@ -146,7 +146,7 @@ public class Persona {
 		this.usuario = usuario;
 	}
 	/**
-	 * @return: Los datosBancarios
+	 * @return Los datosBancarios
 	 */
 	public DatosBancarios getDatosBancarios() {
 		return datosBancarios;
@@ -158,7 +158,7 @@ public class Persona {
 		this.datosBancarios = datosBancarios;
 	}
 	/**
-	 * @return: La fechaDeNacimiento
+	 * @return La fechaDeNacimiento
 	 */
 	public Fecha getFechaDeNacimiento() {
 		return fechaDeNacimiento;

@@ -14,7 +14,7 @@ public class Stock {
 	
 	
 	/**
-	 * @return: La cantidadActual
+	 * @return La cantidadActual
 	 */
 	public double getCantidadActual() {
 		return cantidadActual;
@@ -26,7 +26,7 @@ public class Stock {
 		this.cantidadActual = cantidadActual;
 	}
 	/**
-	 * @return: La moneda
+	 * @return La moneda
 	 */
 	public Moneda getMoneda() {
 		return moneda;

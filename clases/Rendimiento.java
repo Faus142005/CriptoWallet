@@ -14,7 +14,7 @@ public class Rendimiento {
 	
 	
 	/**
-	 * @return: El rendimiento
+	 * @return El rendimiento
 	 */
 	public double getRendimiento() {
 		return rendimiento;
@@ -26,7 +26,7 @@ public class Rendimiento {
 		this.rendimiento = rendimiento;
 	}
 	/**
-	 * @return: La moneda
+	 * @return La moneda
 	 */
 	public Moneda getMoneda() {
 		return moneda;

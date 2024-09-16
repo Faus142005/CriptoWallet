@@ -12,7 +12,7 @@ public class PreguntaYRespuesta {
 	private String respuesta;
 	
 	/**
-	 * @return: La pregunta
+	 * @return La pregunta
 	 */
 	public String getPregunta() {
 		return pregunta;
@@ -24,7 +24,7 @@ public class PreguntaYRespuesta {
 		this.pregunta = pregunta;
 	}
 	/**
-	 * @return: La respuesta
+	 * @return La respuesta
 	 */
 	public String getRespuesta() {
 		return respuesta;

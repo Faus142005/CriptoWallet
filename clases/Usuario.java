@@ -19,7 +19,7 @@ public class Usuario {
 	
 	
 	/**
-	 * @return: El id
+	 * @return El id
 	 */
 	public String getId() {
 		return id;
@@ -31,7 +31,7 @@ public class Usuario {
 		this.id = id;
 	}
 	/**
-	 * @return: La contraseña
+	 * @return La contraseña
 	 */
 	public String getContraseña() {
 		return contraseña;
@@ -43,7 +43,7 @@ public class Usuario {
 		this.contraseña = contraseña;
 	}
 	/**
-	 * @return: El dadoDeBaja
+	 * @return El dadoDeBaja
 	 */
 	public boolean isDadoDeBaja() {
 		return dadoDeBaja;
@@ -55,7 +55,7 @@ public class Usuario {
 		this.dadoDeBaja = dadoDeBaja;
 	}
 	/**
-	 * @return: La seguridad
+	 * @return La seguridad
 	 */
 	public DatosDeSeguridad getSeguridad() {
 		return seguridad;

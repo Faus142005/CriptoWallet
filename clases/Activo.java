@@ -14,7 +14,7 @@ public class Activo {
 	
 	
 	/**
-	 * @return: El cantidad
+	 * @return El cantidad
 	 */
 	public double getCantidad() {
 		return cantidad;
@@ -26,7 +26,7 @@ public class Activo {
 		this.cantidad = cantidad;
 	}
 	/**
-	 * @return: La moneda
+	 * @return La moneda
 	 */
 	public Moneda getMoneda() {
 		return moneda;

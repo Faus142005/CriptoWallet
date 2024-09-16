@@ -14,7 +14,7 @@ public class Protocolo {
 	//Otras clases hechas por nosotros
 	private ArrayList<Rendimiento> listaRendimientos;
 	/**
-	 * @return: El nombre
+	 * @return El nombre
 	 */
 	public String getNombre() {
 		return nombre;
@@ -26,7 +26,7 @@ public class Protocolo {
 		this.nombre = nombre;
 	}
 	/**
-	 * @return: La listaRendimientos
+	 * @return La listaRendimientos
 	 */
 	public ArrayList<Rendimiento> getListaRendimientos() {
 		return listaRendimientos;
