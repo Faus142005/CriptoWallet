@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.14">
   <diagram name="Página-1" id="RRyUGvNoHxZk4EFgljng">
-    <mxGraphModel dx="2763" dy="1503" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="6632" dy="3608" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4800" pageHeight="2400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -41,7 +41,7 @@
         <mxCell id="wawcpVOzvmaKw1MRq7vf-5" value="- listaBajas : static List&lt;Persona&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="wawcpVOzvmaKw1MRq7vf-1" vertex="1">
           <mxGeometry y="104" width="348" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="-UK-ls8aYhJ_0cb7NAIi-1" value="- listaBaneados : static List&lt;Personas&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="wawcpVOzvmaKw1MRq7vf-1">
+        <mxCell id="-UK-ls8aYhJ_0cb7NAIi-1" value="- listaBaneados : static List&lt;Personas&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="wawcpVOzvmaKw1MRq7vf-1" vertex="1">
           <mxGeometry y="130" width="348" height="26" as="geometry" />
         </mxCell>
         <mxCell id="wawcpVOzvmaKw1MRq7vf-6" value="- listaMonedas : static List&lt;MonedaCompleta&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="wawcpVOzvmaKw1MRq7vf-1" vertex="1">
