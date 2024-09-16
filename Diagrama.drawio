@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.14">
   <diagram name="Página-1" id="-2VtjGOH2qZDODduAIqy">
-    <mxGraphModel dx="1228" dy="668" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="1184" dy="644" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -831,7 +831,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-631" value="&lt;&lt;Abstract&gt;&gt;&#xa;Transaccion" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="3220" y="1228" width="200" height="282" as="geometry">
+          <mxGeometry x="3220" y="1215" width="200" height="308" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -864,6 +864,9 @@
         </mxCell>
         <mxCell id="VIrEYwXedCHYXx4s6WmI-23" value="+setCodDeTransaccion(String)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="fC_xdWrlekhXA9CfphBG-631">
           <mxGeometry y="256" width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="VIrEYwXedCHYXx4s6WmI-61" value="+ toString() : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="fC_xdWrlekhXA9CfphBG-631">
+          <mxGeometry y="282" width="200" height="26" as="geometry" />
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-666" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="fC_xdWrlekhXA9CfphBG-651" target="fC_xdWrlekhXA9CfphBG-561" edge="1">
           <mxGeometry relative="1" as="geometry" />
