@@ -1069,8 +1069,8 @@
         <mxCell id="fC_xdWrlekhXA9CfphBG-780" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="fC_xdWrlekhXA9CfphBG-739" target="fC_xdWrlekhXA9CfphBG-631" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="3510" y="1084" />
-              <mxPoint x="3510" y="1270" />
+              <mxPoint x="3510" y="1100" />
+              <mxPoint x="3510" y="1280" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1092,7 +1092,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-739" value="Swap" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="3582.75" y="1054.5" width="119.5" height="60" as="geometry">
+          <mxGeometry x="3582.75" y="1070" width="119.5" height="60" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -1124,19 +1124,21 @@
         <mxCell id="fC_xdWrlekhXA9CfphBG-745" value="+ toString() : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-742" vertex="1">
           <mxGeometry y="60" width="138" height="26" as="geometry" />
         </mxCell>
+        <mxCell id="VIrEYwXedCHYXx4s6WmI-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="fC_xdWrlekhXA9CfphBG-746" target="fC_xdWrlekhXA9CfphBG-631">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3530" y="1180" />
+              <mxPoint x="3530" y="1310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-746" value="DeFi" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontSize=12;flipV=0;" parent="1" vertex="1">
-          <mxGeometry x="3570" y="1129.5" width="145" height="86" as="geometry">
+          <mxGeometry x="3570" y="1154" width="145" height="56" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-747" value="-nombreProtocolo:String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-746" vertex="1">
           <mxGeometry y="26" width="145" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="fC_xdWrlekhXA9CfphBG-748" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-746" vertex="1">
-          <mxGeometry y="52" width="145" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="fC_xdWrlekhXA9CfphBG-749" value="+ toString() : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-746" vertex="1">
-          <mxGeometry y="60" width="145" height="26" as="geometry" />
         </mxCell>
         <mxCell id="fC_xdWrlekhXA9CfphBG-771" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="fC_xdWrlekhXA9CfphBG-753" target="fC_xdWrlekhXA9CfphBG-631" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -1198,14 +1200,6 @@
         <mxCell id="fC_xdWrlekhXA9CfphBG-762" value="+ toString() : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" parent="fC_xdWrlekhXA9CfphBG-759" vertex="1">
           <mxGeometry y="60" width="133" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="fC_xdWrlekhXA9CfphBG-778" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="fC_xdWrlekhXA9CfphBG-747" target="fC_xdWrlekhXA9CfphBG-631" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="3530" y="1168" />
-              <mxPoint x="3530" y="1310" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="VIrEYwXedCHYXx4s6WmI-1" value="CentroDeAyuda" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1870" y="156" width="150" height="346" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
@@ -1250,11 +1244,11 @@
         <mxCell id="VIrEYwXedCHYXx4s6WmI-37" value="+ setLinkTutorial(String)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="VIrEYwXedCHYXx4s6WmI-1">
           <mxGeometry y="320" width="150" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VIrEYwXedCHYXx4s6WmI-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="VIrEYwXedCHYXx4s6WmI-44" target="fC_xdWrlekhXA9CfphBG-746">
+        <mxCell id="VIrEYwXedCHYXx4s6WmI-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="VIrEYwXedCHYXx4s6WmI-44" target="fC_xdWrlekhXA9CfphBG-746">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="3760" y="1085" />
-              <mxPoint x="3760" y="1160" />
+              <mxPoint x="3740" y="1085" />
+              <mxPoint x="3740" y="1170" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1269,11 +1263,11 @@
         <mxCell id="VIrEYwXedCHYXx4s6WmI-47" value="+ toString() : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontSize=12;" vertex="1" parent="VIrEYwXedCHYXx4s6WmI-44">
           <mxGeometry y="34" width="145" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="VIrEYwXedCHYXx4s6WmI-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="VIrEYwXedCHYXx4s6WmI-48" target="fC_xdWrlekhXA9CfphBG-746">
+        <mxCell id="VIrEYwXedCHYXx4s6WmI-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="VIrEYwXedCHYXx4s6WmI-48" target="fC_xdWrlekhXA9CfphBG-746">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="3760" y="1280" />
-              <mxPoint x="3760" y="1190" />
+              <mxPoint x="3740" y="1280" />
+              <mxPoint x="3740" y="1190" />
             </Array>
           </mxGeometry>
         </mxCell>
