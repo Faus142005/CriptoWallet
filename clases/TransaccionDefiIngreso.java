@@ -1,12 +1,16 @@
 package clases;
 
 /**
- * TransaccionDefiIngreso hereda de TransccionDefi
- * Cambia el toString
+ * TransaccionDefiIngreso hereda de TransccionDefi Cambia el toString
+ * 
  * @author Fausto Y Albertina
  */
 
 public class TransaccionDefiIngreso extends TransaccionDefi {
+
+	public TransaccionDefiIngreso() {
+
+	}
 
 	public TransaccionDefiIngreso(double cantidad, double comision, String codigoDeTransaccion, Moneda moneda,
 			String nombreProtocolo) {

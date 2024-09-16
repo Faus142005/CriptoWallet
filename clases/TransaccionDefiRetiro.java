@@ -1,12 +1,16 @@
 package clases;
 
 /**
- * TransaccionDefiRetiro hereda de TransaccionDefi
- * Cambia el toString
+ * TransaccionDefiRetiro hereda de TransaccionDefi Cambia el toString
+ * 
  * @author Fausto Y Albertina
  */
 
 public class TransaccionDefiRetiro extends TransaccionDefi {
+
+	public TransaccionDefiRetiro() {
+
+	}
 
 	public TransaccionDefiRetiro(double cantidad, double comision, String codigoDeTransaccion, Moneda moneda,
 			String nombreProtocolo) {

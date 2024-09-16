@@ -11,6 +11,10 @@ public class TransaccionSwap extends Transaccion {
 	// Otras clases hechas por nosotros
 	private Moneda monedaACambiar;
 	private double cantidadMonedasResultantes;
+	
+	public TransaccionSwap() {
+		
+	}
 
 	public TransaccionSwap(double cantidad, double comision, String codigoDeTransaccion, Moneda moneda,
 			Moneda monedaACambiar, double cantidadMonedasResultantes) {

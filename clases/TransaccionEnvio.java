@@ -9,6 +9,10 @@ package clases;
 public class TransaccionEnvio extends Transaccion {
 
 	private String codigoDestino;
+	
+	public TransaccionEnvio() {
+		
+	}
 
 	public TransaccionEnvio(double cantidad, double comision, String codigoDeTransaccion, Moneda moneda,
 			String codigoDestino) {

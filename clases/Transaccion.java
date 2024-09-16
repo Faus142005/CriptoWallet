@@ -20,6 +20,10 @@ public abstract class Transaccion {
 	private FechaCompleta fecha;
 
 	// Constructor
+	
+	public Transaccion() {
+		
+	}
 
 	public Transaccion(double cantidad, double comision, String codigoDeTransaccion, Moneda moneda) {
 		this.cantidad = cantidad;

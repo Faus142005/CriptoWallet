@@ -7,6 +7,10 @@ package clases;
  */
 
 public class TransaccionVenta extends Transaccion {
+	
+	public TransaccionVenta() {
+		
+	}
 
 	public TransaccionVenta(double cantidad, double comision, String codigoDeTransaccion, Moneda moneda) {
 
