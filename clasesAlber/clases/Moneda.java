@@ -11,8 +11,7 @@ public class Moneda {
 	private String nombre;
 	private String nomenclatura;
 	private double precio;
-	private double volatilidad; //va del 0 al 100 con posibles decimales
-	private double stock; //bancame
+	private double volatilidad; //va del 0 al 100 con posibles decimales	
 	
 	
 	/**
@@ -62,6 +61,18 @@ public class Moneda {
 	 */
 	public void setNomenclatura(String nomenclatura) {
 		this.nomenclatura = nomenclatura;
+	}
+	/**
+	 * @return el tipo (Cripto/FIAT)
+	 */
+	public char getTipo() {
+		return tipo;
+	}
+	/**
+	 * @param tipo El tipo a setear
+	 */
+	public void setTipo(char tipo) {
+		this.tipo = tipo;
 	}
 	
 		

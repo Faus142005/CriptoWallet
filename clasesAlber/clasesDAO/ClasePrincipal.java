@@ -2,6 +2,7 @@ package clasesDAO;
 
 import java.sql.*;
 import javax.sql.DataSource;
+
 import java.util.Scanner;
 
 public class ClasePrincipal {
@@ -16,12 +17,9 @@ public class ClasePrincipal {
 
 		try (Connection connection = dataSource.getConnection()) {
 
-			System.out.println("Conexión a la base de datos establecida");
-			//connection.setAutoCommit(false); //para q no haga los commit automáticamente
+			System.out.println("Conexión a la base de datos establecida");			
 
-			in = new Scanner(System.in);
-
-			GestorBaseDeDatos.creacionDeTablasEnBD(connection);
+			in = new Scanner(System.in);						
 			
 			imprimirOpcionesEnTerminal();
 			int opcion;
@@ -33,11 +31,13 @@ public class ClasePrincipal {
 					break;
 
 				case 2:
-					listarMonedas(connection);
+					MonedaDAOjdbc moneda = new MonedaDAOjdbc();
+					moneda.listarMonedas(connection);
 					break;
 
-				case 3:
-					generarStock(connection);
+				case 3:					
+					StockDAOjdbc stock = new StockDAOjdbc();
+					stock.generarStock(connection);
 					break;
 
 				case 4:
@@ -59,6 +59,7 @@ public class ClasePrincipal {
 				case 8:
 					swap(connection);
 					break;
+					
 				default:
 					System.out.println("Elija nuevamente");
 					imprimirOpcionesEnTerminal();
@@ -88,81 +89,90 @@ public class ClasePrincipal {
 						 "8) Realizar operación de Swap\n" );
 																		
 	}
-
-	/*
-	private static void crearMoneda(Connection connection) throws SQLException {
-		
-		System.out.println("Elija qué moneda quiere crear:\n" + "1) Moneda fiduciaria\n" + "2) Criptomoneda");
+	
+	private static void crearMoneda(Connection connection) throws SQLException {		
+			
+		System.out.println("Elija qué tipo de moneda quiere crear:\n" + "1) Moneda fiduciaria\n" + "2) Criptomoneda");
 		boolean seleccionado = false;
-		
+			
 		while(!seleccionado) {
 			
 			switch (in.nextInt()){
 			
 			case 1: 				
-				MonedaFiduciariaDAOjdbc fiat = new MonedaFiduciariaDAOjdbc();
-				fiat.insertarMonedaFiduciaria(connection);
+				crearMonedaFiduciaria(connection);
 				seleccionado = true;
 				break;
 				
 			case 2:		
-				CriptomonedaDAOjdbc cripto = new CriptomonedaDAOjdbc();
-				cripto.insertarCriptomoneda(connection);
+				crearCriptomoneda(connection);
 				seleccionado = true;
 				break;
-			}
+			}			
 		}
 	}
 	
-	private static void insertarMonedaFiduciaria(Connection connection) throws SQLException {
+	private static void crearCriptomoneda(Connection connection) throws SQLException {
 		
-		System.out.println("Ingrese el nombre de la moneda fiduciaria");
-		String nombre = in.nextLine();
-		
-		System.out.println("Ingrese la nomenclatura de la moneda fiduciaria");
-		String nomenclatura = in.nextLine();		
-		
-				
-		Statement stmt = connection.createStatement();
-		String query = "INSERT INTO moneda (nombre,nomenclatura) VALUES(nombre, nomenclatura)";
-		int res = stmt.executeUpdate(query);
-		stmt.close();			
-
-	}
-	
-
-	private static void insertarCriptomoneda(Connection connection) throws SQLException {
 		System.out.println("Ingrese el nombre de la criptomoneda");
 		String nombre = in.nextLine();
 
 		System.out.println("Ingrese la nomenclatura de la criptomoneda");
 		String nomenclatura = in.nextLine();
-
-		System.out.println("Ingrese el path de la imagen para el icono de la criptomoneda");
-		String imagePath = in.nextLine();
-
+		
 		System.out.println("Ingrese el precio de " + nombre + "en dolares");
 		double precio = in.nextDouble();
-	}
-
-	private static void listarMonedas(Connection connection) throws SQLException {
-		Statement stmt = connection.createStatement();
-		ResultSet resul=stmt.executeQuery("SELECT * FROM moneda");
-			
-		while(resul.next()) {
-			System.out.println("Nombre: "+resul.getString("nombre")+
-							   "\nNomenclatura: "+ resul.getString("nomenclatura")+
-							   "\nPrecio en Dólares: "+ resul.getString("precio")+
-							   "\nVolatilidad: "+ resul.getString("volatilidad")+
-							   "\nStock: "+ resul.getString("stock"));
+		
+		System.out.println("Ingrese la volatilidad de " + nombre);
+		double volatilidad = in.nextDouble();
+		
+		System.out.println("Ingrese el stock disponible de " + nombre);
+		double cantidad = in.nextDouble();
+		
+		System.out.println("Desea confirmar?\n Ingrese 1 para confirmar, y cualquier otra para cancelar.");
+		int confirmacion=in.nextInt();
+		
+		if(confirmacion==1) {			
+		    MonedaDAOjdbc moneda = new MonedaDAOjdbc();
+		    moneda.insertarMoneda(connection,nombre,nomenclatura,precio,volatilidad);
+		    StockDAOjdbc stock = new StockDAOjdbc();
+		    stock.insertarStock(connection,nomenclatura,cantidad);
 		}
 		
-		stmt.close();							
+		else {
+			System.out.println("Operación cancelada.");
+		}		
+		
 	}
-	*/
+	
+	private static void crearMonedaFiduciaria(Connection connection) throws SQLException {
+		
+		System.out.println("Ingrese el nombre de la moneda fiduciaria");
+		String nombre = in.nextLine();
+		
+		System.out.println("Ingrese la nomenclatura de la moneda fiduciaria");
+		String nomenclatura = in.nextLine();	
+		
+		System.out.println("Ingrese el precio de " + nombre + "en dolares");
+		double precio = in.nextDouble();
+		
+		System.out.println("Desea confirmar?\n Ingrese 1 para confirmar, y cualquier otra para cancelar.");
+		int confirmacion=in.nextInt();
+		
+		if(confirmacion==1) {			
+		    MonedaDAOjdbc moneda = new MonedaDAOjdbc();
+		    moneda.insertarMoneda(connection,nombre,nomenclatura,precio);		    
+		}
+		
+		else {
+			System.out.println("Operación cancelada.");
+		}		
+		
+	}
+				
+	
+	//---------------------------------------------------------------
 
-	private static void generarStock(Connection connection) throws SQLException {
-	}
 
 	private static void listarStock(Connection connection) throws SQLException {
 
