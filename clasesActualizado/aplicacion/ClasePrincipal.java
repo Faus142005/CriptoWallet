@@ -45,7 +45,7 @@ public class ClasePrincipal {
 					break;
 
 				case 5:
-					GestorDAOs.generarActivos();
+					//GestorDAOs.generarActivos();
 					break;
 
 				case 6:
@@ -53,11 +53,11 @@ public class ClasePrincipal {
 					break;
 
 				case 7:
-					GestorDAOs.comprarCriptomoneda();
+					//GestorDAOs.comprarCriptomoneda();
 					break;
 
 				case 8:
-					GestorDAOs.swap();
+					//GestorDAOs.swap();
 					break;
 					
 				default:
