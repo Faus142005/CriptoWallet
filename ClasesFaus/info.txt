@@ -1,4 +1,5 @@
-Creacion de la base de  datos.
-1- Agregar todos los DAVOS.
-2- Mejorar la impresion en la terminal.
-3- Modificacion en general de monedas ver documentacion!!
+El 1 y 2 estan hechos, funcionan al 100%
+El 3 y 4 tambien...
+Cuando se le pide al jdbc listar el stock que hacer... 
+Fijate Alber de eso
+Abrazo!!
