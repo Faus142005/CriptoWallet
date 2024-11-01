@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.1">
   <diagram name="Página-1" id="RRyUGvNoHxZk4EFgljng">
-    <mxGraphModel dx="2442" dy="1316" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4800" pageHeight="2400" math="0" shadow="0">
+    <mxGraphModel dx="3489" dy="1880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4800" pageHeight="2400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1092,7 +1092,7 @@
         <mxCell id="c4CE7CPpjkFyj_pf8bTP-11" value="-nomenclatura : String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="c4CE7CPpjkFyj_pf8bTP-8" vertex="1">
           <mxGeometry y="52" width="126.75" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="c4CE7CPpjkFyj_pf8bTP-12" value="-icono : Image" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="c4CE7CPpjkFyj_pf8bTP-8" vertex="1">
+        <mxCell id="c4CE7CPpjkFyj_pf8bTP-12" value="- icono : Image" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="c4CE7CPpjkFyj_pf8bTP-8" vertex="1">
           <mxGeometry y="78" width="126.75" height="26" as="geometry" />
         </mxCell>
         <mxCell id="DrB38jNqlS3dOm8-0yV1-26" value="- precio : double" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="c4CE7CPpjkFyj_pf8bTP-8">
