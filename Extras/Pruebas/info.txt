@@ -1,3 +1,0 @@
-Creacion de la base de  datos.
-1- Agregar todos los DAVOS.
-2- Mejorar la impresion en la terminal.
