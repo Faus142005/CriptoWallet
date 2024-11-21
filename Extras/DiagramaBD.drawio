@@ -28,7 +28,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="2KLb75H1Xo5vnfmy_1gz-80" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="150" y="650" width="250" height="120" as="geometry" />
+          <mxGeometry x="80" y="610" width="250" height="120" as="geometry" />
         </mxCell>
         <mxCell id="2KLb75H1Xo5vnfmy_1gz-71" value="TRANSACCION" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;swimlaneBody=1;columnLines=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="2KLb75H1Xo5vnfmy_1gz-80">
           <mxGeometry width="250" height="120" as="geometry" />
@@ -70,7 +70,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="2KLb75H1Xo5vnfmy_1gz-81" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="425" y="425" width="250" height="150" as="geometry" />
+          <mxGeometry x="435" y="370" width="250" height="150" as="geometry" />
         </mxCell>
         <mxCell id="2KLb75H1Xo5vnfmy_1gz-30" value="ACTIVO_FIAT" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;columnLines=0;" vertex="1" parent="2KLb75H1Xo5vnfmy_1gz-81">
           <mxGeometry width="250" height="150" as="geometry" />
@@ -135,7 +135,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="2KLb75H1Xo5vnfmy_1gz-82" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="90" y="425" width="250" height="150" as="geometry" />
+          <mxGeometry x="100" y="370" width="250" height="150" as="geometry" />
         </mxCell>
         <mxCell id="C-vyLk0tnHw3VtMMgP7b-13" value="ACTIVO_CRIPTO" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;labelBackgroundColor=none;fillColor=#B2C9AB;strokeColor=#788AA3;fontColor=#46495D;columnLines=0;" parent="2KLb75H1Xo5vnfmy_1gz-82" vertex="1">
           <mxGeometry width="250" height="150" as="geometry" />
