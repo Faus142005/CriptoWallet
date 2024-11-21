@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import clases.ActivoCripto;
 
-public interface ActivoCriptoDAO {
+public abstract class ActivoCriptoDAO {
 
 	public abstract void insertarActivoCripto(ActivoCripto activo) throws SQLException; 
 	public abstract void actualizarActivoCripto(ActivoCripto activo) throws SQLException;

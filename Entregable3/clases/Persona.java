@@ -2,41 +2,41 @@ package clases;
 
 public class Persona {
 
-	private String nombre;
-	private String apellido;
+	private String nombres;
+	private String apellidos;
 	
 	public Persona() {
 		
 	}
 	
-	public Persona(String nombre, String apellido) {
-		this.nombre = nombre;
-		this.apellido = apellido;
+	public Persona(String nombres, String apellidos) {
+		this.nombres = nombres;
+		this.apellidos = apellidos;
 	}
 	
 	/**
 	 * @return the nombre
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombres() {
+		return nombres;
 	}
 	/**
 	 * @param nombre the nombre to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
 	/**
 	 * @return the apellido
 	 */
-	public String getApellido() {
-		return apellido;
+	public String getApellidos() {
+		return apellidos;
 	}
 	/**
 	 * @param apellido the apellido to set
 	 */
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 	
 	

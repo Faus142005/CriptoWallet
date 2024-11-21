@@ -56,14 +56,6 @@ public class VistaMain extends JFrame {
 		this.setTitle("CriptoWallet - " + id);
 		cardLayout.show(cardPanel, id);
 		
-		obtenerDimensionesDelPanel(id);
-		this.setLocationRelativeTo(null);
-	}
-	
-	public void cambiarPanel(String id) {
-		this.setTitle("CriptoWallet - " + id);
-		cardLayout.show(cardPanel, id);
-		
 		Dimension d = obtenerDimensionesDelPanel(id);
 		this.setSize(d);
 		System.out.println("Dimensiones: " + d.toString());

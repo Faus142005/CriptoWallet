@@ -16,7 +16,8 @@ public class CrearBaseDeDatos {
 				+ " APELLIDOS       VARCHAR(50)    NOT NULL "
 				+ ")";
 		stmt.executeUpdate(sql);
-		sql = "CREATE TABLE  IF NOT EXISTS USUARIO " + "(" + " ID       INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
+		sql = "CREATE TABLE  IF NOT EXISTS USUARIO " + "("
+				+ " ID       INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
 				+ " ID_PERSONA       INTEGER   NOT NULL, "
 				+ " EMAIL       VARCHAR(50)    NOT NULL, "
 				+ " PASSWORD       VARCHAR(50)    NOT NULL, "

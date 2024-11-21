@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 
 import org.sqlite.SQLiteDataSource;
 
-public final class MiDataSource {
+public final class MyDataSource {
 			
     private static SQLiteDataSource dataSource;
 
@@ -24,7 +24,7 @@ public final class MiDataSource {
         return dataSource;
     }
 
-    private MiDataSource(){}
+    private MyDataSource(){}
 
     public static void closeConnection() throws SQLException {
         if (dataSource != null) {
