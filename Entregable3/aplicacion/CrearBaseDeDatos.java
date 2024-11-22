@@ -16,16 +16,14 @@ public class CrearBaseDeDatos {
 				+ " APELLIDOS       VARCHAR(50)    NOT NULL "
 				+ ")";
 		stmt.executeUpdate(sql);
-		sql = "CREATE TABLE  IF NOT EXISTS USUARIO " + "("
-				+ " ID       INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
+		sql = "CREATE TABLE  IF NOT EXISTS USUARIO " + "(" + " ID       INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
 				+ " ID_PERSONA       INTEGER   NOT NULL, "
 				+ " EMAIL       VARCHAR(50)    NOT NULL, "
 				+ " PASSWORD       VARCHAR(50)    NOT NULL, "
 				+ " ACEPTA_TERMINOS       BOOLEAN    NOT NULL, "
 				+ " FOREIGN KEY(ID_PERSONA) REFERENCES PERSONA(ID)"
 				+ ")";
-		stmt.executeUpdate(sql);
-				
+		stmt.executeUpdate(sql);				
 		sql = "CREATE TABLE  IF NOT EXISTS MONEDA "
 				+ "("
 				+ " ID       INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
@@ -37,7 +35,7 @@ public class CrearBaseDeDatos {
 				+ " STOCK	REAL     NULL, "
 				+ " NOMBRE_ICONO       VARCHAR(50)    NOT NULL "
 				+ ")";
-		stmt.executeUpdate(sql);
+		stmt.executeUpdate(sql);		
 		sql = "CREATE TABLE  IF NOT EXISTS ACTIVO_CRIPTO"
 				+ "("
 				+ " ID       INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
@@ -66,7 +64,7 @@ public class CrearBaseDeDatos {
 				+ " ID_USUARIO INTEGER    NOT NULL, "
 				+ " FOREIGN KEY(ID_USUARIO) REFERENCES USUARIO(ID)"
 				+ ")";
-		stmt.executeUpdate(sql);
+		stmt.executeUpdate(sql);		
 		
 		stmt.close();
 	}

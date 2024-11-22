@@ -5,25 +5,23 @@ public class Moneda {
 	private char tipo;
 	private String nombre;
 	private String nomenclatura;
-	private double valorDolar;
-	private double volatilidad;
-	private double stock;
+	private double valorDolar;	
 	private String nombreIcono;
+	private double stock;	
+	//la volatilidad sólo la tiene la subclase Criptomoneda
 	
 	public Moneda() {
 		
 	}
 
-	public Moneda(char tipo, String nombre, String nomenclatura, double valorDolar, double volatilidad, double stock,
-			String nombreIcono) {
+	public Moneda(char tipo, String nombre, String nomenclatura, double valorDolar, String nombreIcono, double stock) {
 		this.tipo = tipo;
 		this.nombre = nombre;
 		this.nomenclatura = nomenclatura;
-		this.valorDolar = valorDolar;
-		this.volatilidad = volatilidad;
-		this.stock = stock;
+		this.valorDolar = valorDolar;		
 		this.nombreIcono = nombreIcono;
-	}
+		this.stock = stock;
+	}	
 
 	/**
 	 * @return the tipo
@@ -79,20 +77,20 @@ public class Moneda {
 	 */
 	public void setValorDolar(double valorDolar) {
 		this.valorDolar = valorDolar;
+	}	
+
+	/**
+	 * @return the nombreIcono
+	 */
+	public String getNombreIcono() {
+		return nombreIcono;
 	}
 
 	/**
-	 * @return the volatilidad
+	 * @param nombreIcono the nombreIcono to set
 	 */
-	public double getVolatilidad() {
-		return volatilidad;
-	}
-
-	/**
-	 * @param volatilidad the volatilidad to set
-	 */
-	public void setVolatilidad(double volatilidad) {
-		this.volatilidad = volatilidad;
+	public void setNombreIcono(String nombreIcono) {
+		this.nombreIcono = nombreIcono;
 	}
 
 	/**
@@ -109,17 +107,10 @@ public class Moneda {
 		this.stock = stock;
 	}
 
-	/**
-	 * @return the nombreIcono
-	 */
-	public String getNombreIcono() {
-		return nombreIcono;
+	@Override
+	public String toString() {
+		return "Moneda [tipo=" + tipo + ", nombre=" + nombre + ", nomenclatura=" + nomenclatura + ", valorDolar="
+				+ valorDolar + ", nombreIcono=" + nombreIcono + ", stock=" + stock + "]";
 	}
-
-	/**
-	 * @param nombreIcono the nombreIcono to set
-	 */
-	public void setNombreIcono(String nombreIcono) {
-		this.nombreIcono = nombreIcono;
-	}
+		
 }

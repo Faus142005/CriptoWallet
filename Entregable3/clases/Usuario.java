@@ -2,7 +2,7 @@ package clases;
 
 public class Usuario {
 
-	private int idPersona;
+	private Persona persona;
 	private String email;
 	private String contraseña;
 	private boolean tyc;
@@ -11,9 +11,9 @@ public class Usuario {
 
 	}
 
-	public Usuario(int idPersona, String email, String contraseña, boolean tyc) {
+	public Usuario(Persona persona, String email, String contraseña, boolean tyc) {
 
-		this.idPersona = idPersona;
+		this.persona = persona;
 		this.email = email;
 		this.contraseña = contraseña;
 		this.tyc = tyc;
@@ -22,15 +22,15 @@ public class Usuario {
 	/**
 	 * @return the idPersona
 	 */
-	public int getIdPersona() {
-		return idPersona;
+	public Persona getPersona() {
+		return persona;
 	}
 
 	/**
 	 * @param idPersona the idPersona to set
 	 */
-	public void setIdPersona(int idPersona) {
-		this.idPersona = idPersona;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 	/**

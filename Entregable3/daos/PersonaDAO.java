@@ -2,9 +2,7 @@ package daos;
 
 import java.sql.SQLException;
 
-import clases.Persona;
-
-public interface PersonaDAO {
+public interface PersonaDAO<Persona> {
 
 	public abstract int insertarPersona(Persona persona) throws SQLException; 
 	public abstract void actualizarPersona(int id,Persona persona) throws SQLException;

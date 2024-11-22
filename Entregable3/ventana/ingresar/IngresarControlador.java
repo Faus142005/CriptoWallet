@@ -3,7 +3,6 @@ package ventana.ingresar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import clases.Usuario;
 import ventana.VistaMain;
 
 public class IngresarControlador {
@@ -20,11 +19,6 @@ public class IngresarControlador {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String email = vista.getCampoEmail().getText();
-				String contraseña = String.valueOf(vista.getCampoContraseña().getPassword());
-				Usuario usr = new Usuario(-1, email, contraseña, false);
-				
-				boolean inicioSesion = modelo.iniciarSesion(usr);
 			}
 		});
 		

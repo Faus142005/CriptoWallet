@@ -1,58 +1,61 @@
-package aplicacion;
+package daos;
 
-import daos.ActivoCriptoDAO;
-import daos.ActivoFIATDAO;
-import daos.MonedaDAO;
-import daos.PersonaDAO;
-import daos.TransaccionDAO;
-import daos.UsuarioDAO;
 import daosJDBC.PersonaDAOJDBC;
 import daosJDBC.UsuarioDAOJDBC;
+import daosJDBC.MonedaDAOJDBC;
+import daosJDBC.TransaccionDAOJDBC;
+import clases.ActivoCripto;
+import clases.ActivoFIAT;
+import clases.Moneda;
+import clases.Persona;
+import clases.Transaccion;
+import clases.Usuario;
+import daosJDBC.ActivoCriptoDAOJDBC;
+import daosJDBC.ActivoFIATDAOJDBC;
 
-public class GestorDAOS {
 
-	private static PersonaDAO personaDAO = new PersonaDAOJDBC();
-	private static UsuarioDAO usuarioDAO = new UsuarioDAOJDBC();
-	private static MonedaDAO monedaDAO;
-	private static TransaccionDAO transaccionDAO;
-	private static ActivoCriptoDAO activoCriptoDAO;
-	private static ActivoFIATDAO activoFIATDAO;
+public class FactoryDAO {
+	private static PersonaDAO<Persona> personaDAO = new PersonaDAOJDBC();
+	private static UsuarioDAO<Usuario> usuarioDAO = new UsuarioDAOJDBC();
+	private static MonedaDAO<Moneda> monedaDAO = new MonedaDAOJDBC();	
+	private static TransaccionDAO<Transaccion> transaccionDAO = new TransaccionDAOJDBC();
+	private static ActivoCriptoDAO<ActivoCripto> activoCriptoDAO = new ActivoCriptoDAOJDBC();
+	private static ActivoFIATDAO<ActivoFIAT> activoFIATDAO = new ActivoFIATDAOJDBC();
 	/**
 	 * @return the personaDAO
 	 */
-	public static PersonaDAO getPersonaDAO() {
+	public static PersonaDAO<Persona> getPersonaDAO() {
 		return personaDAO;
 	}
 	/**
 	 * @return the usuarioDAO
 	 */
-	public static UsuarioDAO getUsuarioDAO() {
+	public static UsuarioDAO<Usuario> getUsuarioDAO() {
 		return usuarioDAO;
 	}
 	/**
 	 * @return the monedaDAO
 	 */
-	public static MonedaDAO getMonedaDAO() {
+	public static MonedaDAO<Moneda> getMonedaDAO() {
 		return monedaDAO;
-	}
+	}	
 	/**
 	 * @return the transaccionDAO
 	 */
-	public static TransaccionDAO getTransaccionDAO() {
+	public static TransaccionDAO<Transaccion> getTransaccionDAO() {
 		return transaccionDAO;
 	}
 	/**
 	 * @return the activoCriptoDAO
 	 */
-	public static ActivoCriptoDAO getActivoCriptoDAO() {
+	public static ActivoCriptoDAO<ActivoCripto> getActivoCriptoDAO() {
 		return activoCriptoDAO;
 	}
 	/**
 	 * @return the activoFIATDAO
 	 */
-	public static ActivoFIATDAO getActivoFIATDAO() {
+	public static ActivoFIATDAO<ActivoFIAT> getActivoFIATDAO() {
 		return activoFIATDAO;
 	}
-	
 	
 }

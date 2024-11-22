@@ -9,34 +9,34 @@ public class Persona {
 		
 	}
 	
-	public Persona(String nombres, String apellidos) {
-		this.nombres = nombres;
-		this.apellidos = apellidos;
+	public Persona(String nombre, String apellido) {
+		this.nombres = nombre;
+		this.apellidos = apellido;
 	}
 	
 	/**
 	 * @return the nombre
 	 */
-	public String getNombres() {
+	public String getNombre() {
 		return nombres;
 	}
 	/**
 	 * @param nombre the nombre to set
 	 */
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
+	public void setNombre(String nombre) {
+		this.nombres = nombre;
 	}
 	/**
 	 * @return the apellido
 	 */
-	public String getApellidos() {
+	public String getApellido() {
 		return apellidos;
 	}
 	/**
 	 * @param apellido the apellido to set
 	 */
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setApellido(String apellido) {
+		this.apellidos = apellido;
 	}
 	
 	

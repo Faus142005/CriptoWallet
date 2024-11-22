@@ -13,11 +13,11 @@ public class RegistrarseVista {
 	private Dimension dimensiones = new Dimension(560, 520);
 	private JPanel panel = new JPanel();
 
-	private JLabel etiquetaNombres = new JLabel("Nombres:");
-	private JTextField campoNombres = new JTextField();
+	private JLabel etiquetaNombre = new JLabel("Nombre:");
+	private JTextField campoNombre = new JTextField();
 
-	private JLabel etiquetaApellidos = new JLabel("Apellidos:");
-	private JTextField campoApellidos = new JTextField();
+	private JLabel etiquetaApellido = new JLabel("Apellido:");
+	private JTextField campoApellido = new JTextField();
 
 	private JLabel etiquetaEmail = new JLabel("Email:");
 	private JTextField campoEmail = new JTextField();
@@ -37,11 +37,11 @@ public class RegistrarseVista {
 
 		panel.setLayout(null);
 		
-		etiquetaNombres.setBounds(30, 30, 70, 30);
-		campoNombres.setBounds(250, 30, 290, 30);
+		etiquetaNombre.setBounds(30, 30, 60, 30);
+		campoNombre.setBounds(250, 30, 290, 30);
 		
-		etiquetaApellidos.setBounds(30, 90, 100, 30);
-		campoApellidos.setBounds(250, 90, 290, 30);
+		etiquetaApellido.setBounds(30, 90, 90, 30);
+		campoApellido.setBounds(250, 90, 290, 30);
 
 		etiquetaEmail.setBounds(30, 150, 50, 30);
 		campoEmail.setBounds(250, 150, 290, 30);
@@ -57,11 +57,11 @@ public class RegistrarseVista {
 		etiquetaLogin.setBounds(80, 390, 260, 30);
 		botonLogin.setBounds(380, 390, 100, 30);
 		
-		panel.add(etiquetaNombres);
-		panel.add(campoNombres);
+		panel.add(etiquetaNombre);
+		panel.add(campoNombre);
 		
-		panel.add(etiquetaApellidos);
-		panel.add(campoApellidos);
+		panel.add(etiquetaApellido);
+		panel.add(campoApellido);
 		
 		panel.add(etiquetaEmail);
 		panel.add(campoEmail);
@@ -113,57 +113,57 @@ public class RegistrarseVista {
 	/**
 	 * @return the etiquetaNombre
 	 */
-	public JLabel getEtiquetaNombres() {
-		return etiquetaNombres;
+	public JLabel getEtiquetaNombre() {
+		return etiquetaNombre;
 	}
 
 	/**
 	 * @param etiquetaNombre the etiquetaNombre to set
 	 */
-	public void setEtiquetaNombres(JLabel etiquetaNombres) {
-		this.etiquetaNombres = etiquetaNombres;
+	public void setEtiquetaNombre(JLabel etiquetaNombre) {
+		this.etiquetaNombre = etiquetaNombre;
 	}
 
 	/**
 	 * @return the campoNombre
 	 */
-	public JTextField getCampoNombres() {
-		return campoNombres;
+	public JTextField getCampoNombre() {
+		return campoNombre;
 	}
 
 	/**
 	 * @param campoNombre the campoNombre to set
 	 */
-	public void setCampoNombres(JTextField campoNombres) {
-		this.campoNombres = campoNombres;
+	public void setCampoNombre(JTextField campoNombre) {
+		this.campoNombre = campoNombre;
 	}
 
 	/**
 	 * @return the etiquetaApellido
 	 */
-	public JLabel getEtiquetaApellidos() {
-		return etiquetaApellidos;
+	public JLabel getEtiquetaApellido() {
+		return etiquetaApellido;
 	}
 
 	/**
 	 * @param etiquetaApellido the etiquetaApellido to set
 	 */
-	public void setEtiquetaApellidos(JLabel etiquetaApellidos) {
-		this.etiquetaApellidos = etiquetaApellidos;
+	public void setEtiquetaApellido(JLabel etiquetaApellido) {
+		this.etiquetaApellido = etiquetaApellido;
 	}
 
 	/**
 	 * @return the campoApellido
 	 */
-	public JTextField getCampoApellidos() {
-		return campoApellidos;
+	public JTextField getCampoApellido() {
+		return campoApellido;
 	}
 
 	/**
 	 * @param campoApellido the campoApellido to set
 	 */
-	public void setCampoApellidos(JTextField campoApellidos) {
-		this.campoApellidos = campoApellidos;
+	public void setCampoApellido(JTextField campoApellido) {
+		this.campoApellido = campoApellido;
 	}
 
 	/**
