@@ -1,6 +1,4 @@
-FIJARSE UNIQUE??
-HACER LOS EXISTS??
-LOS OBJETOS DEBEN TENER LA ID O EL OBJETO COMO TAL??
+Cómo hacemos para insertar activos? En cuanto al usuario, porque en realidad tenes siempre la misma billetera, o sea el mismo usuario
 
 Respuestas:
 - Probar Paint/redraw/render, para el problema del CardLayout
@@ -8,4 +6,5 @@ Respuestas:
 Entonces hay que hacer métodos que pregunten si tal cosa existe o no 
 - Objetos con objetos. No con id
 - Se puede hacer tanto con join como con los ids y tablas separadas para recuperar por ejemplo un objeto Activo
-- Actualizar a Swing :(
+
+
