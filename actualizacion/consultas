@@ -11,3 +11,5 @@
 - eliminarMoneda, lo hacemos por Nomenclatura o por ID? Lo mismo con insertarMoneda.
 
 - el metodo insertarTransaccion solo con resumen por mi lo saco a la mierda, y dejo el insertar completo :P
+
+- dentro de los daos tenemos moneda, criptomoneda y fiat. La cripto y la fiat no están incluidas ya en moneda? o qué tendrían de diferente?
