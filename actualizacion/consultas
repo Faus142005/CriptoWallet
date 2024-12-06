@@ -1,0 +1,13 @@
+- el insertarPersona de los DAOs era un int, era por algo en especial? En general con los insertar, hice que si todo salía bien entonces retornaba el id del objeto.
+
+- opinión: cuando insertamos una persona nueva a la tabla, se le asigna un id que se autoincrementa automáticamente, querés que ya se lo atribuyamos al objeto Persona? 
+(aplica al resto de los objetos también)
+
+- opinion 2: la Transaccion tiene una clave foránea a la tabla de usuario, o sea que la clase de java debería tener un objeto usuario no?
+(Esto por las dudas ya lo hice)
+  
+- opinion 3: Si elimino un usuario, debería eliminar sus activos?
+
+- eliminarMoneda, lo hacemos por Nomenclatura o por ID? Lo mismo con insertarMoneda.
+
+- el metodo insertarTransaccion solo con resumen por mi lo saco a la mierda, y dejo el insertar completo :P
