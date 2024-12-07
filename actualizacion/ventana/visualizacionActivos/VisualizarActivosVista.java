@@ -1,0 +1,382 @@
+package ventana.visualizacionActivos;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+
+import aplicacion.CalculosGenerales;
+import aplicacion.FuncionesDeLaAplicacion;
+import aplicacion.GestorDeDatosDeLaAplicacion;
+import clases.ActivoCripto;
+import clases.ActivoFIAT;
+import clases.Criptomoneda;
+import clases.FIAT;
+
+public class VisualizarActivosVista {
+
+	private Dimension dimensiones = new Dimension(600, 550);
+	private JPanel panel = new JPanel();
+
+	// FUNCIONAMIENTO SCROLL PANE
+	private HashMap<String, ImageIcon> imagenesEscaladas = new HashMap<>();
+	private HashMap<String, JLabel> etiquetasPrecios = new HashMap<String, JLabel>();
+	private HashMap<String, JLabel> etiquetasVolatilidad = new HashMap<String, JLabel>();
+	private HashMap<String, JLabel> etiquetasStock = new HashMap<String, JLabel>();
+
+	private JPanel panelScrollPaneActivos = new JPanel();
+	private JScrollPane scrollPaneActivos = new JScrollPane(panelScrollPaneActivos);
+
+	// OTRAS COSAS
+
+	private JLabel etiquetaBalance = new JLabel();
+	private JButton botonAtras = new JButton("Atras");
+	private JButton botonExportarCVS = new JButton("Exportar CVS");
+
+	public VisualizarActivosVista() {
+
+		this.panel.setLayout(null);
+
+		this.panelScrollPaneActivos.setLayout(new BoxLayout(panelScrollPaneActivos, BoxLayout.Y_AXIS));
+		this.panel.add(scrollPaneActivos);
+
+		this.scrollPaneActivos.setBounds(50, 50, 500, 400);
+
+		this.etiquetaBalance.setBounds(50, 460, 200, 30);
+		this.panel.add(etiquetaBalance);
+
+		this.botonAtras.setBounds(10, 10, 100, 30);
+		this.panel.add(botonAtras);
+
+		this.botonExportarCVS.setBounds(400, 460, 150, 30);
+		this.panel.add(botonExportarCVS);
+
+		this.panel.setName("Visualizar Activos");
+		this.panel.setSize(dimensiones);
+		this.panel.setPreferredSize(dimensiones);
+
+		this.actualizarActivos();
+	}
+
+	public void actualizarDatosActivos() {
+
+		List<ActivoCripto> activosCripto = FuncionesDeLaAplicacion
+				.listarActivosCripto(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
+
+		for (ActivoCripto activoCripto : activosCripto) {
+			Criptomoneda criptomoneda = (Criptomoneda) activoCripto.getMoneda();
+			etiquetasStock.get(criptomoneda.getNomenclatura()).setText("ADDLS");
+			etiquetasVolatilidad.get(criptomoneda.getNomenclatura())
+					.setText(String.valueOf(criptomoneda.getVolatilidad()));
+			etiquetasPrecios.get(criptomoneda.getNomenclatura()).setText(String.valueOf(criptomoneda.getValorDolar()));
+		}
+
+		etiquetaBalance.setText("Balance: " + FuncionesDeLaAplicacion
+				.calcularBalanceEnDolaresDeUsuario(GestorDeDatosDeLaAplicacion.getUsuarioConectado()) + "USD");
+	}
+
+	public void actualizarActivos() {
+
+		imagenesEscaladas.clear();
+
+		etiquetasPrecios.clear();
+		etiquetasVolatilidad.clear();
+		etiquetasStock.clear();
+
+		panelScrollPaneActivos.removeAll();
+
+		List<ActivoCripto> activosCripto = FuncionesDeLaAplicacion
+				.listarActivosCripto(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
+
+		List<ActivoFIAT> activosFIAT = FuncionesDeLaAplicacion
+				.listarActivosFIAT(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
+
+		HashMap<String, ImageIcon> auxImagenes = FuncionesDeLaAplicacion.obtenerIconsDeCriptomonedas();
+
+		for (ActivoCripto activoCripto : activosCripto) {
+
+			Criptomoneda criptomoneda = (Criptomoneda) activoCripto.getMoneda();
+
+			imagenesEscaladas.put(criptomoneda.getNomenclatura(),
+					CalculosGenerales.escalarImagenAlto(auxImagenes.get(criptomoneda.getNomenclatura()), 50));
+
+			// Panel izquierda(icono)
+			JPanel monedaPanel = new JPanel(new BorderLayout());
+			monedaPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+			JPanel iconoPanel = new JPanel();
+			iconoPanel.setLayout(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.anchor = GridBagConstraints.CENTER;
+			JLabel imagenLabel = new JLabel(imagenesEscaladas.get(criptomoneda.getNomenclatura()));
+
+			iconoPanel.add(imagenLabel, gbc);
+
+			// Panel central(Informacion moneda)
+			JPanel informacionCriptoPanel = new JPanel();
+			informacionCriptoPanel.setLayout(new GridBagLayout());
+			gbc.anchor = GridBagConstraints.CENTER;
+			gbc.gridx = 0;
+
+			JLabel etiquetaTexto = new JLabel(criptomoneda.getNombre() + " (" + criptomoneda.getNomenclatura() + ")");
+			gbc.gridy = 0;
+			informacionCriptoPanel.add(etiquetaTexto, gbc);
+			JLabel etiquetaPrecio = new JLabel(String.valueOf(criptomoneda.getValorDolar()));
+			gbc.gridy = 1;
+			informacionCriptoPanel.add(etiquetaPrecio, gbc);
+			etiquetasPrecios.put(criptomoneda.getNomenclatura(), etiquetaPrecio);
+			JLabel etiquetaVolatilidad = new JLabel("Volatilidad: " + criptomoneda.getVolatilidad() + "%");
+			gbc.gridy = 2;
+			informacionCriptoPanel.add(etiquetaVolatilidad, gbc);
+			JLabel etiquetaStock = new JLabel("Stock: " + "ADDLS");
+			gbc.gridy = 3;
+			informacionCriptoPanel.add(etiquetaStock, gbc);
+
+			// Panel derecho(informacion activo)
+			JPanel informacionActivo = new JPanel();
+			informacionActivo.setLayout(new GridBagLayout());
+			gbc.anchor = GridBagConstraints.CENTER;
+
+			JLabel extraLabel1 = new JLabel("Cantidad: " + activoCripto.getCantidad());
+			gbc.gridy = 0;
+			extraLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+			informacionActivo.add(extraLabel1, gbc);
+
+			JLabel extraLabel2 = new JLabel(
+					"Monto total en USD: " + activoCripto.getCantidad() * criptomoneda.getValorDolar());
+			gbc.gridy = 1;
+			extraLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+			informacionActivo.add(extraLabel2, gbc);
+
+			monedaPanel.add(iconoPanel, BorderLayout.WEST);
+			monedaPanel.add(informacionCriptoPanel, BorderLayout.CENTER);
+			monedaPanel.add(informacionActivo, BorderLayout.EAST);
+
+			panelScrollPaneActivos.add(monedaPanel);
+		}
+
+		auxImagenes = FuncionesDeLaAplicacion.obtenerIconsDeFIATS();
+
+		for (ActivoFIAT activoFIAT : activosFIAT) {
+			FIAT fiat = (FIAT) activoFIAT.getMoneda();
+
+			imagenesEscaladas.put(fiat.getNomenclatura(),
+					CalculosGenerales.escalarImagenAlto(auxImagenes.get(fiat.getNomenclatura()), 50));
+
+			// Panel izquierda(icono)
+			JPanel monedaPanel = new JPanel(new BorderLayout());
+			monedaPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+			JPanel iconoPanel = new JPanel();
+			iconoPanel.setLayout(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.anchor = GridBagConstraints.CENTER;
+			JLabel imagenLabel = new JLabel(imagenesEscaladas.get(fiat.getNomenclatura()));
+
+			iconoPanel.add(imagenLabel, gbc);
+
+			// Panel central(Informacion moneda)
+			JPanel informacionCriptoPanel = new JPanel();
+			informacionCriptoPanel.setLayout(new GridBagLayout());
+			gbc.anchor = GridBagConstraints.CENTER;
+			gbc.gridx = 0;
+
+			JLabel etiquetaTexto = new JLabel(fiat.getNombre() + " (" + fiat.getNomenclatura() + ")");
+			gbc.gridy = 0;
+			informacionCriptoPanel.add(etiquetaTexto, gbc);
+			JLabel etiquetaPrecio = new JLabel(String.valueOf(fiat.getValorDolar()));
+			gbc.gridy = 1;
+			informacionCriptoPanel.add(etiquetaPrecio, gbc);
+
+			// Panel derecho(informacion activo)
+			JPanel informacionActivo = new JPanel();
+			informacionActivo.setLayout(new GridBagLayout());
+			gbc.anchor = GridBagConstraints.CENTER;
+
+			JLabel extraLabel1 = new JLabel("Cantidad: " + activoFIAT.getCantidad());
+			gbc.gridy = 0;
+			extraLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+			informacionActivo.add(extraLabel1, gbc);
+
+			JLabel extraLabel2 = new JLabel("Monto total en USD: " + activoFIAT.getCantidad() * fiat.getValorDolar());
+			gbc.gridy = 1;
+			extraLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+			informacionActivo.add(extraLabel2, gbc);
+
+			monedaPanel.add(iconoPanel, BorderLayout.WEST);
+			monedaPanel.add(informacionCriptoPanel, BorderLayout.CENTER);
+			monedaPanel.add(informacionActivo, BorderLayout.EAST);
+
+			panelScrollPaneActivos.add(monedaPanel);
+		}
+
+		etiquetaBalance.setText("Balance: " + FuncionesDeLaAplicacion
+				.calcularBalanceEnDolaresDeUsuario(GestorDeDatosDeLaAplicacion.getUsuarioConectado()) + "USD");
+	}
+
+	/**
+	 * @return the dimensiones
+	 */
+	public Dimension getDimensiones() {
+		return dimensiones;
+	}
+
+	/**
+	 * @param dimensiones the dimensiones to set
+	 */
+	public void setDimensiones(Dimension dimensiones) {
+		this.dimensiones = dimensiones;
+	}
+
+	/**
+	 * @return the panel
+	 */
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	/**
+	 * @param panel the panel to set
+	 */
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+
+	/**
+	 * @return the imagenesEscaladas
+	 */
+	public HashMap<String, ImageIcon> getImagenesEscaladas() {
+		return imagenesEscaladas;
+	}
+
+	/**
+	 * @param imagenesEscaladas the imagenesEscaladas to set
+	 */
+	public void setImagenesEscaladas(HashMap<String, ImageIcon> imagenesEscaladas) {
+		this.imagenesEscaladas = imagenesEscaladas;
+	}
+
+	/**
+	 * @return the etiquetasPrecios
+	 */
+	public HashMap<String, JLabel> getEtiquetasPrecios() {
+		return etiquetasPrecios;
+	}
+
+	/**
+	 * @param etiquetasPrecios the etiquetasPrecios to set
+	 */
+	public void setEtiquetasPrecios(HashMap<String, JLabel> etiquetasPrecios) {
+		this.etiquetasPrecios = etiquetasPrecios;
+	}
+
+	/**
+	 * @return the etiquetasVolatilidad
+	 */
+	public HashMap<String, JLabel> getEtiquetasVolatilidad() {
+		return etiquetasVolatilidad;
+	}
+
+	/**
+	 * @param etiquetasVolatilidad the etiquetasVolatilidad to set
+	 */
+	public void setEtiquetasVolatilidad(HashMap<String, JLabel> etiquetasVolatilidad) {
+		this.etiquetasVolatilidad = etiquetasVolatilidad;
+	}
+
+	/**
+	 * @return the etiquetasStock
+	 */
+	public HashMap<String, JLabel> getEtiquetasStock() {
+		return etiquetasStock;
+	}
+
+	/**
+	 * @param etiquetasStock the etiquetasStock to set
+	 */
+	public void setEtiquetasStock(HashMap<String, JLabel> etiquetasStock) {
+		this.etiquetasStock = etiquetasStock;
+	}
+
+	/**
+	 * @return the panelScrollPaneActivos
+	 */
+	public JPanel getPanelScrollPaneActivos() {
+		return panelScrollPaneActivos;
+	}
+
+	/**
+	 * @param panelScrollPaneActivos the panelScrollPaneActivos to set
+	 */
+	public void setPanelScrollPaneActivos(JPanel panelScrollPaneActivos) {
+		this.panelScrollPaneActivos = panelScrollPaneActivos;
+	}
+
+	/**
+	 * @return the scrollPaneActivos
+	 */
+	public JScrollPane getScrollPaneActivos() {
+		return scrollPaneActivos;
+	}
+
+	/**
+	 * @param scrollPaneActivos the scrollPaneActivos to set
+	 */
+	public void setScrollPaneActivos(JScrollPane scrollPaneActivos) {
+		this.scrollPaneActivos = scrollPaneActivos;
+	}
+
+	/**
+	 * @return the etiquetaBalance
+	 */
+	public JLabel getEtiquetaBalance() {
+		return etiquetaBalance;
+	}
+
+	/**
+	 * @param etiquetaBalance the etiquetaBalance to set
+	 */
+	public void setEtiquetaBalance(JLabel etiquetaBalance) {
+		this.etiquetaBalance = etiquetaBalance;
+	}
+
+	/**
+	 * @return the botonAtras
+	 */
+	public JButton getBotonAtras() {
+		return botonAtras;
+	}
+
+	/**
+	 * @param botonAtras the botonAtras to set
+	 */
+	public void setBotonAtras(JButton botonAtras) {
+		this.botonAtras = botonAtras;
+	}
+
+	/**
+	 * @return the botonExportarCVS
+	 */
+	public JButton getBotonExportarCVS() {
+		return botonExportarCVS;
+	}
+
+	/**
+	 * @param botonExportarCVS the botonExportarCVS to set
+	 */
+	public void setBotonExportarCVS(JButton botonExportarCVS) {
+		this.botonExportarCVS = botonExportarCVS;
+	}
+
+}
