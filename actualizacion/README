@@ -1,0 +1,4 @@
+Cambié cosas en las funciones del sistema, hay algunas cosas de la compra cambiadas, y agregué el generarActivosRandom para un usuario. 
+Me aseguré de que los DAOs retornen int cuando los insertamos en las tablas (así que ahí tmb hay modificaciones), y creo que ya ninguna lista devuelve null (a lo sumo vacía)
+
+Hay que ver qué onda las excepciones
