@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ActivoCriptoDAO<ActivoCripto> {
 
-	public abstract void insertarActivoCripto(ActivoCripto activo) throws SQLException;
+	public abstract int insertarActivoCripto(ActivoCripto activo) throws SQLException;
 
 	public abstract void actualizarActivoCriptoConID(ActivoCripto activo) throws SQLException; // Busca por el idActivo
 

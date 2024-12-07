@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ActivoFIATDAO<ActivoFIAT> {
 
-	public abstract void insertarActivoFIAT(ActivoFIAT a) throws SQLException;
+	public abstract int insertarActivoFIAT(ActivoFIAT a) throws SQLException;
 
 	public abstract void actualizarActivoFIATConID(ActivoFIAT a) throws SQLException; // Busca por el idActivo
 

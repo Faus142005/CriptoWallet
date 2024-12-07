@@ -32,7 +32,6 @@ public class CrearBaseDeDatos {
 				+ " NOMENCLATURA VARCHAR(10)  NOT NULL UNIQUE, "
 				+ " VALOR_DOLAR	REAL     NOT NULL, "
 				+ " VOLATILIDAD	REAL     NULL, "
-				//+ " STOCK	REAL     NULL, "
 				+ " NOMBRE_ICONO       VARCHAR(50)    NOT NULL "
 				+ ")";
 		stmt.executeUpdate(sql);		

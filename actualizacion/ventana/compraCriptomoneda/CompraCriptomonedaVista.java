@@ -34,7 +34,7 @@ public class CompraCriptomonedaVista {
 	private JLabel etiquetaFIAT = new JLabel("Seleccione la moneda FIAT a usar");
 	private JComboBox<FIAT> selectorFIAT = new JComboBox<FIAT>();
 	private JTextField campoCantidadFIAT = new JTextField();
-	private JLabel etiquetaPrecioCriptoAFIAT = new JLabel("BTC = 90000ARG");
+	private JLabel etiquetaPrecioCriptoAFIAT = new JLabel("BTC = 90000ARS");
 
 	private JButton botonComprar = new JButton("Comprar");
 

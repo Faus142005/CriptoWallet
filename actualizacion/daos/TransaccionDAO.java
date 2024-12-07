@@ -7,8 +7,6 @@ public interface TransaccionDAO<Transaccion> {
 	
     public abstract int insertarTransaccion(Transaccion t) throws SQLException;
 	
-    public abstract int insertarTransaccionSoloResumen(Transaccion t) throws SQLException;
-	
 	public abstract void actualizarTransaccion(int idTransaccion, Transaccion t) throws SQLException;				
 	
 	public abstract void eliminarTransaccion(int idTransaccion) throws SQLException;

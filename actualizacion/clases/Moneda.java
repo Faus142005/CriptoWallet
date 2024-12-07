@@ -18,8 +18,8 @@ public class Moneda {
 		this.tipo = tipo;
 		this.nombre = nombre;
 		this.nomenclatura = nomenclatura;
-		this.valorDolar = valorDolar;
-		this.nombreIcono = nombreIcono;
+		this.valorDolar = valorDolar;		
+		this.nombreIcono = nombreIcono;		
 	}	
 	
 

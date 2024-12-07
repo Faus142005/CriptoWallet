@@ -3,9 +3,11 @@ package aplicacion;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -13,14 +15,17 @@ import clases.ActivoCripto;
 import clases.ActivoFIAT;
 import clases.Criptomoneda;
 import clases.FIAT;
+import clases.Moneda;
+import clases.Stock;
 import clases.Transaccion;
 import clases.UnidadDeCompra;
 import clases.Usuario;
 import daos.ActivoCriptoDAO;
 import daos.ActivoFIATDAO;
-import daos.CriptomonedaDAO;
-import daos.FIATDAO;
 import daos.FactoryDAO;
+import daos.MonedaDAO;
+import daos.StockDAO;
+import daos.TransaccionDAO;
 
 public class FuncionesDeLaAplicacion {
 
@@ -147,12 +152,12 @@ public class FuncionesDeLaAplicacion {
 
 		List<ActivoFIAT> activosFIAT = new ArrayList<>();
 
-		activosFIAT.add(new ActivoFIAT(1, null, monedasFIAT.get(0), 1000.0)); // USD
-		activosFIAT.add(new ActivoFIAT(2, null, monedasFIAT.get(1), 800.0)); // EUR
-		activosFIAT.add(new ActivoFIAT(3, null, monedasFIAT.get(2), 500.0)); // GBP
+		activosFIAT.add(new ActivoFIAT(1, null, monedasFIAT.get(0), 1000.0)); 	// USD
+		activosFIAT.add(new ActivoFIAT(2, null, monedasFIAT.get(1), 800.0));	// EUR
+		activosFIAT.add(new ActivoFIAT(3, null, monedasFIAT.get(2), 500.0)); 	// GBP
 		activosFIAT.add(new ActivoFIAT(4, null, monedasFIAT.get(3), 100000.0)); // JPY
-		activosFIAT.add(new ActivoFIAT(5, null, monedasFIAT.get(4), 1500.0)); // CAD
-		activosFIAT.add(new ActivoFIAT(6, null, monedasFIAT.get(5), 2000.0)); // CHF
+		activosFIAT.add(new ActivoFIAT(5, null, monedasFIAT.get(4), 1500.0)); 	// CAD
+		activosFIAT.add(new ActivoFIAT(6, null, monedasFIAT.get(5), 2000.0)); 	// CHF
 
 		return activosFIAT;
 	}
@@ -183,11 +188,82 @@ public class FuncionesDeLaAplicacion {
 			// En caso de excepción, registra el error y devuelve un valor especial.
 			System.err.println("Error al calcular el balance en dólares: " + e.getMessage());
 			return -1;
+		}		
+
+	}
+	
+	// Sumar activo de Criptomoneda en la billetera del usuario
+	private static void sumarActivoCriptoUsuario(ActivoCripto activoCripto, UnidadDeCompra unidadDeCompra, ActivoCriptoDAO<ActivoCripto> activoCriptoDAO) throws SQLException {
+		
+		if (activoCripto == null) { // Crea el activo
+
+			activoCripto = new ActivoCripto();
+			activoCripto.setCantidad(unidadDeCompra.getCantidadCriptomoneda());
+			activoCripto.setUsuario(unidadDeCompra.getUsuario());
+
+			activoCriptoDAO.insertarActivoCripto(activoCripto);
+		} else {
+			activoCripto.setCantidad(unidadDeCompra.getCantidadCriptomoneda() + activoCripto.getCantidad());
+
+			activoCriptoDAO.actualizarActivoCriptoConID(activoCripto);
 		}
-
-		// Acá antes habías tirado un finally, pero eclipse me daba que cerraba mal el
-		// bloque del finally (?
-
+	}			
+	
+	// Sumar Stock de FIAT a la base de datos
+	private static void sumarStockFIATBD(Stock stockFIAT, UnidadDeCompra unidadDeCompra, StockDAO<Stock> stockDAO) throws SQLException {
+		
+		stockFIAT = stockDAO.buscarStock(unidadDeCompra.getFiat().getNomenclatura());
+		
+		//si entra al if es porque todavía no había stock de esta moneda fiat
+		if (stockFIAT == null) {
+			
+			stockFIAT = new Stock();
+			stockFIAT.setCantidad(unidadDeCompra.getCantidadFIAT());
+			stockFIAT.setMoneda(unidadDeCompra.getFiat());
+						
+			stockDAO.insertarStock(stockFIAT);
+		}
+		//Si no, ya estaba creado y se actualizan las cantidades
+		else {
+			stockFIAT.setCantidad(unidadDeCompra.getCantidadFIAT() + stockFIAT.getCantidad());
+			
+			stockDAO.actualizarStock(stockFIAT);
+		}				
+	}
+	
+	//Resta el Stock de Criptomoneda en la base de datos
+	private static void restarStockCriptoBD(Stock stockCripto, UnidadDeCompra unidadDeCompra, StockDAO<Stock> stockDAO) throws SQLException {		
+		
+		stockCripto = stockDAO.buscarStock(unidadDeCompra.getCriptomoneda().getNomenclatura());
+		//Si entra al if es porque aún no había stock de esta cripto en el sistema
+		if(stockCripto == null) {
+			stockCripto = new Stock();
+			stockCripto.setCantidad(unidadDeCompra.getCantidadCriptomoneda());
+			stockCripto.setMoneda(unidadDeCompra.getCriptomoneda());
+			
+			stockDAO.insertarStock(stockCripto);
+		}
+		//Si no, ya estaba creado y se actualizan las cantidades
+		else {
+			stockCripto.setCantidad(stockCripto.getCantidad() - unidadDeCompra.getCantidadCriptomoneda());
+			
+			stockDAO.actualizarStock(stockCripto);
+		}
+	}
+	
+	//Resta el activo de Fiat en la billetera del usuario
+	private static void restarActivoFIATUsuario(ActivoFIAT activoFIAT, UnidadDeCompra unidadDeCompra, ActivoFIATDAO<ActivoFIAT> activoFIATDAO) throws SQLException {
+		if (activoFIAT == null) 
+			System.out.println("El usuario no posee "+unidadDeCompra.getFiat().getNombre()+".");		
+		
+		else if( (activoFIAT.getCantidad() - unidadDeCompra.getCantidadFIAT()) < 0) 
+			System.out.println("El usuario no posee suficiente "+unidadDeCompra.getFiat().getNombre()+" para la transacción."); 					
+		
+		else {
+			// Restar activo de FIAT al usuario
+			activoFIAT.setCantidad(activoFIAT.getCantidad() - unidadDeCompra.getCantidadFIAT());
+			activoFIATDAO.actualizarActivoFIAT(activoFIAT);
+		}
 	}
 
 	public static Transaccion comprarCriptomoneda(UnidadDeCompra unidadDeCompra) throws SQLException {
@@ -197,14 +273,15 @@ public class FuncionesDeLaAplicacion {
 		String mensaje;
 		ActivoCripto activoCripto;
 		ActivoFIAT activoFIAT;
-		FIAT fiatResultado = new FIAT(unidadDeCompra.getFiat());
-		Criptomoneda criptomonedaResultado = new Criptomoneda(unidadDeCompra.getCriptomoneda());
-
+		Stock stockFIAT = null;
+		Stock stockCripto = null;
+				
 		// DAOS
 		ActivoCriptoDAO<ActivoCripto> activoCriptoDAO = FactoryDAO.getActivoCriptoDAO();
 		ActivoFIATDAO<ActivoFIAT> activoFIATDAO = FactoryDAO.getActivoFIATDAO();
-		FIATDAO<FIAT> fiatDAO = FactoryDAO.getFiatDAO();
-		CriptomonedaDAO<Criptomoneda> criptomonedaDAO = FactoryDAO.getCriptomonedaDAO();
+		StockDAO<Stock> stockDAO = FactoryDAO.getStockDAO();
+		TransaccionDAO<Transaccion> transaccionDAO = FactoryDAO.getTransaccionDAO();
+		
 
 		try {
 
@@ -214,35 +291,15 @@ public class FuncionesDeLaAplicacion {
 			activoCripto = activoCriptoDAO.buscarActivoCripto(unidadDeCompra.getUsuario().getIdUsuario(),
 					unidadDeCompra.getCriptomoneda().getIdMoneda());
 
-			// Sumar Criptomoneda al usuario
-
-			if (activoCripto == null) { // Crea el activo
-
-				activoCripto = new ActivoCripto();
-				activoCripto.setCantidad(unidadDeCompra.getCantidadCriptomoneda());
-				activoCripto.setUsuario(unidadDeCompra.getUsuario());
-
-				activoCriptoDAO.insertarActivoCripto(activoCripto);
-			} else {
-				activoCripto.setCantidad(unidadDeCompra.getCantidadCriptomoneda() + activoCripto.getCantidad());
-
-				activoCriptoDAO.actualizarActivoCriptoConID(activoCripto);
-			}
-
-			// Sumar FIAT a la base de datos
-			fiatResultado.setStock(fiatResultado.getStock() + unidadDeCompra.getCantidadFIAT());
-			fiatDAO.actualizarFIAT(fiatResultado);
-
-			// Restar FIAT al usuario
-			activoFIAT.setCantidad(activoFIAT.getCantidad() - unidadDeCompra.getCantidadFIAT());
-
-			activoFIATDAO.actualizarActivoFIAT(activoFIAT);
-
-			// Restar Criptomoneda a la base de datos
-
-			criptomonedaResultado.setStock(criptomonedaResultado.getStock() - unidadDeCompra.getCantidadCriptomoneda());
-			criptomonedaDAO.actualizarCriptomoneda(criptomonedaResultado);
-
+			//Suma activo de cripto al usuario
+			sumarActivoCriptoUsuario(activoCripto, unidadDeCompra, activoCriptoDAO);
+			//Suma stock del FIAT en el sistema
+			sumarStockFIATBD(stockFIAT, unidadDeCompra, stockDAO);
+			//Resta activo Fiat al usuario
+			restarActivoFIATUsuario(activoFIAT, unidadDeCompra, activoFIATDAO);
+			//Resta Stock de cripto en el sistema
+			restarStockCriptoBD(stockCripto, unidadDeCompra, stockDAO);								
+			
 			mensaje = "Compra de criptomonedas\n" + "Criptomoneda: "
 					+ unidadDeCompra.getCriptomoneda().getNomenclatura() + "\n" + "Cantidad de la criptomoneda: "
 					+ unidadDeCompra.getCantidadCriptomoneda() + "\n" + "FIAT: "
@@ -252,11 +309,66 @@ public class FuncionesDeLaAplicacion {
 
 			transaccion = new Transaccion(-1, mensaje, new Date(System.currentTimeMillis()),
 					unidadDeCompra.getUsuario());
-
+			
+			transaccionDAO.insertarTransaccion(transaccion);
+			
 			return transaccion;
 		} finally {
 			return null;
 		}
+	}
+	
+	private static List<Integer> generarArregloDeNumerosRandomSinRepetir(List<Moneda> monedasDisponibles) {
+		
+		// Crear una lista con los números de los IDs de las monedas disponibles
+		List<Integer> numeros = new ArrayList<>();
+		List<Integer> ids = new ArrayList<>();
+		for (int i = 1; i <= monedasDisponibles.size(); i++)
+			ids.add(monedasDisponibles.get(i).getIdMoneda());
+		
+
+		// Barajar la lista de ids
+		Collections.shuffle(ids);
+
+		return ids;		
+	}
+	
+	public static void generarActivos(Usuario usuario) throws SQLException {
+		
+		Random random = new Random();
+		MonedaDAO<Moneda> monedaDAO = FactoryDAO.getMonedaDAO();
+		ActivoCriptoDAO<ActivoCripto> activoCriptoDAO = FactoryDAO.getActivoCriptoDAO();
+		ActivoFIATDAO<ActivoFIAT> activoFIATDAO = FactoryDAO.getActivoFIATDAO();
+		
+		//lista de monedas disponibles en la base de datos
+		List<Moneda> monedasDisponibles = monedaDAO.listarMonedas();
+		
+		//genero un número random teniendo en cuenta la cantidad de monedas disponibles
+		int cantidadDeActivosRandom = random.nextInt(monedasDisponibles.size());		
+		
+		//lista de ids de las monedas disponibles, en orden random sin repetir
+		List<Integer> idsMonedas = generarArregloDeNumerosRandomSinRepetir(monedasDisponibles);
+		
+		for(int i = 0; i<cantidadDeActivosRandom; i++) {			
+			Moneda moneda = monedaDAO.buscarMonedaPorID(idsMonedas.get(i));			
+			//Si es cripto genero un número random de 0.01 a 100.00, y redondeo a dos decimales
+			if (moneda.getTipo()=='C') {
+		        double cantidadCripto = 0.01 + (100.00 - 0.01) * random.nextDouble();
+		        cantidadCripto = Math.round(cantidadCripto * 100.0) / 100.0;
+		        Criptomoneda cripto = monedaDAO.buscarCriptomoneda(moneda.getNomenclatura());
+		        ActivoCripto activoCripto = new ActivoCripto(-1, usuario, cripto, cantidadCripto);
+		        activoCriptoDAO.insertarActivoCripto(activoCripto);
+			}
+			//Si es fiat entonces genero un número random de 0.01 a 1000000.00, y redondeo a dos decimales
+			else {
+				double cantidadFIAT = 0.01 + (1000000.00 - 0.01) * random.nextDouble();
+				cantidadFIAT = Math.round(cantidadFIAT * 100.0) / 100.0;
+				FIAT fiat = monedaDAO.buscarFIAT(moneda.getNomenclatura());
+				ActivoFIAT activoFIAT = new ActivoFIAT(-1, usuario, fiat, cantidadFIAT);
+		        activoFIATDAO.insertarActivoFIAT(activoFIAT);
+				
+			}						
+		}								
 	}
 
 	public static boolean exportarCSV() {

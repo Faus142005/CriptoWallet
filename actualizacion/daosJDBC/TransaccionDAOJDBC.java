@@ -55,30 +55,6 @@ public class TransaccionDAOJDBC implements TransaccionDAO<Transaccion>{
 	}
 
 	@Override
-	public int insertarTransaccionSoloResumen(Transaccion t) throws SQLException {
-		String sql = "INSERT INTO TRANSACCION (RESUMEN, ID_USUARIO) VALUES (?, ?)";
-
-	    try (Connection connection = getConnection();
-	         PreparedStatement pstmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-	       
-	    	// Asigno valores al statement
-	        pstmt.setString(1, t.getResumen());	    	        	        	        	        	        
-	        pstmt.setInt(2, t.getUsuario().getIdUsuario());
-	        
-	        pstmt.executeUpdate();
-	        
-	        // Obtener el id generado
-	        try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	            	t.setIdTransaccion(generatedKeys.getInt(1));
-	                return t.getIdTransaccion();	                
-	            } else 
-	            	throw new SQLException("No se pudo obtener el ID generado para el usuario.");	            
-	        }		      	        	             
-	    }
-	}
-
-	@Override
 	public List<Transaccion> listarTransacciones() throws SQLException {
 		String sql = """				
 		        SELECT 
@@ -97,7 +73,7 @@ public class TransaccionDAOJDBC implements TransaccionDAO<Transaccion>{
 		        JOIN 
 		            USUARIO u ON t.ID_USUARIO = u.ID       
 		        JOIN 
-		            PERSONA p ON u.ID_PERSONA = p.ID;
+		            PERSONA p ON u.ID_PERSONA = p.ID;		        
 		    """;
 
 		    List<Transaccion> transacciones = new ArrayList<>();

@@ -156,8 +156,7 @@ public class MonedaDAOJDBC implements MonedaDAO<Moneda>{
 
 	}
 
-	//-----METODOS PARA CRIPTOS-------------------------------------------------------
-	
+	//-----METODOS PARA CRIPTOS-------------------------------------------------------	
 	@Override
 	public int insertarCriptomoneda(Criptomoneda c) throws SQLException {
 		String sql = "INSERT INTO MONEDA (TIPO, NOMBRE, NOMENCLATURA, VALOR_DOLAR, VOLATILIDAD, NOMBRE_ICONO) "
@@ -311,7 +310,6 @@ public class MonedaDAOJDBC implements MonedaDAO<Moneda>{
 	                int idMoneda = rs.getInt("ID");
 	                char tipo = rs.getString("TIPO").charAt(0);
 	                String nombre = rs.getString("NOMBRE");
-	                String nomenclaturaDB = rs.getString("NOMENCLATURA");
 	                double valorDolar = rs.getDouble("VALOR_DOLAR");
 	                String nombreIcono = rs.getString("NOMBRE_ICONO");
 
@@ -319,11 +317,48 @@ public class MonedaDAOJDBC implements MonedaDAO<Moneda>{
 	                if (tipo == 'C') {
 	                    // Retornar una instancia de Criptomoneda
 	                	double volatilidad = rs.getDouble("VOLATILIDAD");
-	                    return new Criptomoneda(idMoneda, nombre, nomenclaturaDB, valorDolar, nombreIcono, volatilidad);
+	                    return new Criptomoneda(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono, volatilidad);
 	                } 
 	                else if (tipo == 'F') {
 	                    // Retornar una instancia de FIAT
-	                    return new FIAT(idMoneda, nombre, nomenclaturaDB, valorDolar, nombreIcono);
+	                    return new FIAT(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono);
+	                }	                
+	            }
+	        }
+	    }	    
+        //Si llegó hasta acá es porque hubo un error
+	    System.out.println("Error");
+        return null;
+	}
+	
+	@Override
+	public Moneda buscarMonedaPorID(int idMoneda) throws SQLException {
+		// SQL para buscar la moneda por ID
+	    String sql = "SELECT * FROM MONEDA WHERE ID = ?";
+	    
+	    try (Connection connection = getConnection();
+	         PreparedStatement pstmt = connection.prepareStatement(sql)) {
+ 
+	        pstmt.setInt(1, idMoneda);
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            // Si se encuentra la moneda, crear y devolver el objeto Moneda correspondiente
+	        	
+	            if (rs.next()) {
+	                char tipo = rs.getString("TIPO").charAt(0);
+	                String nombre = rs.getString("NOMBRE");
+	                String nomenclatura = rs.getString("NOMENCLATURA");
+	                double valorDolar = rs.getDouble("VALOR_DOLAR");
+	                String nombreIcono = rs.getString("NOMBRE_ICONO");
+
+	                // Verificar si la moneda es una Criptomoneda o FIAT
+	                if (tipo == 'C') {
+	                    // Retornar una instancia de Criptomoneda
+	                	double volatilidad = rs.getDouble("VOLATILIDAD");
+	                    return new Criptomoneda(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono, volatilidad);
+	                } 
+	                else if (tipo == 'F') {
+	                    // Retornar una instancia de FIAT
+	                    return new FIAT(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono);
 	                }	                
 	            }
 	        }
@@ -333,10 +368,30 @@ public class MonedaDAOJDBC implements MonedaDAO<Moneda>{
         return null;
 	}
 
+	//Elimina moneda por su nomenclatura
 	@Override
-	public void eliminarMoneda(int idMoneda) throws SQLException {
+	public void eliminarMonedaPorNomenclatura(String nomenclatura) throws SQLException {
 		// SQL para eliminar la moneda por su nomenclatura
 	    String sql = "DELETE FROM MONEDA WHERE NOMENCLATURA = ?";
+
+	    try (Connection connection = getConnection();
+	         PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+	        pstmt.setString(1, nomenclatura);
+	        pstmt.executeUpdate();
+	    } 
+	    
+	    catch (SQLException e) {
+	        System.out.println("Error al eliminar la moneda: " + e.getMessage());
+	        throw e;
+	    }
+	}
+	
+	//Elimina moneda por su ID
+	@Override
+	public void eliminarMonedaPorID(int idMoneda) throws SQLException {
+		// SQL para eliminar la moneda por su id
+	    String sql = "DELETE FROM MONEDA WHERE ID = ?";
 
 	    try (Connection connection = getConnection();
 	         PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -395,7 +450,6 @@ public class MonedaDAOJDBC implements MonedaDAO<Moneda>{
 		    // Retornar la lista de monedas
 		    return monedas;
 	}
-
 	
 
 }
