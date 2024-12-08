@@ -65,7 +65,6 @@ public class VistaMain extends JFrame implements CriptoWalletVistaMain,Runnable{
 		this.setResizable(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.encendido = true;
-		this.setSize(new Dimension(600,600));
 		cambiadorPaneles.setPanelPadre(panel);
 		cambiadorPaneles.agregarPanelHijo(registrarseVista.getPanel(), registrarseVista.getPanel().getName(), registrarseControlador);
 		cambiadorPaneles.agregarPanelHijo(ingresarVista.getPanel(), ingresarVista.getPanel().getName(), ingresarControlador);
