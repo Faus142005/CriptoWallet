@@ -65,8 +65,8 @@ public class VistaMain extends JFrame {
 		cardPanel.add(visualizarActivosVista.getPanel(), visualizarActivosVista.getPanel().getName());
 		cardPanel.add(transaccionesVista.getPanel(), transaccionesVista.getPanel().getName());
 
-		this.cambiarPanel(registrarseVista.getPanel().getName());
-		// this.cambiarPanel(ingresarVista.getPanel().getName());
+		// this.cambiarPanel(registrarseVista.getPanel().getName());
+		this.cambiarPanel(ingresarVista.getPanel().getName());
 		// this.cambiarPanel(inicioVista.getPanel().getName());
 		// this.cambiarPanel(compraCriptomonedaVista.getPanel().getName());
 		// this.cambiarPanel(registrarseVista.getPanel().getName());
