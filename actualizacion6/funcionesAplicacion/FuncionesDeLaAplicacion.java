@@ -26,6 +26,7 @@ import daos.FactoryDAO;
 import daos.MonedaDAO;
 import daos.StockDAO;
 import daos.TransaccionDAO;
+import excepciones.*;
 
 public class FuncionesDeLaAplicacion {
 
@@ -180,7 +181,7 @@ public class FuncionesDeLaAplicacion {
 
 	// Resta el Stock de Criptomoneda en la base de datos
 	private static void restarStockCriptoBD(Stock stockCripto, UnidadDeCompra unidadDeCompra, StockDAO<Stock> stockDAO)
-			throws SQLException {
+			throws SQLException, FondosInsuficientesException {
 
 		stockCripto = stockDAO.buscarStock(unidadDeCompra.getCriptomoneda().getNomenclatura());
 		// Si entra al if es porque aún no había stock de esta cripto en el sistema
@@ -190,10 +191,12 @@ public class FuncionesDeLaAplicacion {
 			stockCripto.setMoneda(unidadDeCompra.getCriptomoneda());
 			stockDAO.insertarStock(stockCripto);
 		}
+		
 		//Si no, ya estaba creado, y ahora me fijo si alcanza la cantidad de stock de cripto actual
-		else if ((stockCripto.getCantidad() - unidadDeCompra.getCantidadCriptomoneda()) < 0)
-			System.out.println(
-					"El usuario no posee suficiente " + unidadDeCompra.getFiat().getNombre() + " para la transacción.");
+		else if ((stockCripto.getCantidad() - unidadDeCompra.getCantidadCriptomoneda()) < 0) {
+			throw new FondosInsuficientesException(stockCripto.getMoneda().getNomenclatura());						
+		}
+		
 		// Si no, ya estaba creado y está todo bien. Se actualizan las cantidades
 		else {
 			stockCripto.setCantidad(stockCripto.getCantidad() - unidadDeCompra.getCantidadCriptomoneda());
@@ -203,14 +206,15 @@ public class FuncionesDeLaAplicacion {
 
 	// Resta el activo de Fiat en la billetera del usuario
 	private static void restarActivoFIATUsuario(ActivoFIAT activoFIAT, UnidadDeCompra unidadDeCompra,
-			ActivoFIATDAO<ActivoFIAT> activoFIATDAO) throws SQLException {
+			ActivoFIATDAO<ActivoFIAT> activoFIATDAO) throws SQLException, StockInsuficienteException {
 		// Si entra al if es porque el usuario no posee activo de la fiat elegida
 		if (activoFIAT == null)
 			System.out.println("El usuario no posee " + unidadDeCompra.getFiat().getNombre() + ".");
+		
 		// Si entra al if es porque el usuario no posee activo de la fiat elegida
-		else if ((activoFIAT.getCantidad() - unidadDeCompra.getCantidadFIAT()) < 0)
-			System.out.println(
-					"El usuario no posee suficiente " + unidadDeCompra.getFiat().getNombre() + " para la transacción.");
+		else if ((activoFIAT.getCantidad() - unidadDeCompra.getCantidadFIAT()) < 0) {
+			throw new StockInsuficienteException(activoFIAT.getMoneda().getNomenclatura());
+		}
 		
 		else {
 			// Restar activo de FIAT al usuario
@@ -274,11 +278,22 @@ public class FuncionesDeLaAplicacion {
 			transaccionDAO.insertarTransaccion(transaccion);
 
 			return transaccion;
+		
+		} catch (StockInsuficienteException s) {
+			// Manejar específicamente la excepción StockInsuficiente
+	        System.err.println("Error: " + s.getMessage());
+	        return null;
+		} catch (FondosInsuficientesException f) {
+			// Manejar específicamente la excepción FondosInsuficientes
+	        System.err.println("Error: " + f.getMessage());
+	        return null;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			return null;
 		}
 	}
+	
+	
 	public static boolean exportarCSV(Usuario usuario) {
 
 		JFileChooser fileChooser = new JFileChooser();

@@ -97,8 +97,8 @@ public class CotizacionesCriptomonedasVista {
 
 		for (Criptomoneda criptomoneda : criptomonedas) {
 
-			imagenesEscaladas.put(criptomoneda.getNomenclatura(),
-					CalculosGenerales.escalarImagenAlto(auxImagenes.get(criptomoneda.getNomenclatura()), 50));
+			//imagenesEscaladas.put(criptomoneda.getNomenclatura(),
+					//CalculosGenerales.escalarImagenAlto(auxImagenes.get(criptomoneda.getNomenclatura()), 50));
 
 			JPanel monedaPanel = new JPanel(new BorderLayout());
 			monedaPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -107,8 +107,8 @@ public class CotizacionesCriptomonedasVista {
 			iconoPanel.setLayout(new GridBagLayout());
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.anchor = GridBagConstraints.CENTER;
-			//JLabel imagenLabel = new JLabel(auxImagenes.get(criptomoneda.getNomenclatura()));
-			JLabel imagenLabel = new JLabel(imagenesEscaladas.get(criptomoneda.getNomenclatura()));
+			JLabel imagenLabel = new JLabel(auxImagenes.get(criptomoneda.getNomenclatura()));
+			//JLabel imagenLabel = new JLabel(imagenesEscaladas.get(criptomoneda.getNomenclatura()));
 			iconoPanel.add(imagenLabel, gbc);
 
 			JPanel informacionCriptoPanel = new JPanel();

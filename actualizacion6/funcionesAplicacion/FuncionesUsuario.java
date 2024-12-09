@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import aplicacion.GestorDeDatosDeLaAplicacion;
 import clases.Persona;
 import clases.Usuario;
 import daos.FactoryDAO;
@@ -25,14 +24,15 @@ public class FuncionesUsuario {
 
 		try {
 
-			if (usuarioDAO.buscarUsuario(usuario) != null) // YA EXISTE CON EL MAIL
-					throw new RegistrationException("Ya existe un usuario con ese mail");
+			if (usuarioDAO.buscarUsuario(usuario) != null) // YA EXISTE UN USUARIO CON EL MAIL
+					throw new RegistrationException();
 			usuario.getPersona().setIdPersona(personaDAO.insertarPersona(usuario.getPersona()));
 			usuarioDAO.insertarUsuario(usuario);
 
+		} catch (RegistrationException r) {
+			System.err.println(r.getMessage());			
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			throw new RegistrationException("Hubo un error inesperado");
+			System.err.println(e.getMessage());	
 		}
 	}
 
@@ -46,12 +46,16 @@ public class FuncionesUsuario {
 				return usuarioEncontrado;
 			}
 
-			throw new InicioSesionException("Usuario/Contraseña incorrectas");
+			throw new InicioSesionException(); // Se ingresó usuario y/o contraseña incorrectas
 
+		} catch (InicioSesionException i) {
+			System.err.println("Error: "+i.getMessage());
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			throw new InicioSesionException("Hubo un error inesperado");
+			System.err.println(e.getMessage());			
+		}finally {
+			return null;
 		}
+		
 	}
 
 	public static boolean aceptarTerminosYCondiciones(Usuario usuario) {
@@ -59,11 +63,11 @@ public class FuncionesUsuario {
 		JPanel panel = new JPanel(new BorderLayout(5, 5));
 
 		JLabel label = new JLabel(
-				"Antes tienes que aceptar los terminos y condiciones");
+				"Antes tienes que aceptar los términos y condiciones");
 		panel.add(label, BorderLayout.NORTH);
 
-		Object[] options = { "Aceptar terminos y condiciones y comprar", "Cancelar" };
-		int result = JOptionPane.showOptionDialog(null, panel, "Confirmacion", JOptionPane.DEFAULT_OPTION,
+		Object[] options = { "Aceptar términos y condiciones y comprar", "Cancelar" };
+		int result = JOptionPane.showOptionDialog(null, panel, "Confirmación", JOptionPane.DEFAULT_OPTION,
 				JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 		if (result != 0)
@@ -79,7 +83,7 @@ public class FuncionesUsuario {
 			
 			return true;
 		}catch(SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error!! Intente nuevamente", "Información del Usuario", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Error! Intente nuevamente", "Información del Usuario", JOptionPane.INFORMATION_MESSAGE);
 			System.err.println(e.getMessage());
 			return false;
 		}
