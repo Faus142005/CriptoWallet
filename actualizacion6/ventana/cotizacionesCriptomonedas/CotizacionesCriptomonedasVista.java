@@ -1,20 +1,24 @@
 package ventana.cotizacionesCriptomonedas;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 import aplicacion.CalculosGenerales;
 import clases.Criptomoneda;
@@ -26,13 +30,15 @@ import funcionesAplicacion.FuncionesRecursosPrograma;
 
 public class CotizacionesCriptomonedasVista {
 
-	private Dimension dimensiones = new Dimension(600, 500);
+	private Dimension dimensiones = new Dimension(1100, 500);
 	private JPanel panel = new JPanel();
 
 	private JButton botonAtras = new JButton("Atras");
 
-	private JPanel panelScrollPaneCriptomonedas = new JPanel();
-	private JScrollPane scrollPaneCriptomonedas = new JScrollPane(panelScrollPaneCriptomonedas);
+	private String[] titulos = { "", "Nombre", "Nomenclatura", "Precio", "Stock", "Volatilidad", "Boton" };
+	private ModeloTablaCotizaciones modelo = new ModeloTablaCotizaciones(null, titulos);
+	private JTable tabla = new JTable(modelo);
+	private JScrollPane scrollPaneCriptomonedas = new JScrollPane(tabla);
 
 	private HashMap<String, ImageIcon> imagenesEscaladas = new HashMap<>();
 	private HashMap<String, JLabel> etiquetasPrecios = new HashMap<String, JLabel>();
@@ -44,8 +50,38 @@ public class CotizacionesCriptomonedasVista {
 		this.panel.setLayout(null);
 		this.panel.add(scrollPaneCriptomonedas);
 
-		this.panelScrollPaneCriptomonedas.setLayout(new BoxLayout(panelScrollPaneCriptomonedas, BoxLayout.Y_AXIS));
-		this.scrollPaneCriptomonedas.setBounds(50, 50, 500, 400);
+		this.scrollPaneCriptomonedas.setBounds(50, 50, 1000, 400);
+
+		// Configuración de las columnas
+		tabla.getColumnModel().getColumn(0).setPreferredWidth(60); // Icono
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(90); // Nombre/Nomenclatura
+		tabla.getColumnModel().getColumn(2).setPreferredWidth(110); // Nombre/Nomenclatura
+		tabla.getColumnModel().getColumn(3).setPreferredWidth(270); // Precio
+		tabla.getColumnModel().getColumn(4).setPreferredWidth(270); // Stock
+		tabla.getColumnModel().getColumn(5).setPreferredWidth(100); // Volatilidad
+		tabla.getColumnModel().getColumn(6).setPreferredWidth(100); // Botón
+		tabla.setRowHeight(60);
+		tabla.setShowGrid(false);
+		// Desactivar el cambio de color al seleccionar una celda
+		tabla.setSelectionBackground(new Color(255, 255, 255)); // Color de fondo al seleccionar una celda (blanco)
+		tabla.setSelectionForeground(Color.BLACK); // Color del texto al seleccionar (negro)
+
+		
+
+		// Configuración para centrar las celdas
+		DefaultTableCellRenderer centrarRenderer = new DefaultTableCellRenderer();
+		centrarRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+		for (int i = 1; i < 6; i++) {
+			tabla.getColumnModel().getColumn(i).setCellRenderer(centrarRenderer);
+		}
+
+		// Crear el TableRowSorter para hacer la tabla ordenable
+		TableRowSorter<ModeloTablaCotizaciones> sorter = new TableRowSorter<>(modelo);
+		tabla.setRowSorter(sorter); // Establecer el sorter para la tabla
+
+		// Asignar un renderer personalizado a la columna de botones
+		tabla.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer());
 
 		this.botonAtras.setBounds(15, 15, 100, 30);
 		this.panel.add(botonAtras);
@@ -57,29 +93,27 @@ public class CotizacionesCriptomonedasVista {
 		this.nuevasCriptomonedas();
 	}
 
-	public void cambiarDatosCriptomonedas() {
+	// Clase personalizada para renderizar botones en la tabla
+	private class ButtonRenderer extends JButton implements TableCellRenderer {
+		public ButtonRenderer() {
+			setOpaque(true);
+		}
 
-		try {
-
-			List<Criptomoneda> criptomonedas = FuncionesDeLaAplicacion.listarCriptomonedas();
-			StockDAO<Stock> stockDAO = FactoryDAO.getStockDAO();
-
-			for (Criptomoneda criptomoneda : criptomonedas) {
-				Stock s = stockDAO.buscarStock(criptomoneda.getNomenclatura());
-				etiquetasStock.get(criptomoneda.getNomenclatura()).setText(String.valueOf(s.getCantidad()));
-				etiquetasVolatilidad.get(criptomoneda.getNomenclatura())
-						.setText(String.valueOf(criptomoneda.getVolatilidad()));
-				etiquetasPrecios.get(criptomoneda.getNomenclatura())
-						.setText(String.valueOf(criptomoneda.getValorDolar()));
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			if (value instanceof JButton) {
+				JButton button = (JButton) value;
+				return button; // Devuelve el botón que se ha creado en la tabla
 			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			return this; // Si no es un botón, se devuelve el componente por defecto
 		}
 	}
 
+	public void cambiarDatosCriptomonedas() {
+	}
+
 	public void nuevasCriptomonedas() {
-		
-		try {
 
 		imagenesEscaladas.clear();
 
@@ -88,69 +122,33 @@ public class CotizacionesCriptomonedasVista {
 		etiquetasStock.clear();
 		botonesCompra.clear();
 
-		panelScrollPaneCriptomonedas.removeAll();
+		modelo.setRowCount(0);
+		tabla.removeAll();
 
 		List<Criptomoneda> criptomonedas = FuncionesDeLaAplicacion.listarCriptomonedas();
 		StockDAO<Stock> stockDAO = FactoryDAO.getStockDAO();
 
 		HashMap<String, ImageIcon> auxImagenes = FuncionesRecursosPrograma.obtenerIconosDeCriptomonedas();
 
-		for (Criptomoneda criptomoneda : criptomonedas) {
+		DecimalFormat formato = new DecimalFormat("#.##########");
 
-			//imagenesEscaladas.put(criptomoneda.getNomenclatura(),
-					//CalculosGenerales.escalarImagenAlto(auxImagenes.get(criptomoneda.getNomenclatura()), 50));
+		try {
+			for (Criptomoneda criptomoneda : criptomonedas) {
 
-			JPanel monedaPanel = new JPanel(new BorderLayout());
-			monedaPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+				ImageIcon icon = CalculosGenerales.escalarImagenAlto(auxImagenes.get(criptomoneda.getNomenclatura()),
+						50);
 
-			JPanel iconoPanel = new JPanel();
-			iconoPanel.setLayout(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
-			gbc.anchor = GridBagConstraints.CENTER;
-			JLabel imagenLabel = new JLabel(auxImagenes.get(criptomoneda.getNomenclatura()));
-			//JLabel imagenLabel = new JLabel(imagenesEscaladas.get(criptomoneda.getNomenclatura()));
-			iconoPanel.add(imagenLabel, gbc);
+				Stock s = stockDAO.buscarStock(criptomoneda.getNomenclatura());
 
-			JPanel informacionCriptoPanel = new JPanel();
-			informacionCriptoPanel.setLayout(new GridBagLayout());
-			GridBagConstraints gbc2 = new GridBagConstraints();
-			gbc2.anchor = GridBagConstraints.CENTER;
-			gbc2.gridx = 0;
+				imagenesEscaladas.put(criptomoneda.getNomenclatura(), icon);
 
-			// Etiqueta del nombre de la criptomoneda
-			JLabel etiquetaTexto = new JLabel(criptomoneda.getNombre() + " (" + criptomoneda.getNomenclatura() + ")");
-			gbc2.gridy = 0;
-			informacionCriptoPanel.add(etiquetaTexto, gbc2);
+				Object[] dato = { icon, criptomoneda.getNombre(), criptomoneda.getNomenclatura(),
+						formato.format(criptomoneda.getValorDolar()), formato.format(s.getCantidad()),
+						formato.format(criptomoneda.getVolatilidad()) + "%", new JButton("Comprar")};
 
-			// Etiqueta del precio actual en dólares
-			JLabel etiquetaPrecio = new JLabel(String.valueOf(criptomoneda.getValorDolar()));
-			gbc2.gridy = 1;
-			informacionCriptoPanel.add(etiquetaPrecio, gbc2);
-			etiquetasPrecios.put(criptomoneda.getNomenclatura(), etiquetaPrecio);
-
-			// Nueva etiqueta: Porcentaje de cambio diario
-			JLabel etiquetaVolatilidad = new JLabel("Volatilidad: " + criptomoneda.getVolatilidad() + "%");
-			gbc2.gridy = 2;
-			informacionCriptoPanel.add(etiquetaVolatilidad, gbc2);
-			etiquetasVolatilidad.put(criptomoneda.getNomenclatura(), etiquetaVolatilidad);
-			
-			Stock s = stockDAO.buscarStock(criptomoneda.getNomenclatura());
-
-			JLabel etiquetaStock = new JLabel("Stock: " + s.getCantidad());
-			gbc2.gridy = 3;
-			informacionCriptoPanel.add(etiquetaStock, gbc2);
-			etiquetasStock.put(criptomoneda.getNomenclatura(), etiquetaStock);
-
-			JButton boton = new JButton("Comprar");
-			botonesCompra.put(criptomoneda, boton);
-
-			monedaPanel.add(iconoPanel, BorderLayout.WEST);
-			monedaPanel.add(informacionCriptoPanel, BorderLayout.CENTER);
-			monedaPanel.add(boton, BorderLayout.EAST);
-
-			panelScrollPaneCriptomonedas.add(monedaPanel);
-		}
-		}catch (SQLException e) {
+				modelo.addRow(dato);
+			}
+		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -198,17 +196,31 @@ public class CotizacionesCriptomonedasVista {
 	}
 
 	/**
-	 * @return the panelScrollPaneCriptomonedas
+	 * @return the modelo
 	 */
-	public JPanel getPanelScrollPaneCriptomonedas() {
-		return panelScrollPaneCriptomonedas;
+	public ModeloTablaCotizaciones getModelo() {
+		return modelo;
 	}
 
 	/**
-	 * @param panelScrollPaneCriptomonedas the panelScrollPaneCriptomonedas to set
+	 * @param modelo the modelo to set
 	 */
-	public void setPanelScrollPaneCriptomonedas(JPanel panelScrollPaneCriptomonedas) {
-		this.panelScrollPaneCriptomonedas = panelScrollPaneCriptomonedas;
+	public void setModelo(ModeloTablaCotizaciones modelo) {
+		this.modelo = modelo;
+	}
+
+	/**
+	 * @return the tabla
+	 */
+	public JTable getTabla() {
+		return tabla;
+	}
+
+	/**
+	 * @param tabla the tabla to set
+	 */
+	public void setTabla(JTable tabla) {
+		this.tabla = tabla;
 	}
 
 	/**
