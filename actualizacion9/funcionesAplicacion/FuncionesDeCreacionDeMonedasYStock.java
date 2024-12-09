@@ -68,13 +68,25 @@ public class FuncionesDeCreacionDeMonedasYStock {
 				stockDAO.insertarStock(new Stock(-1, f, 0));
 			}
 
-			f = new FIAT(-1, "Peso Argentino", "ARS", 0.001, "iconos/PesoArgentino.png");
+			f = new FIAT(-1, "Peso Argentino", "ARS", 0.001, "iconos/pesoArgentino.png");
 			if (monedaDAO.buscarFIAT(f.getNomenclatura()) == null) {
 				c.setIdMoneda(monedaDAO.insertarFIAT(f));
 				stockDAO.insertarStock(new Stock(-1, f, 0));
 			}
 
-			f = new FIAT(-1, "Euro", "EUR", 1.05, "iconos/Euro.png");
+			f = new FIAT(-1, "Euro", "EUR", 1.05, "iconos/euro.png");
+			if (monedaDAO.buscarFIAT(f.getNomenclatura()) == null) {
+				c.setIdMoneda(monedaDAO.insertarFIAT(f));
+				stockDAO.insertarStock(new Stock(-1, f, 0));
+			}
+			
+			f = new FIAT(-1, "Peso Uruguayo", "UYU", 0.023 , "iconos/pesoUruguayo.png");
+			if (monedaDAO.buscarFIAT(f.getNomenclatura()) == null) {
+				c.setIdMoneda(monedaDAO.insertarFIAT(f));
+				stockDAO.insertarStock(new Stock(-1, f, 0));
+			}
+			
+			f = new FIAT(-1, "Peso Mexicano", "MXN", 0.049, "iconos/pesoMexicano.png");
 			if (monedaDAO.buscarFIAT(f.getNomenclatura()) == null) {
 				c.setIdMoneda(monedaDAO.insertarFIAT(f));
 				stockDAO.insertarStock(new Stock(-1, f, 0));

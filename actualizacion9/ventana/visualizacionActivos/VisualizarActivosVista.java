@@ -1,11 +1,13 @@
 package ventana.visualizacionActivos;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +18,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 import aplicacion.CalculosGenerales;
 import aplicacion.GestorDeDatosDeLaAplicacion;
@@ -24,102 +29,130 @@ import clases.ActivoCripto;
 import clases.ActivoFIAT;
 import clases.Criptomoneda;
 import clases.FIAT;
-import clases.Stock;
-import daos.FactoryDAO;
-import daos.StockDAO;
+
+import estilos.EncabezadoCriptoWallet;
+import estilos.ModeloTabla;
 import funcionesAplicacion.FuncionesDeLaAplicacion;
 import funcionesAplicacion.FuncionesRecursosPrograma;
 
+
 public class VisualizarActivosVista {
 
-	private Dimension dimensiones = new Dimension(700, 550);
+	private Dimension dimensiones = new Dimension(900, 600);
 	private JPanel panel = new JPanel();
 
 	// FUNCIONAMIENTO SCROLL PANE
 	private HashMap<String, ImageIcon> imagenesEscaladas = new HashMap<>();
-	private HashMap<String, JLabel> etiquetasPrecios = new HashMap<String, JLabel>();
-	private HashMap<String, JLabel> etiquetasVolatilidad = new HashMap<String, JLabel>();
-	private HashMap<String, JLabel> etiquetasStock = new HashMap<String, JLabel>();
 
-	private JPanel panelScrollPaneActivos = new JPanel();
-	private JScrollPane scrollPaneActivos = new JScrollPane(panelScrollPaneActivos);
-
-	// OTRAS COSAS
-	//private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png");	
+	//Tabla
+	private String[] titulos = { "", "Criptomoneda", "Volatilidad", "Cantidad", "Monto en USD"};
+	private ModeloTabla modelo = new ModeloTabla(null, titulos);
+	private JTable tabla = new JTable(modelo);
+	private JScrollPane scrollPaneActivos = new JScrollPane(tabla);
 	
+	// OTRAS COSAS
+	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png");
 	private JLabel etiquetaBalance = new JLabel();
 	private JButton botonAtras = new JButton("Atras");
 	private JButton botonExportarCVS = new JButton("Exportar CVS");
 
+
 	public VisualizarActivosVista() {
 
 		this.panel.setLayout(null);
-
-		this.panelScrollPaneActivos.setLayout(new BoxLayout(panelScrollPaneActivos, BoxLayout.Y_AXIS));
 		this.panel.add(scrollPaneActivos);
 
-		this.scrollPaneActivos.setBounds(50, 50, 600, 400);
+		this.scrollPaneActivos.setBounds(25, 110, 850, 400);
+		this.scrollPaneActivos.getVerticalScrollBar().setUnitIncrement(10);
 
-		this.etiquetaBalance.setBounds(50, 460, 300, 30);
-		this.panel.add(etiquetaBalance);
+		// Configuración de las columnas
+		tabla.getColumnModel().getColumn(0).setPreferredWidth(60); 	// Icono
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(80); 	// Criptomoneda (NOMENCLATURA)		
+		tabla.getColumnModel().getColumn(2).setPreferredWidth(30); 	// Volatilidad
+		tabla.getColumnModel().getColumn(3).setPreferredWidth(90); 	// Cantidad
+		tabla.getColumnModel().getColumn(4).setPreferredWidth(90); 	// Monto en USD		
+		tabla.setRowHeight(60);
+		tabla.setShowGrid(false);
+		
+		// Desactivar el cambio de color al seleccionar una celda
+		tabla.setSelectionBackground(new Color(255, 255, 255)); // Color de fondo al seleccionar una celda (blanco)
+		tabla.setSelectionForeground(Color.BLACK); // Color del texto al seleccionar (negro)
 
-		this.botonAtras.setBounds(10, 10, 100, 30);
+		// Configuración para centrar las celdas
+		DefaultTableCellRenderer centrarRenderer = new DefaultTableCellRenderer();
+		centrarRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+		for (int i = 1; i < tabla.getColumnCount(); i++) {
+			tabla.getColumnModel().getColumn(i).setCellRenderer(centrarRenderer);
+		}
+
+		// Crear el TableRowSorter para hacer la tabla ordenable
+		TableRowSorter<ModeloTabla> sorter = new TableRowSorter<>(modelo);
+		tabla.setRowSorter(sorter); 
+		
+		this.botonAtras.setBounds(15, 15, 100, 30);
 		this.panel.add(botonAtras);
-
-		this.botonExportarCVS.setBounds(400, 460, 150, 30);
-		this.panel.add(botonExportarCVS);
 
 		this.panel.setName("Visualizar Activos");
 		this.panel.setSize(dimensiones);
 		this.panel.setPreferredSize(dimensiones);
+
+		encabezado.setBounds(0, 0, 900, 100);
+		this.panel.add(encabezado);
 		
-		// Encabezado en la parte superior
-	//	this.panel.add(encabezado, BorderLayout.NORTH); 
-
-		this.nuevosActivos();
+		this.etiquetaBalance.setBounds(50, 460, 300, 30);
+		this.panel.add(etiquetaBalance);		
+		
+		this.nuevosActivos();			
+		 
 	}
 
-	public void actualizarDatosActivos() {
-
-		try {
-
-			List<ActivoCripto> activosCripto = FuncionesDeLaAplicacion
-					.listarActivosCripto(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
-			StockDAO<Stock> stockDAO = FactoryDAO.getStockDAO();
-
-			for (ActivoCripto activoCripto : activosCripto) {
-				Criptomoneda criptomoneda = (Criptomoneda) activoCripto.getMoneda();
-				Stock s = stockDAO.buscarStock(criptomoneda.getNomenclatura());
-				
-				etiquetasStock.get(criptomoneda.getNomenclatura()).setText(String.valueOf(s.getCantidad()));
-				etiquetasStock.get(criptomoneda.getNomenclatura()).setText("ADDLS");
-				etiquetasVolatilidad.get(criptomoneda.getNomenclatura())
-						.setText(String.valueOf(criptomoneda.getVolatilidad()));
-				etiquetasPrecios.get(criptomoneda.getNomenclatura())
-						.setText(String.valueOf(criptomoneda.getValorDolar()));
-			}
-
-			DecimalFormat formato = new DecimalFormat("#.##########");
+	private String obtenerNomenclatura(String textoTabla) {
+		//Busco índice del inicio del paréntesis
+		int startIndex = textoTabla.indexOf("(") + 1; 
+		//Busco índice del cierre del paréntesis
+	    int endIndex = textoTabla.indexOf(")"); 
+	    
+	    if (startIndex > 0 && endIndex > startIndex) {
+	        String nomenclatura = textoTabla.substring(startIndex, endIndex);
+	        return nomenclatura;
+	    } 
+	    else 	        
+	        return "";	    
+	}
+	
+	public void actualizarDatosActivos() {				
+		HashMap<String, ActivoCripto> mapeadoActivoCripto = FuncionesDeLaAplicacion.mapearActivosCripto(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
+		HashMap<String, ActivoFIAT> mapeadoActivoFIAT = FuncionesDeLaAplicacion.mapearActivosFIAT(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
+		
+		for(int i = 0; i < modelo.getRowCount(); i++) {
+			String nomenclatura = obtenerNomenclatura((String)modelo.getValueAt(i, 1));						
 			
-			etiquetaBalance.setText("Balance: " + formato.format(FuncionesDeLaAplicacion
-					.calcularBalanceEnDolaresDeUsuario(GestorDeDatosDeLaAplicacion.getUsuarioConectado())) + "USD");
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			if( (modelo.getValueAt(i, 2)).toString().equals("-")) {
+				ActivoFIAT af = mapeadoActivoFIAT.get(nomenclatura);
+				modelo.setValueAt(af.getCantidad(), i, 3); 	// Cantidad				
+				modelo.setValueAt(af.getCantidad()*af.getFIAT().getValorDolar(),  i, 4); 		// Monto En dolar	
+			}
+			else {
+				ActivoCripto ac = mapeadoActivoCripto.get(nomenclatura);
+				modelo.setValueAt(ac.getCriptomoneda().getVolatilidad(), i, 2); 				// Volatilidad
+				modelo.setValueAt(ac.getCantidad(), i, 3); 										// Cantidad
+				modelo.setValueAt(ac.getCantidad()*ac.getCriptomoneda().getValorDolar(),  i, 4);// Monto En dolar	
+			}	
 		}
-	}
+	}		
 
 	public void nuevosActivos() {
 		
-		try {
-
-		imagenesEscaladas.clear();
-
-		etiquetasPrecios.clear();
-		etiquetasVolatilidad.clear();
-		etiquetasStock.clear();
-
-		panelScrollPaneActivos.removeAll();
-
+		imagenesEscaladas.clear();		
+		
+		tabla.setRowSorter(null);
+		modelo.setRowCount(0);
+		TableRowSorter<ModeloTabla> sorter = new TableRowSorter<>(modelo);
+		tabla.setRowSorter(sorter); 		
+		
+		tabla.removeAll();
+		
 		List<ActivoCripto> activosCripto = FuncionesDeLaAplicacion
 				.listarActivosCripto(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
 
@@ -127,142 +160,44 @@ public class VisualizarActivosVista {
 				.listarActivosFIAT(GestorDeDatosDeLaAplicacion.getUsuarioConectado());
 
 		HashMap<String, ImageIcon> auxImagenes = FuncionesRecursosPrograma.obtenerIconosDeCriptomonedas();
-		StockDAO<Stock> stockDAO = FactoryDAO.getStockDAO();
 		
 		DecimalFormat formato = new DecimalFormat("#.##########");
+		
+						
 
 		for (ActivoCripto activoCripto : activosCripto) {
-
-			Criptomoneda criptomoneda = (Criptomoneda) activoCripto.getMoneda();
-
-			imagenesEscaladas.put(criptomoneda.getNomenclatura(),
-					CalculosGenerales.escalarImagenAlto(auxImagenes.get(criptomoneda.getNomenclatura()), 50));
-
-			// Panel izquierda(icono)
-			JPanel monedaPanel = new JPanel(new BorderLayout());
-			monedaPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-			JPanel iconoPanel = new JPanel();
-			iconoPanel.setLayout(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
-			gbc.anchor = GridBagConstraints.CENTER;
-			JLabel imagenLabel = new JLabel(imagenesEscaladas.get(criptomoneda.getNomenclatura()));
-
-			iconoPanel.add(imagenLabel, gbc);
-
-			// Panel central(Informacion moneda)
-			JPanel informacionCriptoPanel = new JPanel();
-			informacionCriptoPanel.setLayout(new GridBagLayout());
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.gridx = 0;
-
-			JLabel etiquetaTexto = new JLabel(criptomoneda.getNombre() + " (" + criptomoneda.getNomenclatura() + ")");
-			gbc.gridy = 0;
-			informacionCriptoPanel.add(etiquetaTexto, gbc);
+	
+			Criptomoneda criptoAux = activoCripto.getCriptomoneda();				
+			ImageIcon icon = CalculosGenerales.escalarImagenAlto(auxImagenes.get(criptoAux.getNomenclatura()),
+						50);
 			
-			JLabel etiquetaPrecio = new JLabel(formato.format(criptomoneda.getValorDolar()));
-			gbc.gridy = 1;
-			informacionCriptoPanel.add(etiquetaPrecio, gbc);
-			etiquetasPrecios.put(criptomoneda.getNomenclatura(), etiquetaPrecio);
-			JLabel etiquetaVolatilidad = new JLabel("Volatilidad: " + formato.format(criptomoneda.getVolatilidad()) + "%");
-			gbc.gridy = 2;
-			informacionCriptoPanel.add(etiquetaVolatilidad, gbc);
-			
-			Stock s = stockDAO.buscarStock(criptomoneda.getNomenclatura());
-			JLabel etiquetaStock = new JLabel("Stock: " + formato.format(s.getCantidad()));
-			gbc.gridy = 3;
-			informacionCriptoPanel.add(etiquetaStock, gbc);
 
-			// Panel derecho(informacion activo)
-			JPanel informacionActivo = new JPanel();
-			informacionActivo.setLayout(new GridBagLayout());
-			gbc.anchor = GridBagConstraints.CENTER;
+			imagenesEscaladas.put(activoCripto.getMoneda().getNomenclatura(), icon);
 
-			JLabel extraLabel1 = new JLabel("Cantidad: " + formato.format(activoCripto.getCantidad()));
-			gbc.gridy = 0;
-			extraLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-			informacionActivo.add(extraLabel1, gbc);
+			Object[] dato = { icon, criptoAux.getNombre()+"("+criptoAux.getNomenclatura()+")", criptoAux.getVolatilidad(),
+						formato.format(activoCripto.getCantidad()), formato.format(activoCripto.getCantidad()*criptoAux.getValorDolar()) };						
 
-			JLabel extraLabel2 = new JLabel(
-					"Monto total en USD: " + formato.format(activoCripto.getCantidad() * criptomoneda.getValorDolar()));
-			gbc.gridy = 1;
-			extraLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-			informacionActivo.add(extraLabel2, gbc);
-
-			monedaPanel.add(iconoPanel, BorderLayout.WEST);
-			monedaPanel.add(informacionCriptoPanel, BorderLayout.CENTER);
-			monedaPanel.add(informacionActivo, BorderLayout.EAST);
-
-			panelScrollPaneActivos.add(monedaPanel);
+			modelo.addRow(dato);													
 		}
-
+			
 		auxImagenes = FuncionesRecursosPrograma.obtenerIconosDeFIATS();
 
 		for (ActivoFIAT activoFIAT : activosFIAT) {
-			FIAT fiat = (FIAT) activoFIAT.getMoneda();
+			FIAT fiatAux = activoFIAT.getFIAT();
+			ImageIcon icon = CalculosGenerales.escalarImagenAlto(auxImagenes.get(fiatAux.getNomenclatura()),
+					50);
 
-			imagenesEscaladas.put(fiat.getNomenclatura(),
-					CalculosGenerales.escalarImagenAlto(auxImagenes.get(fiat.getNomenclatura()), 50));
+			imagenesEscaladas.put(activoFIAT.getMoneda().getNomenclatura(), icon);
 
-			// Panel izquierda(icono)
-			JPanel monedaPanel = new JPanel(new BorderLayout());
-			monedaPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+			Object[] dato = { icon, fiatAux.getNombre()+"("+fiatAux.getNomenclatura()+")", "-",
+					formato.format(activoFIAT.getCantidad()), formato.format(activoFIAT.getCantidad()*fiatAux.getValorDolar()) };
 
-			JPanel iconoPanel = new JPanel();
-			iconoPanel.setLayout(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
-			gbc.anchor = GridBagConstraints.CENTER;
-			JLabel imagenLabel = new JLabel(imagenesEscaladas.get(fiat.getNomenclatura()));
-
-			iconoPanel.add(imagenLabel, gbc);
-
-			// Panel central(Informacion moneda)
-			JPanel informacionCriptoPanel = new JPanel();
-			informacionCriptoPanel.setLayout(new GridBagLayout());
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.gridx = 0;
-
-			JLabel etiquetaTexto = new JLabel(fiat.getNombre() + " (" + fiat.getNomenclatura() + ")");
-			gbc.gridy = 0;
-			informacionCriptoPanel.add(etiquetaTexto, gbc);
-			
-			JLabel etiquetaPrecio = new JLabel(formato.format(fiat.getValorDolar()));
-			gbc.gridy = 1;
-			informacionCriptoPanel.add(etiquetaPrecio, gbc);
-			
-			Stock s = stockDAO.buscarStock(fiat.getNomenclatura());
-			JLabel etiquetaStock = new JLabel("Stock: " + formato.format(s.getCantidad()));
-			gbc.gridy = 2;
-			informacionCriptoPanel.add(etiquetaStock, gbc);
-
-			// Panel derecho(informacion activo)
-			JPanel informacionActivo = new JPanel();
-			informacionActivo.setLayout(new GridBagLayout());
-			gbc.anchor = GridBagConstraints.CENTER;
-
-			JLabel extraLabel1 = new JLabel("Cantidad: " + formato.format(activoFIAT.getCantidad()));
-			gbc.gridy = 0;
-			extraLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-			informacionActivo.add(extraLabel1, gbc);
-
-			JLabel extraLabel2 = new JLabel("Monto total en USD: " + formato.format(activoFIAT.getCantidad() * fiat.getValorDolar()));
-			gbc.gridy = 1;
-			extraLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-			informacionActivo.add(extraLabel2, gbc);
-
-			monedaPanel.add(iconoPanel, BorderLayout.WEST);
-			monedaPanel.add(informacionCriptoPanel, BorderLayout.CENTER);
-			monedaPanel.add(informacionActivo, BorderLayout.EAST);
-
-			panelScrollPaneActivos.add(monedaPanel);
-		}
-		
-		etiquetaBalance.setText("Balance: " + formato.format(FuncionesDeLaAplicacion
-				.calcularBalanceEnDolaresDeUsuario(GestorDeDatosDeLaAplicacion.getUsuarioConectado())) + "USD");
-		
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-		}
+			modelo.addRow(dato);
+				
+		}							
+								
+			etiquetaBalance.setText("Balance: " + formato.format(FuncionesDeLaAplicacion
+					.calcularBalanceEnDolaresDeUsuario(GestorDeDatosDeLaAplicacion.getUsuarioConectado())) + "USD");													
 	}
 
 	/**
@@ -308,76 +243,6 @@ public class VisualizarActivosVista {
 	}
 
 	/**
-	 * @return the etiquetasPrecios
-	 */
-	public HashMap<String, JLabel> getEtiquetasPrecios() {
-		return etiquetasPrecios;
-	}
-
-	/**
-	 * @param etiquetasPrecios the etiquetasPrecios to set
-	 */
-	public void setEtiquetasPrecios(HashMap<String, JLabel> etiquetasPrecios) {
-		this.etiquetasPrecios = etiquetasPrecios;
-	}
-
-	/**
-	 * @return the etiquetasVolatilidad
-	 */
-	public HashMap<String, JLabel> getEtiquetasVolatilidad() {
-		return etiquetasVolatilidad;
-	}
-
-	/**
-	 * @param etiquetasVolatilidad the etiquetasVolatilidad to set
-	 */
-	public void setEtiquetasVolatilidad(HashMap<String, JLabel> etiquetasVolatilidad) {
-		this.etiquetasVolatilidad = etiquetasVolatilidad;
-	}
-
-	/**
-	 * @return the etiquetasStock
-	 */
-	public HashMap<String, JLabel> getEtiquetasStock() {
-		return etiquetasStock;
-	}
-
-	/**
-	 * @param etiquetasStock the etiquetasStock to set
-	 */
-	public void setEtiquetasStock(HashMap<String, JLabel> etiquetasStock) {
-		this.etiquetasStock = etiquetasStock;
-	}
-
-	/**
-	 * @return the panelScrollPaneActivos
-	 */
-	public JPanel getPanelScrollPaneActivos() {
-		return panelScrollPaneActivos;
-	}
-
-	/**
-	 * @param panelScrollPaneActivos the panelScrollPaneActivos to set
-	 */
-	public void setPanelScrollPaneActivos(JPanel panelScrollPaneActivos) {
-		this.panelScrollPaneActivos = panelScrollPaneActivos;
-	}
-
-	/**
-	 * @return the scrollPaneActivos
-	 */
-	public JScrollPane getScrollPaneActivos() {
-		return scrollPaneActivos;
-	}
-
-	/**
-	 * @param scrollPaneActivos the scrollPaneActivos to set
-	 */
-	public void setScrollPaneActivos(JScrollPane scrollPaneActivos) {
-		this.scrollPaneActivos = scrollPaneActivos;
-	}
-
-	/**
 	 * @return the etiquetaBalance
 	 */
 	public JLabel getEtiquetaBalance() {
@@ -417,6 +282,76 @@ public class VisualizarActivosVista {
 	 */
 	public void setBotonExportarCVS(JButton botonExportarCVS) {
 		this.botonExportarCVS = botonExportarCVS;
+	}
+
+	/**
+	 * @return the titulos
+	 */
+	public String[] getTitulos() {
+		return titulos;
+	}
+
+	/**
+	 * @param titulos the titulos to set
+	 */
+	public void setTitulos(String[] titulos) {
+		this.titulos = titulos;
+	}
+
+	/**
+	 * @return the modelo
+	 */
+	public ModeloTabla getModelo() {
+		return modelo;
+	}
+
+	/**
+	 * @param modelo the modelo to set
+	 */
+	public void setModelo(ModeloTabla modelo) {
+		this.modelo = modelo;
+	}
+
+	/**
+	 * @return the tabla
+	 */
+	public JTable getTabla() {
+		return tabla;
+	}
+
+	/**
+	 * @param tabla the tabla to set
+	 */
+	public void setTabla(JTable tabla) {
+		this.tabla = tabla;
+	}
+
+	/**
+	 * @return the scrollPaneActivos
+	 */
+	public JScrollPane getScrollPaneActivos() {
+		return scrollPaneActivos;
+	}
+
+	/**
+	 * @param scrollPaneActivos the scrollPaneActivos to set
+	 */
+	public void setScrollPaneActivos(JScrollPane scrollPaneActivos) {
+		this.scrollPaneActivos = scrollPaneActivos;
+	}
+
+	/**
+	 * @return the encabezado
+	 */
+	public static JPanel getEncabezado() {
+		return encabezado;
+	}
+
+	/**
+	 * @param encabezado the encabezado to set
+	 */
+	public static void setEncabezado(JPanel encabezado) {
+		VisualizarActivosVista.encabezado = encabezado;
 	}
 
 }
