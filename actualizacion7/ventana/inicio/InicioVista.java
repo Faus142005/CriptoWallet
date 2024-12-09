@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class InicioVista {
 
@@ -24,16 +27,17 @@ public class InicioVista {
 	
 	//Decorativos
 	
-	private JLabel etiquetaNombre = new JLabel("CriptoWallet");
 	private JLabel etiquetaMenu = new JLabel("Menu");
+	private JLabel fotoUsuario = new JLabel(new ImageIcon("iconos/logo.png"));
 
 	public InicioVista() {
 		
 		this.panel.setLayout(null);
 		this.panel.setBackground(new Color(255,255,255));		
 		
-		this.botonCerrarSesion.setBounds(30, 30, 150, 30);
+		this.botonCerrarSesion.setBounds(30, 180, 150, 30);
 		this.botonCerrarSesion.setBackground(new Color(255,0,0));
+		this.botonCerrarSesion.setForeground(new Color(0,0,0));
 		this.panel.add(botonCerrarSesion);
 		
 		this.botonVisualizarActivos.setBounds(225,90,250,30);
@@ -54,10 +58,15 @@ public class InicioVista {
 		this.botonGenerarActivos.setBounds(520,310, 150, 30);
 		this.panel.add(botonGenerarActivos);
 		
+		//Decorativo
+		
 		this.etiquetaMenu.setBounds(225, 30, 250, 30);
 		this.etiquetaMenu.setFont(new Font("Arial", 1, 30));
 		this.etiquetaMenu.setHorizontalAlignment(JLabel.CENTER);
 		this.panel.add(etiquetaMenu);
+		
+		this.fotoUsuario.setBounds(30, 30, 140, 140);
+		this.panel.add(fotoUsuario);
 		
 		this.panel.setName("Inicio");
 		this.panel.setSize(dimensiones);
@@ -188,5 +197,35 @@ public class InicioVista {
 	 */
 	public void setBotonGenerarActivos(JButton botonGenerarActivos) {
 		this.botonGenerarActivos = botonGenerarActivos;
+	}
+
+	/**
+	 * @return the etiquetaMenu
+	 */
+	public JLabel getEtiquetaMenu() {
+		return etiquetaMenu;
+	}
+
+	/**
+	 * @param etiquetaMenu the etiquetaMenu to set
+	 */
+	public void setEtiquetaMenu(JLabel etiquetaMenu) {
+		this.etiquetaMenu = etiquetaMenu;
+	}
+
+	/**
+	 * @return the fotoUsuario
+	 */
+	public JLabel getFotoUsuario() {
+		return fotoUsuario;
+	}
+
+	/**
+	 * @param fotoUsuario the fotoUsuario to set
+	 */
+	public void setFotoUsuario(JLabel fotoUsuario) {
+		this.fotoUsuario = fotoUsuario;
 	}	
+	
+	
 }
