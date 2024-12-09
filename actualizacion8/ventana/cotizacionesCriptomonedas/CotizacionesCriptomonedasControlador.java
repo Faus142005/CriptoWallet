@@ -62,6 +62,8 @@ public class CotizacionesCriptomonedasControlador implements CriptoWalletControl
 	public void ingresoVentana() {
 		vistaMain.cambiarTamaño(vista.getDimensiones());
 		vista.nuevasCriptomonedas();
+		
+		System.out.println("1");
 
 		this.vista.getBotonesCompra().forEach((criptomoneda, button) -> {
 

@@ -78,7 +78,7 @@ public class CotizacionesCriptomonedasVista {
 
 		// Crear el TableRowSorter para hacer la tabla ordenable
 		TableRowSorter<ModeloTablaCotizaciones> sorter = new TableRowSorter<>(modelo);
-		tabla.setRowSorter(sorter); // Establecer el sorter para la tabla
+		tabla.setRowSorter(sorter); 
 
 		// Asignar un renderer personalizado a la columna de botones
 		tabla.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer());
@@ -110,7 +110,13 @@ public class CotizacionesCriptomonedasVista {
 		}
 	}
 
-	public void cambiarDatosCriptomonedas() {
+	public void cambiarDatosCriptomonedas() {		
+		
+		for(int i = 0; i < modelo.getRowCount(); i++) {
+			
+			String nomenclatura = (String)modelo.getValueAt(i, 2);
+			//Listar criptomonedas
+		}
 	}
 
 	public void nuevasCriptomonedas() {
@@ -121,8 +127,13 @@ public class CotizacionesCriptomonedasVista {
 		etiquetasVolatilidad.clear();
 		etiquetasStock.clear();
 		botonesCompra.clear();
-
+		
+		tabla.setRowSorter(null);
 		modelo.setRowCount(0);
+		TableRowSorter<ModeloTablaCotizaciones> sorter = new TableRowSorter<>(modelo);
+		tabla.setRowSorter(sorter); 
+		
+		
 		tabla.removeAll();
 
 		List<Criptomoneda> criptomonedas = FuncionesDeLaAplicacion.listarCriptomonedas();
