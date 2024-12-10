@@ -40,6 +40,7 @@ public class VisualizarActivosVista {
 
 	private Dimension dimensiones = new Dimension(900, 600);
 	private JPanel panel = new JPanel();
+	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png", 900);
 
 	// FUNCIONAMIENTO SCROLL PANE
 	private HashMap<String, ImageIcon> imagenesEscaladas = new HashMap<>();
@@ -51,19 +52,14 @@ public class VisualizarActivosVista {
 	private JScrollPane scrollPaneActivos = new JScrollPane(tabla);
 	
 	// OTRAS COSAS
-	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png");
 	private JLabel etiquetaBalance = new JLabel();
-	private JButton botonAtras = new JButton("Atras");
+	private JButton botonAtras = new JButton("Atrás");
 	private JButton botonExportarCVS = new JButton("Exportar CVS");
 
 
 	public VisualizarActivosVista() {
 
-		this.panel.setLayout(null);
-		this.panel.add(scrollPaneActivos);
-
-		this.scrollPaneActivos.setBounds(25, 110, 850, 400);
-		this.scrollPaneActivos.getVerticalScrollBar().setUnitIncrement(10);
+		this.panel.setLayout(null);				
 
 		// Configuración de las columnas
 		tabla.getColumnModel().getColumn(0).setPreferredWidth(60); 	// Icono
@@ -90,19 +86,25 @@ public class VisualizarActivosVista {
 		TableRowSorter<ModeloTabla> sorter = new TableRowSorter<>(modelo);
 		tabla.setRowSorter(sorter); 
 		
+		this.scrollPaneActivos.setBounds(25, 110, 850, 400);
+		this.scrollPaneActivos.getVerticalScrollBar().setUnitIncrement(10);
+		this.panel.add(scrollPaneActivos);
+		
+		this.etiquetaBalance.setBounds(50, 460, 200, 30);
+		this.panel.add(etiquetaBalance);
+
 		this.botonAtras.setBounds(15, 15, 100, 30);
 		this.panel.add(botonAtras);
 
+		this.botonExportarCVS.setBounds(400, 460, 150, 30);
+		this.panel.add(botonExportarCVS);
+		
+		this.panel.add(encabezado);
+		
 		this.panel.setName("Visualizar Activos");
 		this.panel.setSize(dimensiones);
 		this.panel.setPreferredSize(dimensiones);
-
-		encabezado.setBounds(0, 0, 900, 100);
-		this.panel.add(encabezado);
-		
-		this.etiquetaBalance.setBounds(50, 460, 300, 30);
-		this.panel.add(etiquetaBalance);		
-		
+							
 		this.nuevosActivos();			
 		 
 	}
@@ -196,7 +198,7 @@ public class VisualizarActivosVista {
 				
 		}							
 								
-			etiquetaBalance.setText("Balance: " + formato.format(FuncionesDeLaAplicacion
+		etiquetaBalance.setText("Balance: " + formato.format(FuncionesDeLaAplicacion
 					.calcularBalanceEnDolaresDeUsuario(GestorDeDatosDeLaAplicacion.getUsuarioConectado())) + "USD");													
 	}
 

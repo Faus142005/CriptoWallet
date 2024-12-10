@@ -11,23 +11,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import estilos.EncabezadoCriptoWallet;
+
 public class InicioVista {
 
-	private Dimension dimensiones = new Dimension(700, 400);
+	private Dimension dimensiones = new Dimension(700, 500);
 	private JPanel panel = new JPanel();
 	
-	private JButton botonCerrarSesion = new JButton("Cerrar sesion");	
+	private JButton botonCerrarSesion = new JButton("Cerrar sesión");	
 	private JButton botonVisualizarActivos = new JButton("Ver activos");
-	private JButton botonVerCotizacionCriptomonedas = new JButton("Ver cotizacion");
+	private JButton botonVerCotizacionCriptomonedas = new JButton("Ver cotización");
 	private JButton botonComprarCriptomonedas = new JButton("Comprar criptomonedas");
 	private JButton botonVisualizarTransaccion = new JButton("Ver transacciones");
 	
 	private JButton botonGenerarStock = new JButton("Generar stock");
 	private JButton botonGenerarActivos = new JButton("Generar activos");
 	
+	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png", 700);
+	
 	//Decorativos
 	
-	private JLabel etiquetaMenu = new JLabel("Menu");
+	private JLabel etiquetaMenu = new JLabel("Menú");
 	private JLabel fotoUsuario = new JLabel(new ImageIcon("iconos/logo.png"));
 
 	public InicioVista() {
@@ -40,27 +44,27 @@ public class InicioVista {
 		this.botonCerrarSesion.setForeground(new Color(0,0,0));
 		this.panel.add(botonCerrarSesion);
 		
-		this.botonVisualizarActivos.setBounds(225,90,250,30);
+		this.botonVisualizarActivos.setBounds(225,190,250,30);
 		this.panel.add(botonVisualizarActivos);
 		
-		this.botonVerCotizacionCriptomonedas.setBounds(225,150,250,30);
+		this.botonVerCotizacionCriptomonedas.setBounds(225,250,250,30);
 		this.panel.add(botonVerCotizacionCriptomonedas);
 		
-		this.botonComprarCriptomonedas.setBounds(225,210,250,30);
+		this.botonComprarCriptomonedas.setBounds(225,310,250,30);
 		this.panel.add(botonComprarCriptomonedas);
 		
-		this.botonVisualizarTransaccion.setBounds(225,270,250,30);
+		this.botonVisualizarTransaccion.setBounds(225,370,250,30);
 		this.panel.add(botonVisualizarTransaccion);
 		
-		this.botonGenerarStock.setBounds(520,250, 150, 30);
+		this.botonGenerarStock.setBounds(520,310, 150, 30);
 		this.panel.add(botonGenerarStock);
 		
-		this.botonGenerarActivos.setBounds(520,310, 150, 30);
+		this.botonGenerarActivos.setBounds(520,370, 150, 30);
 		this.panel.add(botonGenerarActivos);
 		
 		//Decorativo
 		
-		this.etiquetaMenu.setBounds(225, 30, 250, 30);
+		this.etiquetaMenu.setBounds(225, 130, 250, 30);
 		this.etiquetaMenu.setFont(new Font("Arial", 1, 30));
 		this.etiquetaMenu.setHorizontalAlignment(JLabel.CENTER);
 		this.panel.add(etiquetaMenu);
@@ -71,6 +75,8 @@ public class InicioVista {
 		this.panel.setName("Inicio");
 		this.panel.setSize(dimensiones);
 		this.panel.setPreferredSize(dimensiones);
+		
+		this.panel.add(encabezado);
 	}
 
 	/**

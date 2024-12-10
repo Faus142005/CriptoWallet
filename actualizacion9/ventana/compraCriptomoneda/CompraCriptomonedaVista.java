@@ -19,15 +19,17 @@ import aplicacion.CalculosGenerales;
 import aplicacion.GestorDeDatosDeLaAplicacion;
 import clases.Criptomoneda;
 import clases.FIAT;
+import estilos.EncabezadoCriptoWallet;
 import funcionesAplicacion.FuncionesRecursosPrograma;
 import funcionesAplicacion.FuncionesDeLaAplicacion;
 
 public class CompraCriptomonedaVista {
 
-	private Dimension dimensiones = new Dimension(600, 400);
+	private Dimension dimensiones = new Dimension(600, 550);
 	private JPanel panel = new JPanel();
+	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png", 600);
 
-	private JButton botonAtras = new JButton("Atras");
+	private JButton botonAtras = new JButton("Atrás");
 
 	private JLabel etiquetaCriptomoneda = new JLabel("Seleccione la criptomoneda a comprar");
 	private JComboBox<Criptomoneda> selectorCriptomonedas = new JComboBox<Criptomoneda>();
@@ -46,12 +48,13 @@ public class CompraCriptomonedaVista {
 
 	public CompraCriptomonedaVista() {
 
-		this.panel.setLayout(null);
+		this.panel.setLayout(null);		
 
 		this.botonAtras.setBounds(10, 10, 100, 30);
+		this.botonAtras.setVisible(true);				
 
-		this.etiquetaCriptomoneda.setBounds(165, 30, 270, 30);
-		this.selectorCriptomonedas.setBounds(165, 60, 270, 30);
+		this.etiquetaCriptomoneda.setBounds(165, 130, 270, 30);
+		this.selectorCriptomonedas.setBounds(165, 160, 270, 30);
 
 		this.selectorCriptomonedas.setRenderer(new DefaultListCellRenderer() {
 			@Override
@@ -75,11 +78,11 @@ public class CompraCriptomonedaVista {
 			}
 		});
 
-		this.campoCantidadCriptomonedas.setBounds(165, 100, 270, 30);
-		this.etiquetaPrecioCriptoADolar.setBounds(165, 140, 200, 30);
+		this.campoCantidadCriptomonedas.setBounds(165, 200, 270, 30);
+		this.etiquetaPrecioCriptoADolar.setBounds(165, 240, 200, 30);
 
-		this.etiquetaFIAT.setBounds(165, 200, 240, 30);
-		this.selectorFIAT.setBounds(165, 230, 270, 30);
+		this.etiquetaFIAT.setBounds(165, 300, 240, 30);
+		this.selectorFIAT.setBounds(165, 330, 270, 30);
 
 		this.selectorFIAT.setRenderer(new DefaultListCellRenderer() {
 			@Override
@@ -103,10 +106,10 @@ public class CompraCriptomonedaVista {
 			}
 		});
 
-		this.campoCantidadFIAT.setBounds(165, 270, 270, 30);
-		this.etiquetaPrecioCriptoAFIAT.setBounds(165, 310, 200, 30);
+		this.campoCantidadFIAT.setBounds(165, 370, 270, 30);
+		this.etiquetaPrecioCriptoAFIAT.setBounds(165, 410, 200, 30);
 
-		this.botonComprar.setBounds(490, 325, 100, 30);
+		this.botonComprar.setBounds(490, 425, 100, 30);
 
 		this.panel.add(botonAtras);
 
@@ -125,6 +128,8 @@ public class CompraCriptomonedaVista {
 		this.panel.setName("Compra de Criptomoneda");
 		this.panel.setSize(dimensiones);
 		this.panel.setPreferredSize(dimensiones);
+		
+		this.panel.add(encabezado);
 
 		this.nuevasCriptomonedas();
 		this.nuevasFIAT();

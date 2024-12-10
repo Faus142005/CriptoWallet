@@ -23,18 +23,20 @@ import clases.Criptomoneda;
 import clases.Stock;
 import daos.FactoryDAO;
 import daos.StockDAO;
+import estilos.EncabezadoCriptoWallet;
 import estilos.ModeloTabla;
 import funcionesAplicacion.FuncionesDeLaAplicacion;
 import funcionesAplicacion.FuncionesRecursosPrograma;
 
 public class CotizacionesCriptomonedasVista {
 
-	private Dimension dimensiones = new Dimension(1100, 500);
+	private Dimension dimensiones = new Dimension(1100, 600);
 	private JPanel panel = new JPanel();
+	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png", 1100);
 
-	private JButton botonAtras = new JButton("Atras");
+	private JButton botonAtras = new JButton("Atrás");
 
-	private String[] titulos = { "", "Nombre", "Nomenclatura", "Precio", "Stock", "Volatilidad", "Boton" };
+	private String[] titulos = { "", "Nombre", "Nomenclatura", "Precio", "Stock", "Volatilidad", "" };
 	private ModeloTabla modelo = new ModeloTabla(null, titulos);
 	private JTable tabla = new JTable(modelo);
 	private JScrollPane scrollPaneCriptomonedas = new JScrollPane(tabla);
@@ -49,14 +51,14 @@ public class CotizacionesCriptomonedasVista {
 		this.panel.setLayout(null);
 		this.panel.add(scrollPaneCriptomonedas);
 
-		this.scrollPaneCriptomonedas.setBounds(50, 50, 1000, 400);
+		this.scrollPaneCriptomonedas.setBounds(50, 150, 1000, 370);
 
 		// Configuración de las columnas
 		tabla.getColumnModel().getColumn(0).setPreferredWidth(60); // Icono
-		tabla.getColumnModel().getColumn(1).setPreferredWidth(90); // Nombre/Nomenclatura
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(100); // Nombre/Nomenclatura
 		tabla.getColumnModel().getColumn(2).setPreferredWidth(110); // Nombre/Nomenclatura
-		tabla.getColumnModel().getColumn(3).setPreferredWidth(270); // Precio
-		tabla.getColumnModel().getColumn(4).setPreferredWidth(270); // Stock
+		tabla.getColumnModel().getColumn(3).setPreferredWidth(250); // Precio
+		tabla.getColumnModel().getColumn(4).setPreferredWidth(250); // Stock
 		tabla.getColumnModel().getColumn(5).setPreferredWidth(100); // Volatilidad
 		tabla.getColumnModel().getColumn(6).setPreferredWidth(100); // Botón
 		tabla.setRowHeight(60);
@@ -66,7 +68,6 @@ public class CotizacionesCriptomonedasVista {
 		tabla.setSelectionForeground(Color.BLACK); // Color del texto al seleccionar (negro)
 
 		
-
 		// Configuración para centrar las celdas
 		DefaultTableCellRenderer centrarRenderer = new DefaultTableCellRenderer();
 		centrarRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -88,6 +89,8 @@ public class CotizacionesCriptomonedasVista {
 		this.panel.setName("Cotizaciones Criptomonedas");
 		this.panel.setSize(dimensiones);
 		this.panel.setPreferredSize(dimensiones);
+		
+		this.panel.add(encabezado);
 
 		this.nuevasCriptomonedas();
 	}
@@ -115,15 +118,16 @@ public class CotizacionesCriptomonedasVista {
 		
 		for(int i = 0; i < modelo.getRowCount(); i++) {
 			
-			String nomenclatura = (String)modelo.getValueAt(i, 2);
-			
+			String nomenclatura = (String)modelo.getValueAt(i, 2);			
 			
 			Criptomoneda c = mapeadoCripto.get(nomenclatura);
-			Stock s = mapeadoStock.get(nomenclatura);
+			
 			if(c == null)
 				break;
+			
+			Stock s = mapeadoStock.get(nomenclatura);
 			modelo.setValueAt(c.getValorDolar(),  i, 3); // Precio
-			modelo.setValueAt(s.getCantidad(), i, 4); // Stock
+			modelo.setValueAt(s.getCantidad(), i, 4); 	 // Stock
 			modelo.setValueAt(c.getVolatilidad(), i, 5); // Volatilidad
 		}
 	}

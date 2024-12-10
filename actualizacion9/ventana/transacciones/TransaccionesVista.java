@@ -13,24 +13,27 @@ import javax.swing.JScrollPane;
 import aplicacion.GestorDeDatosDeLaAplicacion;
 import clases.Transaccion;
 import comparators.transacciones.ComparadorFechaReciente;
+import estilos.EncabezadoCriptoWallet;
 import funcionalidadesVentana.CriptoWalletControlador;
 import funcionesAplicacion.FuncionesDeLaAplicacion;
 
 public class TransaccionesVista {
 
-	private Dimension dimensiones = new Dimension(500, 500);
+	private Dimension dimensiones = new Dimension(600, 600);
 	private JPanel panel = new JPanel();
 
 	private JPanel panelScrollPaneTransferencias = new JPanel();
 	private JScrollPane scrollPaneTransferencias = new JScrollPane(panelScrollPaneTransferencias);
 
 	private JButton botonAtras = new JButton("Atras");
+	
+	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png", 600);
 
 	public TransaccionesVista() {
 
 		this.panel.setLayout(null);
 
-		this.scrollPaneTransferencias.setBounds(50, 50, 400, 400);
+		this.scrollPaneTransferencias.setBounds(50, 150, 500, 400);
 		this.panelScrollPaneTransferencias.setLayout(new BoxLayout(panelScrollPaneTransferencias, BoxLayout.Y_AXIS));
 		this.panel.add(scrollPaneTransferencias);
 
@@ -42,6 +45,8 @@ public class TransaccionesVista {
 		this.panel.setName("Transacciones");
 		this.panel.setSize(dimensiones);
 		this.panel.setPreferredSize(dimensiones);
+		
+		this.panel.add(encabezado);
 	}
 
 	public void actualizarTransferencias() {

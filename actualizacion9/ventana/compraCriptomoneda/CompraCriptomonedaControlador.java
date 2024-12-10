@@ -20,6 +20,7 @@ import clases.FIAT;
 import clases.Moneda;
 import clases.Transaccion;
 import clases.UnidadDeCompra;
+import excepciones.ExcepcionRara;
 import excepciones.FondosInsuficientesException;
 import excepciones.StockInsuficienteException;
 import funcionalidadesVentana.CriptoWalletControlador;
@@ -98,7 +99,7 @@ public class CompraCriptomonedaControlador implements CriptoWalletControlador {
 				Criptomoneda c = (Criptomoneda) vista.getSelectorCriptomonedas().getSelectedItem();
 				if (c == null)
 					return;
-				
+
 				vista.getEtiquetaPrecioCriptoADolar().setText(c.getNomenclatura() + " | " + c.getValorDolar() + "USD");
 				actualizarCampoCripto();
 			}
@@ -121,7 +122,7 @@ public class CompraCriptomonedaControlador implements CriptoWalletControlador {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-								
+
 				FIAT f = (FIAT) vista.getSelectorFIAT().getSelectedItem();
 				if (f == null)
 					return;
@@ -165,43 +166,44 @@ public class CompraCriptomonedaControlador implements CriptoWalletControlador {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					if (!GestorDeDatosDeLaAplicacion.getUsuarioConectado().isTyc())
+						if (!FuncionesUsuario
+								.aceptarTerminosYCondiciones(GestorDeDatosDeLaAplicacion.getUsuarioConectado()))
+							return;
 
-				if (!GestorDeDatosDeLaAplicacion.getUsuarioConectado().isTyc())
-					if (!FuncionesUsuario
-							.aceptarTerminosYCondiciones(GestorDeDatosDeLaAplicacion.getUsuarioConectado()))
+					Criptomoneda criptomonedaSeleccionada = (Criptomoneda) vista.getSelectorCriptomonedas()
+							.getSelectedItem();
+					double cantidadCriptomonedas = Double.valueOf(vista.getCampoCantidadCriptomonedas().getText());
+
+					FIAT fiatSeleccionada = (FIAT) vista.getSelectorFIAT().getSelectedItem();
+					double cantidadFIAT = Double.valueOf(vista.getCampoCantidadFIAT().getText());
+
+					UnidadDeCompra unidad = new UnidadDeCompra(GestorDeDatosDeLaAplicacion.getUsuarioConectado(),
+							criptomonedaSeleccionada, cantidadCriptomonedas, fiatSeleccionada, cantidadFIAT);
+
+					JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+					JLabel label = new JLabel("Estas seguro de comprar " + unidad.getCantidadCriptomoneda()
+							+ unidad.getCriptomoneda().getNomenclatura() + " a "
+							+ unidad.getCriptomoneda().getValorDolar() + "?");
+					panel.add(label, BorderLayout.NORTH);
+
+					Object[] options = { "Si", "No" };
+					int result = JOptionPane.showOptionDialog(null, panel, "Confirmacion", JOptionPane.DEFAULT_OPTION,
+							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+					if (result != 0)
 						return;
 
-				Criptomoneda criptomonedaSeleccionada = (Criptomoneda) vista.getSelectorCriptomonedas()
-						.getSelectedItem();
-				double cantidadCriptomonedas = Double.valueOf(vista.getCampoCantidadCriptomonedas().getText());
+					vista.getCampoCantidadCriptomonedas().setText("0");
+					vista.getCampoCantidadFIAT().setText("0");
 
-				FIAT fiatSeleccionada = (FIAT) vista.getSelectorFIAT().getSelectedItem();
-				double cantidadFIAT = Double.valueOf(vista.getCampoCantidadFIAT().getText());
-
-				UnidadDeCompra unidad = new UnidadDeCompra(GestorDeDatosDeLaAplicacion.getUsuarioConectado(),
-						criptomonedaSeleccionada, cantidadCriptomonedas, fiatSeleccionada, cantidadFIAT);
-
-				JPanel panel = new JPanel(new BorderLayout(5, 5));
-
-				JLabel label = new JLabel("Estas seguro de comprar " + unidad.getCantidadCriptomoneda()
-						+ unidad.getCriptomoneda().getNomenclatura() + " a " + unidad.getCriptomoneda().getValorDolar()
-						+ "?");
-				panel.add(label, BorderLayout.NORTH);
-
-				Object[] options = { "Si", "No" };
-				int result = JOptionPane.showOptionDialog(null, panel, "Confirmacion", JOptionPane.DEFAULT_OPTION,
-						JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-
-				if (result != 0)
-					return;
-
-				vista.getCampoCantidadCriptomonedas().setText("0");
-				vista.getCampoCantidadFIAT().setText("0");
-				try {
 					Transaccion transaccion = FuncionesDeLaAplicacion.comprarCriptomoneda(unidad);
-					JOptionPane.showMessageDialog(null, "Compra increiblemente exitosa.\nPodra ver mas informacion en la ventana de transacciones", "Compra exitosa",
-							JOptionPane.INFORMATION_MESSAGE);
-				} catch (StockInsuficienteException | FondosInsuficientesException e1) {
+					JOptionPane.showMessageDialog(null,
+							"Compra increiblemente exitosa.\nPodra ver mas informacion en la ventana de transacciones",
+							"Compra exitosa", JOptionPane.INFORMATION_MESSAGE);
+				} catch (StockInsuficienteException | FondosInsuficientesException | ExcepcionRara e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error en la compra",
 							JOptionPane.INFORMATION_MESSAGE);
 				}

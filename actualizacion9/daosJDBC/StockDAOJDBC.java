@@ -124,7 +124,7 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 				m.ID AS ID_MONEDA, 
 				m.NOMBRE, 
 				m.VALOR_DOLAR, 					
-				m.NOMBRE_ICONO,												
+				m.NOMBRE_ICONO												
 			FROM 
 				STOCK s
 			JOIN 
