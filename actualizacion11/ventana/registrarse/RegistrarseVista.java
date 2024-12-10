@@ -40,7 +40,7 @@ public class RegistrarseVista {
 
 	private JButton botonRegistrarse = new JButton("Registrarse");
 
-	private JLabel etiquetaLogin = new JLabel("¿Ya estas registrado? Inicia sesion:");
+	private JLabel etiquetaLogin = new JLabel("¿Ya estás registrado? Inicia sesión:");
 	private JButton botonLogin = new JButton("Login");	
 
 	public RegistrarseVista() {

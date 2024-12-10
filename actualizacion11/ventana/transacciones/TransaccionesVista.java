@@ -25,7 +25,7 @@ public class TransaccionesVista {
 	private JPanel panelScrollPaneTransferencias = new JPanel();
 	private JScrollPane scrollPaneTransferencias = new JScrollPane(panelScrollPaneTransferencias);
 
-	private JButton botonAtras = new JButton("Atras");
+	private JButton botonAtras = new JButton("Atrás");
 	
 	private static JPanel encabezado = EncabezadoCriptoWallet.crearEncabezado("CriptoWallet", "iconos/logo.png", 600);
 

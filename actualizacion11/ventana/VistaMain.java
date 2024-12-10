@@ -77,13 +77,8 @@ public class VistaMain extends JFrame implements CriptoWalletVistaMain,Runnable{
 		cambiadorPaneles.agregarPanelHijo(visualizarActivosVista.getPanel(), visualizarActivosVista.getPanel().getName(), visualizarActivosControlador);
 		cambiadorPaneles.agregarPanelHijo(transaccionesVista.getPanel(), transaccionesVista.getPanel().getName(), transaccionesControlador);
 
-		// this.cambiarPanel(registrarseVista.getPanel().getName());
+
 		this.cambiarPanel(ingresarVista.getPanel().getName());
-		//this.cambiarPanel(inicioVista.getPanel().getName());
-		// this.cambiarPanel(compraCriptomonedaVista.getPanel().getName());
-		// this.cambiarPanel(registrarseVista.getPanel().getName());
-		// this.cambiarPanel(cotizacionesCriptomonedasVista.getPanel().getName());
-		// this.cambiarPanel(visualizarActivosVista.getPanel().getName());
 
 		this.add(panel);
 		this.setLocationRelativeTo(null);

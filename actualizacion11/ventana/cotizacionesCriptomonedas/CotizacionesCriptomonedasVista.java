@@ -54,7 +54,7 @@ public class CotizacionesCriptomonedasVista {
 		this.scrollPaneCriptomonedas.setBounds(50, 150, 1000, 370);
 
 		// Configuración de las columnas
-		tabla.getColumnModel().getColumn(0).setPreferredWidth(60); // Icono
+		tabla.getColumnModel().getColumn(0).setPreferredWidth(60);  // Icono
 		tabla.getColumnModel().getColumn(1).setPreferredWidth(100); // Nombre/Nomenclatura
 		tabla.getColumnModel().getColumn(2).setPreferredWidth(110); // Nombre/Nomenclatura
 		tabla.getColumnModel().getColumn(3).setPreferredWidth(250); // Precio

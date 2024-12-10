@@ -63,13 +63,13 @@ public class FuncionesUsuario {
 		JPanel panel = new JPanel(new BorderLayout(5, 5));
 
 		JLabel label = new JLabel(
-				"Antes tienes que aceptar los terminos y condiciones");
+				"Antes tienes que aceptar los términos y condiciones");
 		panel.add(label, BorderLayout.NORTH);
 		
 		label.setHorizontalAlignment(JLabel.CENTER);
 
-		Object[] options = { "Aceptar terminos y condiciones y comprar", "Cancelar" };
-		int result = JOptionPane.showOptionDialog(null, panel, "Confirmacion", JOptionPane.DEFAULT_OPTION,
+		Object[] options = { "Aceptar términos y condiciones y comprar", "Cancelar" };
+		int result = JOptionPane.showOptionDialog(null, panel, "Confirmación", JOptionPane.DEFAULT_OPTION,
 				JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 		if (result != 0)

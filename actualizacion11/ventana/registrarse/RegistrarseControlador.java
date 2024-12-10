@@ -46,17 +46,17 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 				JPanel panel = new JPanel(new BorderLayout(5, 5));
 
 				JLabel label = new JLabel(
-						"Aceptas los terminos y condiciones? Puedes hacerlo mas tarde pero no se te permitira hacer ningun tipo de transaccion");
+						"Aceptas los términos y condiciones? Puedes hacerlo más tarde pero no se te permitirá hacer ningún tipo de transacción");
 				panel.add(label, BorderLayout.NORTH);
 
 				JPanel checkboxPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-				JCheckBox checkBox = new JCheckBox("Acepto totalmente sin importar lo que eso implique");
+				JCheckBox checkBox = new JCheckBox("He leído y acepto los términos y condiciones.");
 				checkboxPanel.add(checkBox);
 
 				panel.add(checkboxPanel, BorderLayout.CENTER);
 
 				Object[] options = { "Registrarse", "Cancelar" };
-				int result = JOptionPane.showOptionDialog(null, panel, "Confirmacion", JOptionPane.DEFAULT_OPTION,
+				int result = JOptionPane.showOptionDialog(null, panel, "Confirmación", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 				if (result != 0)
@@ -74,7 +74,7 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 					FuncionesUsuario.registrarse(usuario);
 
 					JOptionPane.showMessageDialog(null, "Te has logrado registrar exitosamente!",
-							"Registracion exitosa", JOptionPane.INFORMATION_MESSAGE);
+							"Registración exitosa", JOptionPane.INFORMATION_MESSAGE);
 					vista.getCampoNombre().setText("");
 					vista.getCampoApellidos().setText("");
 					vista.getCampoEmail().setText("");
@@ -86,7 +86,7 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 					vista.getCampoContraseñaNuevamente().setEchoChar('•');
 					vistaMain.panelAnterior();
 				} catch (RegistrationException | ExcepcionRara ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage(), "Registracion no exitosa",
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Registración no exitosa",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 

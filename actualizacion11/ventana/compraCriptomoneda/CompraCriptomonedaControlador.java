@@ -184,13 +184,13 @@ public class CompraCriptomonedaControlador implements CriptoWalletControlador {
 
 					JPanel panel = new JPanel(new BorderLayout(5, 5));
 
-					JLabel label = new JLabel("Estas seguro de comprar " + unidad.getCantidadCriptomoneda()
+					JLabel label = new JLabel("Estás seguro de comprar " + unidad.getCantidadCriptomoneda()
 							+ unidad.getCriptomoneda().getNomenclatura() + " a "
 							+ unidad.getCriptomoneda().getValorDolar() + "?");
 					panel.add(label, BorderLayout.NORTH);
 
 					Object[] options = { "Si", "No" };
-					int result = JOptionPane.showOptionDialog(null, panel, "Confirmacion", JOptionPane.DEFAULT_OPTION,
+					int result = JOptionPane.showOptionDialog(null, panel, "Confirmación", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 					if (result != 0)
@@ -201,7 +201,7 @@ public class CompraCriptomonedaControlador implements CriptoWalletControlador {
 
 					Transaccion transaccion = FuncionesDeLaAplicacion.comprarCriptomoneda(unidad);
 					JOptionPane.showMessageDialog(null,
-							"Compra increiblemente exitosa.\nPodra ver mas informacion en la ventana de transacciones",
+							"Compra increíblemente exitosa.\nPodrá ver más información en la ventana de transacciones",
 							"Compra exitosa", JOptionPane.INFORMATION_MESSAGE);
 				} catch (StockInsuficienteException | FondosInsuficientesException | ExcepcionRara e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error en la compra",

@@ -24,7 +24,7 @@ public class IngresarVista {
 
 	private JButton botonVerContraseña = new JButton("*");
 
-	private JLabel etiquetaRegistracion = new JLabel("¿No estas registrado? Registrate: ");
+	private JLabel etiquetaRegistracion = new JLabel("¿No estás registrado? Registrate: ");
 	private JButton botonRegistrarse = new JButton("Registrarse");
 
 	public IngresarVista() {

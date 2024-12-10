@@ -373,7 +373,7 @@ public class FuncionesDeLaAplicacion {
 						"El sistema no tiene criptomoneda: " + unidadDeCompra.getCriptomoneda().getNomenclatura());
 
 			if (stockCripto.getCantidad() < unidadDeCompra.getCantidadCriptomoneda())
-				throw new StockInsuficienteException("El sistema no suficientes criptomonedas: "
+				throw new StockInsuficienteException("El sistema no tiene suficientes criptomonedas: "
 						+ unidadDeCompra.getCriptomoneda().getNomenclatura());
 
 			// Suma activo de cripto al usuario
@@ -390,7 +390,7 @@ public class FuncionesDeLaAplicacion {
 					+ unidadDeCompra.getCantidadCriptomoneda() + "\n" + "FIAT: "
 					+ unidadDeCompra.getFiat().getNomenclatura() + "\n" + "Cantidad de la FIAT: "
 					+ unidadDeCompra.getCantidadFIAT() + "\n" + "Precio por cada criptomoneda: "
-					+ unidadDeCompra.getCantidadFIAT() / unidadDeCompra.getCantidadCriptomoneda();
+					+ unidadDeCompra.getCantidadFIAT() / unidadDeCompra.getCantidadCriptomoneda()+" "+unidadDeCompra.getFiat().getNomenclatura();
 
 			transaccion = new Transaccion(-1, mensaje, new Timestamp(System.currentTimeMillis()),
 					unidadDeCompra.getUsuario());
@@ -463,7 +463,7 @@ public class FuncionesDeLaAplicacion {
 			writer.close();
 
 			JOptionPane.showMessageDialog(null, "Archivo guardado en: " + fileToSave.getAbsolutePath(),
-					"Guardado exitoso", JOptionPane.INFORMATION_MESSAGE);
+					"Se ha guardado exitosamente", JOptionPane.INFORMATION_MESSAGE);
 			return true;
 		} catch (IOException e) {
 			System.err.println(e.getMessage());

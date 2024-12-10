@@ -63,7 +63,7 @@ public class FuncionesDeCreacionDeMonedasYStock {
 
 			// FIATS
 
-			f = new FIAT(-1, "Dolar", "USD", 1, "iconos/dolar.png");
+			f = new FIAT(-1, "Dólar", "USD", 1, "iconos/dolar.png");
 			if (monedaDAO.buscarFIAT(f.getNomenclatura()) == null) {
 				c.setIdMoneda(monedaDAO.insertarFIAT(f));
 				stockDAO.insertarStock(new Stock(-1, f, 0));
