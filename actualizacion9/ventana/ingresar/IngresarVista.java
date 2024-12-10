@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class IngresarVista{
+public class IngresarVista {
 
-	private Dimension dimensiones = new Dimension(470, 300);
+	private Dimension dimensiones = new Dimension(600, 300);
 	private JPanel panel = new JPanel();
 	private JLabel etiquetaEmail = new JLabel("Email:");
 	private JTextField campoEmail = new JTextField();
@@ -18,30 +18,36 @@ public class IngresarVista{
 	private JPasswordField campoContraseña = new JPasswordField();
 	private JButton botonLogin = new JButton("Login");
 
+	private JButton botonVerContraseña = new JButton("*");
+
 	private JLabel etiquetaRegistracion = new JLabel("¿No estas registrado? Registrate: ");
 	private JButton botonRegistrarse = new JButton("Registrarse");
 
 	public IngresarVista() {
-		
+
 		panel.setLayout(null);
 
 		etiquetaEmail.setBounds(30, 30, 50, 30);
 		campoEmail.setBounds(160, 30, 290, 30);
 		etiquetaContraseña.setBounds(30, 90, 90, 30);
 		campoContraseña.setBounds(160, 90, 290, 30);
-
-		botonLogin.setBounds(185, 150, 100, 30);
-		etiquetaRegistracion.setBounds(50, 210, 250, 30);
-		botonRegistrarse.setBounds(300, 210, 120, 30);
+		
+		botonVerContraseña.setBounds(510,90,40,30);
+		
+		botonLogin.setBounds(250, 150, 100, 30);
+		etiquetaRegistracion.setBounds(115, 210, 250, 30);
+		botonRegistrarse.setBounds(365, 210, 120, 30);
 
 		panel.add(etiquetaEmail);
 		panel.add(campoEmail);
 		panel.add(etiquetaContraseña);
 		panel.add(campoContraseña);
+		panel.add(botonVerContraseña);
 		panel.add(botonLogin);
 		panel.add(etiquetaRegistracion);
 		panel.add(botonRegistrarse);
 		
+
 		panel.setName("Ingresar");
 		panel.setSize(dimensiones);
 		panel.setPreferredSize(dimensiones);
@@ -146,6 +152,20 @@ public class IngresarVista{
 	}
 
 	/**
+	 * @return the botonVerContraseña
+	 */
+	public JButton getBotonVerContraseña() {
+		return botonVerContraseña;
+	}
+
+	/**
+	 * @param botonVerContraseña the botonVerContraseña to set
+	 */
+	public void setBotonVerContraseña(JButton botonVerContraseña) {
+		this.botonVerContraseña = botonVerContraseña;
+	}
+
+	/**
 	 * @return the etiquetaRegistracion
 	 */
 	public JLabel getEtiquetaRegistracion() {
@@ -173,4 +193,6 @@ public class IngresarVista{
 		this.botonRegistrarse = botonRegistrarse;
 	}
 
+	
+	
 }

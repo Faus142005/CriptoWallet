@@ -7,16 +7,17 @@ import javax.swing.JOptionPane;
 
 import aplicacion.GestorDeDatosDeLaAplicacion;
 import clases.Usuario;
+import excepciones.ExcepcionRara;
 import excepciones.InicioSesionException;
 import funcionalidadesVentana.CriptoWalletControlador;
 import funcionalidadesVentana.CriptoWalletVistaMain;
-import funcionesAplicacion.FuncionesDeLaAplicacion;
 import funcionesAplicacion.FuncionesUsuario;
 
 public class IngresarControlador implements CriptoWalletControlador {
 
 	private IngresarVista vista;
 	private CriptoWalletVistaMain vistaMain;
+	private boolean viendoContraseña = false;
 
 	public IngresarControlador(IngresarVista vista, CriptoWalletVistaMain vistaMain) {
 		this.vista = vista;
@@ -36,11 +37,13 @@ public class IngresarControlador implements CriptoWalletControlador {
 					vista.getCampoEmail().setText("");
 					vista.getCampoContraseña().setText("");
 					GestorDeDatosDeLaAplicacion.setUsuarioConectado(usuario);
+					viendoContraseña = false;
+					vista.getCampoContraseña().setEchoChar('•');
 					vistaMain.cambiarPanel("Inicio");
 
-				} catch (InicioSesionException ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage(),
-							"Inicio de sesión no exitoso", JOptionPane.INFORMATION_MESSAGE);
+				} catch (InicioSesionException | ExcepcionRara ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Inicio de sesión no exitoso",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -49,8 +52,26 @@ public class IngresarControlador implements CriptoWalletControlador {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				vista.getCampoEmail().setText("");
+				vista.getCampoContraseña().setText("");
+				viendoContraseña = false;
+				vista.getCampoContraseña().setEchoChar('•');
 				vistaMain.cambiarPanel("Registrarse");
 			}
+		});
+
+		vista.getBotonVerContraseña().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (viendoContraseña)
+					vista.getCampoContraseña().setEchoChar('•');
+				else
+					vista.getCampoContraseña().setEchoChar('\0');
+
+				viendoContraseña = !viendoContraseña;
+			}
+
 		});
 	}
 
