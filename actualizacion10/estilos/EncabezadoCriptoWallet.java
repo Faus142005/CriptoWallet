@@ -28,7 +28,7 @@ public class EncabezadoCriptoWallet {
        
         JLabel etiquetaTituloIcono = new JLabel(titulo, iconoRedimensionado, JLabel.CENTER);
         etiquetaTituloIcono.setForeground(Color.WHITE); // Texto blanco
-        etiquetaTituloIcono.setFont(new Font("SansSerif", Font.BOLD, 40));
+        etiquetaTituloIcono.setFont(new Font("SansSerif", Font.BOLD, 32));
         etiquetaTituloIcono.setBounds((ancho - 400) / 2, 20, 400, 60); // Centramos el contenido
 
 
