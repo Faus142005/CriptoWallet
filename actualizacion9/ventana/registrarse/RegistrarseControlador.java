@@ -14,6 +14,7 @@ import javax.swing.event.DocumentListener;
 
 import clases.Persona;
 import clases.Usuario;
+import excepciones.ExcepcionRara;
 import excepciones.RegistrationException;
 import funcionalidadesVentana.CriptoWalletControlador;
 import funcionalidadesVentana.CriptoWalletVistaMain;
@@ -23,6 +24,8 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 
 	private RegistrarseVista vista;
 	private CriptoWalletVistaMain vistaMain;
+	private boolean viendoContraseña1 = false;
+	private boolean viendoContraseña2 = false;
 
 	public RegistrarseControlador(RegistrarseVista vista, CriptoWalletVistaMain vistaMain) {
 
@@ -30,8 +33,8 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 		this.vistaMain = vistaMain;
 
 		this.vista.getCampoEmail().getDocument().addDocumentListener(new comprobadorCampoEmail());
-		
-		this.vista.getCampoContraseña().getDocument().addDocumentListener(new comprobadorCamposContraseña());		
+
+		this.vista.getCampoContraseña().getDocument().addDocumentListener(new comprobadorCamposContraseña());
 
 		this.vista.getCampoContraseñaNuevamente().getDocument().addDocumentListener(new comprobadorCamposContraseña());
 
@@ -69,7 +72,7 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 
 				try {
 					FuncionesUsuario.registrarse(usuario);
-					
+
 					JOptionPane.showMessageDialog(null, "Te has logrado registrar exitosamente!",
 							"Registracion exitosa", JOptionPane.INFORMATION_MESSAGE);
 					vista.getCampoNombre().setText("");
@@ -77,10 +80,14 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 					vista.getCampoEmail().setText("");
 					vista.getCampoContraseña().setText("");
 					vista.getCampoContraseñaNuevamente().setText("");
+					viendoContraseña1 = false;
+					vista.getCampoContraseña().setEchoChar('•');
+					viendoContraseña2 = false;
+					vista.getCampoContraseñaNuevamente().setEchoChar('•');
 					vistaMain.panelAnterior();
-				} catch (RegistrationException ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage(),
-							"Registracion no exitosa", JOptionPane.INFORMATION_MESSAGE);
+				} catch (RegistrationException | ExcepcionRara ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Registracion no exitosa",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 
 			}
@@ -91,7 +98,44 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				vista.getCampoNombre().setText("");
+				vista.getCampoApellidos().setText("");
+				vista.getCampoEmail().setText("");
+				vista.getCampoContraseña().setText("");
+				vista.getCampoContraseñaNuevamente().setText("");
+				viendoContraseña1 = false;
+				vista.getCampoContraseña().setEchoChar('•');
+				viendoContraseña2 = false;
+				vista.getCampoContraseñaNuevamente().setEchoChar('•');
 				vistaMain.panelAnterior();
+			}
+		});
+
+		this.vista.getBotonVerContraseña1().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (viendoContraseña1)
+					vista.getCampoContraseña().setEchoChar('•');
+				else
+					vista.getCampoContraseña().setEchoChar('\0');
+
+				viendoContraseña1 = !viendoContraseña1;
+			}
+		});
+
+		this.vista.getBotonVerContraseña2().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (viendoContraseña2)
+					vista.getCampoContraseñaNuevamente().setEchoChar('•');
+				else
+					vista.getCampoContraseñaNuevamente().setEchoChar('\0');
+
+				viendoContraseña2 = !viendoContraseña2;
 			}
 		});
 	}
@@ -121,7 +165,7 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 			vista.getEtiquetaContraseñasDiferentes().setVisible(!bandera);
 		}
 	}
-	
+
 	public class comprobadorCampoEmail implements DocumentListener {
 
 		@Override
@@ -141,18 +185,18 @@ public class RegistrarseControlador implements CriptoWalletControlador {
 
 		private void comprobarEmail() {
 			String mail = vista.getCampoEmail().getText();
-			
+
 			// Validar que el correo no sea nulo ni vacío
-	        boolean emailValido = (mail != null && !mail.trim().isEmpty());
-	        
-	        // 	Validar formato del correo electrónico
-	        if (emailValido) {
-	            emailValido = mail.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
-	        }
-	        
-	        vista.getBotonRegistrarse().setEnabled(emailValido);
-	        vista.getEtiquetaDebeIngresarEmail().setVisible(!emailValido);
-	        
+			boolean emailValido = (mail != null && !mail.trim().isEmpty());
+
+			// Validar formato del correo electrónico
+			if (emailValido) {
+				emailValido = mail.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+			}
+
+			vista.getBotonRegistrarse().setEnabled(emailValido);
+			vista.getEtiquetaDebeIngresarEmail().setVisible(!emailValido);
+
 		}
 	}
 
