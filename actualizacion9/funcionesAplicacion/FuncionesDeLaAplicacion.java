@@ -27,6 +27,7 @@ import daos.FactoryDAO;
 import daos.MonedaDAO;
 import daos.StockDAO;
 import daos.TransaccionDAO;
+import excepciones.ExcepcionRara;
 import excepciones.FondosInsuficientesException;
 import excepciones.StockInsuficienteException;
 
@@ -331,7 +332,7 @@ public class FuncionesDeLaAplicacion {
 	}
 
 	public static Transaccion comprarCriptomoneda(UnidadDeCompra unidadDeCompra)
-			throws StockInsuficienteException, FondosInsuficientesException {
+			throws StockInsuficienteException, FondosInsuficientesException, ExcepcionRara {
 
 		// Variables
 		Transaccion transaccion;
@@ -406,8 +407,7 @@ public class FuncionesDeLaAplicacion {
 			return transaccion;
 
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			return null;
+			throw new ExcepcionRara();
 		}
 	}
 

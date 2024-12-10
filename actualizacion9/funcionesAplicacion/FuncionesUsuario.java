@@ -7,18 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import aplicacion.GestorDeDatosDeLaAplicacion;
 import clases.Persona;
 import clases.Usuario;
 import daos.FactoryDAO;
 import daos.PersonaDAO;
 import daos.UsuarioDAO;
+import excepciones.ExcepcionRara;
 import excepciones.InicioSesionException;
 import excepciones.RegistrationException;
 
 public class FuncionesUsuario {
 	
-	public static void registrarse(Usuario usuario) throws RegistrationException{
+	public static void registrarse(Usuario usuario) throws RegistrationException, ExcepcionRara{
 
 		PersonaDAO<Persona> personaDAO = FactoryDAO.getPersonaDAO();
 		UsuarioDAO<Usuario> usuarioDAO = FactoryDAO.getUsuarioDAO();
@@ -31,11 +31,11 @@ public class FuncionesUsuario {
 			usuarioDAO.insertarUsuario(usuario);
 
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());			
+			throw new ExcepcionRara();		
 		}
 	}
 
-	public static Usuario iniciarSesion(Usuario usuario) throws InicioSesionException{		
+	public static Usuario iniciarSesion(Usuario usuario) throws InicioSesionException, ExcepcionRara{		
 		if(usuario==null) {
 			throw new InicioSesionException("Hubo un error inesperado.");
 		}
@@ -51,12 +51,11 @@ public class FuncionesUsuario {
 			throw new InicioSesionException(); // Se ingresó usuario y/o contraseña incorrectas
 
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());			
-		}
-		return usuario;		
+			throw new ExcepcionRara();
+		}	
 	}
 
-	public static boolean aceptarTerminosYCondiciones(Usuario usuario) {
+	public static boolean aceptarTerminosYCondiciones(Usuario usuario) throws ExcepcionRara{
 		
 		JPanel panel = new JPanel(new BorderLayout(5, 5));
 
@@ -82,8 +81,7 @@ public class FuncionesUsuario {
 			return true;
 		}catch(SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error!! Intente nuevamente", "Información del Usuario", JOptionPane.INFORMATION_MESSAGE);
-			System.err.println(e.getMessage());
-			return false;
+			throw new ExcepcionRara();
 		}
 	}
 }
