@@ -3,8 +3,6 @@ package ventana.cotizacionesCriptomonedas;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -25,6 +23,7 @@ import clases.Criptomoneda;
 import clases.Stock;
 import daos.FactoryDAO;
 import daos.StockDAO;
+import estilos.ModeloTabla;
 import funcionesAplicacion.FuncionesDeLaAplicacion;
 import funcionesAplicacion.FuncionesRecursosPrograma;
 
@@ -36,7 +35,7 @@ public class CotizacionesCriptomonedasVista {
 	private JButton botonAtras = new JButton("Atras");
 
 	private String[] titulos = { "", "Nombre", "Nomenclatura", "Precio", "Stock", "Volatilidad", "Boton" };
-	private ModeloTablaCotizaciones modelo = new ModeloTablaCotizaciones(null, titulos);
+	private ModeloTabla modelo = new ModeloTabla(null, titulos);
 	private JTable tabla = new JTable(modelo);
 	private JScrollPane scrollPaneCriptomonedas = new JScrollPane(tabla);
 
@@ -77,7 +76,7 @@ public class CotizacionesCriptomonedasVista {
 		}
 
 		// Crear el TableRowSorter para hacer la tabla ordenable
-		TableRowSorter<ModeloTablaCotizaciones> sorter = new TableRowSorter<>(modelo);
+		TableRowSorter<ModeloTabla> sorter = new TableRowSorter<>(modelo);
 		tabla.setRowSorter(sorter); 
 
 		// Asignar un renderer personalizado a la columna de botones
@@ -140,7 +139,7 @@ public class CotizacionesCriptomonedasVista {
 		
 		tabla.setRowSorter(null);
 		modelo.setRowCount(0);
-		TableRowSorter<ModeloTablaCotizaciones> sorter = new TableRowSorter<>(modelo);
+		TableRowSorter<ModeloTabla> sorter = new TableRowSorter<>(modelo);
 		tabla.setRowSorter(sorter); 
 		
 		
@@ -219,14 +218,14 @@ public class CotizacionesCriptomonedasVista {
 	/**
 	 * @return the modelo
 	 */
-	public ModeloTablaCotizaciones getModelo() {
+	public ModeloTabla getModelo() {
 		return modelo;
 	}
 
 	/**
 	 * @param modelo the modelo to set
 	 */
-	public void setModelo(ModeloTablaCotizaciones modelo) {
+	public void setModelo(ModeloTabla modelo) {
 		this.modelo = modelo;
 	}
 

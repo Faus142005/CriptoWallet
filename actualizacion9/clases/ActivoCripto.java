@@ -9,4 +9,7 @@ public class ActivoCripto extends Activo {
 		super(idActivo, usuario, criptomoneda, cantidad);
 	}
 	
+	public Criptomoneda getCriptomoneda() {
+		return (Criptomoneda) super.getMoneda();
+	}
 }

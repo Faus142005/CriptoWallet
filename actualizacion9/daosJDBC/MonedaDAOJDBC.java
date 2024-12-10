@@ -398,6 +398,35 @@ public class MonedaDAOJDBC implements MonedaDAO<Moneda> {
 		System.out.println("Error");
 		return null;
 	}
+	
+	@Override
+	public TipoDeMoneda buscarMonedaPorIDTipo(int idMoneda) throws SQLException {
+		// SQL para buscar la moneda por ID
+		String sql = "SELECT * FROM MONEDA WHERE ID = ?";
+
+		try (Connection connection = getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+			pstmt.setInt(1, idMoneda);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				// Si se encuentra la moneda, crear y devolver el objeto Moneda correspondiente
+
+				if (rs.next()) {
+					char tipo = rs.getString("TIPO").charAt(0);
+
+					if (tipo == 'C') {
+						return TipoDeMoneda.CRIPTOMONEDA;
+					} else if (tipo == 'F') {
+						return TipoDeMoneda.FIAT;
+					}
+					
+					else return TipoDeMoneda.NULO;
+				}
+			}
+		}
+		// Si llegó hasta acá es porque hubo un error
+		System.out.println("Error");
+		return null;
+	}
 
 	@Override
 	public Moneda buscarMonedaPorID(int idMoneda) throws SQLException {

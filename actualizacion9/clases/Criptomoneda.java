@@ -14,12 +14,12 @@ public class Criptomoneda extends Moneda {
 			double volatilidad) {
 
 		// el tipo se inicializa en C automáticamente
-		super(idMoneda, 'C', nombre, nomenclatura, valorDolar, nombreIcono);
+		super(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono);
 		this.volatilidad = volatilidad;
 	}
 
 	public Criptomoneda(Criptomoneda criptomoneda) {
-		super(criptomoneda.getIdMoneda(), criptomoneda.getTipo(), criptomoneda.getNombre(),
+		super(criptomoneda.getIdMoneda(), criptomoneda.getNombre(),
 				criptomoneda.getNomenclatura(), criptomoneda.getValorDolar(), criptomoneda.getNombreIcono());
 		this.volatilidad = criptomoneda.volatilidad;
 	}

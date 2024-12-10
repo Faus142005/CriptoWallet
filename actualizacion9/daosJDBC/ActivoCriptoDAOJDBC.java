@@ -113,7 +113,7 @@ public class ActivoCriptoDAOJDBC implements ActivoCriptoDAO<ActivoCripto> {
 				JOIN
 				    PERSONA p ON u.ID_PERSONA = p.ID
 				WHERE
-					ac.ID = ? AND m.TIPO = 'C' """;
+					ac.ID = ? """;
 
 		try (Connection connection = getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -192,7 +192,7 @@ public class ActivoCriptoDAOJDBC implements ActivoCriptoDAO<ActivoCripto> {
 				JOIN
 				    PERSONA p ON u.ID_PERSONA = p.ID
 				WHERE
-					m.ID = ? AND u.ID = ? AND m.TIPO = 'C' """;
+					m.ID = ? AND u.ID = ? """;
 
 		try (Connection connection = getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -294,7 +294,7 @@ public class ActivoCriptoDAOJDBC implements ActivoCriptoDAO<ActivoCripto> {
 			JOIN 
 			    PERSONA p ON u.ID_PERSONA = p.ID
 			WHERE 
-				u.ID = ? AND m.TIPO = 'C' """;
+				u.ID = ? """;
 		
 		try (Connection connection = getConnection(); 
 				PreparedStatement pstmt = connection.prepareStatement(sql)) {

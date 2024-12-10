@@ -17,6 +17,7 @@ import daos.ActivoCriptoDAO;
 import daos.ActivoFIATDAO;
 import daos.FactoryDAO;
 import daos.MonedaDAO;
+import daos.MonedaDAO.TipoDeMoneda;
 import daos.StockDAO;
 
 public class FuncionesDeCreacionDeMonedasYStock {
@@ -150,13 +151,13 @@ public class FuncionesDeCreacionDeMonedasYStock {
 			List<Integer> idsMonedas = generarArregloDeNumerosRandomSinRepetir(monedasDisponibles);
 
 			for (int i = 0; i < cantidadDeActivosRandom; i++) {
-				Moneda moneda = monedaDAO.buscarMonedaPorID(idsMonedas.get(i));
+				TipoDeMoneda tipoDeMoneda = monedaDAO.buscarMonedaPorIDTipo(idsMonedas.get(i));
 				// Si es cripto genero un número random de 0.01 a 100.00, y redondeo a dos
 				// decimales
-				if (moneda.getTipo() == 'C') {
+				if (tipoDeMoneda == TipoDeMoneda.CRIPTOMONEDA) {
 					double cantidadCripto = 0.01 + (100.00 - 0.01) * random.nextDouble();
 					cantidadCripto = Math.round(cantidadCripto * 100.0) / 100.0;
-					Criptomoneda cripto = monedaDAO.buscarCriptomoneda(moneda.getNomenclatura());
+					Criptomoneda cripto = monedaDAO.buscarCriptomoneda(idsMonedas.get(i));
 					ActivoCripto activoCripto = activoCriptoDAO.buscarActivoCripto(usuario.getIdUsuario(),
 							cripto.getIdMoneda());
 					if (activoCripto == null) {
@@ -170,10 +171,10 @@ public class FuncionesDeCreacionDeMonedasYStock {
 				}
 				// Si es fiat entonces genero un número random de 0.01 a 1000000.00, y redondeo
 				// a dos decimales
-				else {
+				else if(tipoDeMoneda == TipoDeMoneda.FIAT){
 					double cantidadFIAT = 0.01 + (1000000.00 - 0.01) * random.nextDouble();
 					cantidadFIAT = Math.round(cantidadFIAT * 100.0) / 100.0;
-					FIAT fiat = monedaDAO.buscarFIAT(moneda.getNomenclatura());
+					FIAT fiat = monedaDAO.buscarFIAT(idsMonedas.get(i));
 					ActivoFIAT activoFIAT = activoFIATDAO.buscarActivoFIAT(usuario.getIdUsuario(),
 							fiat.getIdMoneda());
 					if (activoFIAT == null) {
@@ -184,6 +185,10 @@ public class FuncionesDeCreacionDeMonedasYStock {
 						activoFIAT.setCantidad(activoFIAT.getCantidad() + cantidadFIAT);
 						activoFIATDAO.actualizarActivoFIAT(activoFIAT);
 					}
+				}
+				
+				else {
+					//Lanzar error inesperado
 				}
 			}
 		} catch (SQLException e) {

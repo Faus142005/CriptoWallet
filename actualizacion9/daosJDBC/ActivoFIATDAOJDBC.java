@@ -113,7 +113,7 @@ public class ActivoFIATDAOJDBC implements ActivoFIATDAO<ActivoFIAT> {
 			JOIN 
 			    PERSONA p ON u.ID_PERSONA = p.ID
 			WHERE 
-				af.ID = ? AND m.TIPO = 'F' """;
+				af.ID = ? """;
 		
 		try (Connection connection = getConnection(); 
 				PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -189,7 +189,7 @@ public class ActivoFIATDAOJDBC implements ActivoFIATDAO<ActivoFIAT> {
 			JOIN 
 			    PERSONA p ON u.ID_PERSONA = p.ID
 			WHERE 
-				m.ID = ? AND u.ID = ? AND m.TIPO = 'F' """;
+				m.ID = ? AND u.ID = ? """;
 		
 		try (Connection connection = getConnection(); 
 				PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -291,7 +291,7 @@ public class ActivoFIATDAOJDBC implements ActivoFIATDAO<ActivoFIAT> {
 			JOIN 
 			    PERSONA p ON u.ID_PERSONA = p.ID
 			WHERE 
-				u.ID = ? AND m.TIPO = 'F' """;
+				u.ID = ? """;
 		
 		try (Connection connection = getConnection(); 
 				PreparedStatement pstmt = connection.prepareStatement(sql)) {

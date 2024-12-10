@@ -9,4 +9,7 @@ public class ActivoFIAT extends Activo {
 		super(idActivo, usuario, fiat, cantidad);
 	}
 	
+	public FIAT getFIAT() {
+		return (FIAT) super.getMoneda();
+	}
 }

@@ -36,6 +36,7 @@ public interface MonedaDAO<Moneda> {
 	
 	public abstract TipoDeMoneda buscarMonedaPorNomenclaturaTipo(String nomenclatura) throws SQLException;
 	public abstract Moneda buscarMonedaPorNomenclatura(String nomenclatura) throws SQLException; //busca moneda con nomenclatura
+	public abstract TipoDeMoneda buscarMonedaPorIDTipo(int idMoneda) throws SQLException; //busca moneda con id
 	public abstract Moneda buscarMonedaPorID(int idMoneda) throws SQLException; //busca moneda con id
 	
 	public abstract void eliminarMonedaPorNomenclatura(String nomenclatura) throws SQLException; //elimina moneda por nomenclatura

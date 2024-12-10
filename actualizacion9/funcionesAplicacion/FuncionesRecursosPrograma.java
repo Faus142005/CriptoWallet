@@ -46,7 +46,7 @@ public class FuncionesRecursosPrograma {
 			fiats = monedaDAO.listarFIATS();
 
 			for (FIAT f : fiats)
-				iconosCriptomoneda.put(f.getNomenclatura(), new ImageIcon(f.getNombreIcono()));
+				iconosFIAT.put(f.getNomenclatura(), new ImageIcon(f.getNombreIcono()));
 
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());

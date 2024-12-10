@@ -75,7 +75,6 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 				s.ID,
 				s.CANTIDAD, 
 				m.ID AS ID_MONEDA, 
-				m.TIPO,
 				m.NOMBRE, 
 				m.VALOR_DOLAR,				
 				m.NOMBRE_ICONO												
@@ -97,13 +96,12 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 			if (rs.next()) {
 				// Extraer información de la moneda	 	
 				int idMoneda = rs.getInt("ID_MONEDA");
-				char tipo = rs.getString("TIPO").charAt(0);
 	            String nombre = rs.getString("NOMBRE");	            
 	            double valorDolar = rs.getDouble("VALOR_DOLAR");
 	            String nombreIcono = rs.getString("NOMBRE_ICONO");	            
 	            
 	            // Crear objeto moneda
-	            Moneda moneda = new Moneda(idMoneda, tipo, nombre, nomenclatura, valorDolar, nombreIcono);	            
+	            Moneda moneda = new Moneda(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono);	            
 	            	            
 	            // Extraer cantidad y crear el objeto Stock
                 int idStock = rs.getInt("ID");
@@ -124,7 +122,6 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 				SELECT 
 				s.CANTIDAD, 
 				m.ID AS ID_MONEDA, 
-				m.TIPO,
 				m.NOMBRE, 
 				m.VALOR_DOLAR, 					
 				m.NOMBRE_ICONO,												
@@ -146,14 +143,13 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 			if (rs.next()) {
 				// Extraer información de la moneda	 	
 				int idMoneda = rs.getInt("ID_MONEDA");
-				char tipo = rs.getString("TIPO").charAt(0);
 	            String nombre = rs.getString("NOMBRE");	 
 	            String nomenclatura = rs.getString("NOMENCLATURA");	 
 	            double valorDolar = rs.getDouble("VALOR_DOLAR");
 	            String nombreIcono = rs.getString("NOMBRE_ICONO");	            
 	            
 	            // Crear objeto moneda
-	            Moneda moneda = new Moneda(idMoneda, tipo, nombre, nomenclatura, valorDolar, nombreIcono);	            
+	            Moneda moneda = new Moneda(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono);	            
 	            	            
 	            // Extraer cantidad y crear el objeto Stock                
 	            double cantidad = rs.getDouble("CANTIDAD");
@@ -216,7 +212,6 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 				s.ID,
 				s.CANTIDAD, 
 				m.ID AS ID_MONEDA, 
-				m.TIPO,
 				m.NOMBRE, 
 				m.VALOR_DOLAR, 					
 				m.NOMBRE_ICONO,												
@@ -225,7 +220,7 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 			JOIN 
 				MONEDA m ON s.ID_MONEDA = m.ID """;
 		
-		try (Connection connection = getConnection(); 
+		try (Connection connection = getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			
 			ResultSet rs = pstmt.executeQuery();
@@ -235,14 +230,13 @@ public class StockDAOJDBC implements StockDAO<Stock>{
 			while (rs.next()) {
 				// Extraer información de la moneda	 
 				int idMoneda = rs.getInt("ID_MONEDA");
-				char tipo = rs.getString("TIPO").charAt(0);
 	            String nombre = rs.getString("NOMBRE");
 	            String nomenclatura = rs.getString("NOMENCLATURA");
 	            double valorDolar = rs.getDouble("VALOR_DOLAR");	
 	            String nombreIcono = rs.getString("NOMBRE_ICONO");	            
 	            
 	            // Crear objeto moneda
-	            Moneda moneda = new Moneda(idMoneda, tipo, nombre, nomenclatura, valorDolar, nombreIcono);	            
+	            Moneda moneda = new Moneda(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono);	            
 	            	            
 	            // Extraer cantidad y crear el objeto Stock
                 int idStock = rs.getInt("ID");

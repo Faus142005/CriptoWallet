@@ -20,6 +20,7 @@ public final class ClasePrincipal {
 			
 			FuncionesDeCreacionDeMonedasYStock.crearMonedas();			
 			FuncionesRecursosPrograma.cargarImagenesCriptomonedas();
+			FuncionesRecursosPrograma.cargarImagenesFIAT();
 						
 		} catch (SQLException e) {
 			System.out.println("Error! " + e.getMessage());

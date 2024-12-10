@@ -14,7 +14,7 @@ public class FIAT extends Moneda {
 	public FIAT(int idMoneda, String nombre, String nomenclatura, double valorDolar, String nombreIcono) {
 
 		// el tipo se inicializa en F automáticamente
-		super(idMoneda, 'F', nombre, nomenclatura, valorDolar, nombreIcono);			
+		super(idMoneda, nombre, nomenclatura, valorDolar, nombreIcono);			
 	}
 
 	/*public FIAT(int idMoneda, char tipo, String nombre, String nomenclatura, double valorDolar, String nombreIcono,
@@ -23,7 +23,7 @@ public class FIAT extends Moneda {
 	}*/
 	
 	public FIAT(FIAT fiat) {
-		super(fiat.getIdMoneda(), fiat.getTipo(), fiat.getNombre(), fiat.getNomenclatura(), fiat.getValorDolar(), fiat.getNombreIcono());
+		super(fiat.getIdMoneda(), fiat.getNombre(), fiat.getNomenclatura(), fiat.getValorDolar(), fiat.getNombreIcono());
 	}
 
 }

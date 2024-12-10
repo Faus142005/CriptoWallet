@@ -3,7 +3,6 @@ package clases;
 public class Moneda {
 	
 	private int idMoneda;
-	private char tipo;
 	private String nombre;
 	private String nomenclatura;
 	private double valorDolar;	
@@ -13,9 +12,8 @@ public class Moneda {
 		
 	}
 
-	public Moneda(int idMoneda, char tipo, String nombre, String nomenclatura, double valorDolar, String nombreIcono) {
+	public Moneda(int idMoneda, String nombre, String nomenclatura, double valorDolar, String nombreIcono) {
 		this.idMoneda = idMoneda;
-		this.tipo = tipo;
 		this.nombre = nombre;
 		this.nomenclatura = nomenclatura;
 		this.valorDolar = valorDolar;		
@@ -35,20 +33,6 @@ public class Moneda {
 	 */
 	public void setIdMoneda(int idMoneda) {
 		this.idMoneda = idMoneda;
-	}
-
-	/**
-	 * @return the tipo
-	 */
-	public char getTipo() {
-		return tipo;
-	}
-
-	/**
-	 * @param tipo the tipo to set
-	 */
-	public void setTipo(char tipo) {
-		this.tipo = tipo;
 	}
 
 	/**
@@ -110,7 +94,7 @@ public class Moneda {
 
 	@Override
 	public String toString() {
-		return "Moneda [tipo=" + tipo + ", nombre=" + nombre + ", nomenclatura=" + nomenclatura + ", valorDolar="
+		return "Moneda [nombre=" + nombre + ", nomenclatura=" + nomenclatura + ", valorDolar="
 				+ valorDolar + ", nombreIcono=" + nombreIcono + "]";
 	}
 		
