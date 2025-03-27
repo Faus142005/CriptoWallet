@@ -1,3 +1,0 @@
-modificaciones:
-INCIO
-COTIZACIONES
